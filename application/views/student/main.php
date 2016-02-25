@@ -1,6 +1,6 @@
 <div class="span9">
             <div class="faq-content">
-    <h1 class="page-title">欢迎进入线上招新系统管理后台</h1>
+    <h1 class="page-title">欢迎进入查课系统（学生版）</h1>
     <div class="row-fluid">
         <div class="span9">
           <div class="block">
@@ -105,9 +105,9 @@
 图书馆一楼学生事务中心大厅
 </address>
                 <div style="text-align: center;">
-                    <a class="btn" href=""><img src="images/wechat.png" width="25" height="25"></a>
-                    <a class="btn" href="http://weibo.com/njuptaifuwu"><img src="images/sina.png" width="25" height="25"></a>
-                    <a class="btn" href="http://page.renren.com/601861848"><img src="images/renren.png" width="25"></a>
+                    <a class="btn" href=""><img src="<?php echo base_url('assets/images/wechat.png')?>" width="25" height="25"></a>
+                    <a class="btn" href="http://weibo.com/njuptaifuwu"><img src="<?php echo base_url('assets/images/sina.png')?>" width="25" height="25"></a>
+                    <a class="btn" href="http://page.renren.com/601861848"><img src="<?php echo base_url('assets/images/renren.png')?>" width="25"></a>
                 </div>
           </div>
         </div>

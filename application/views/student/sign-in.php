@@ -1,21 +1,14 @@
     <div class="navbar">
 <div class="navbar-inner">
             <div class="container-fluid">
-            	<a class="brand" href="index.php"><img src="images/logo.png" width="195" height="22"></a>
+            	<a class="brand" href=""><img src="<?php echo base_url('assets/images/logo.png')?>" width="195" height="22"></a>
                 <ul class="nav pull-right">
                 
                 <li id="fat-menu" class="dropdown">
-                        <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                            社团与系统
-                            <i class="icon-caret-down"></i>
-                        </a>
-
-                        <ul class="dropdown-menu">
-                            <li><a tabindex="-1" href="association_introduction.php">社团介绍</a></li>
-                            <li><a tabindex="-1" href="department_introduction.php">部门介绍</a></li>
-                            <li><a tabindex="-1" href="system_description.php">关于系统</a></li>
-                        </ul>
-                  </li>
+                    <a href="<?php echo base_url('')?>" id="drop3" role="button" class="dropdown-toggle">
+                        返回首页
+                    </a>
+                </li>
                     
               </ul>
 
@@ -49,7 +42,7 @@
         <div class="block">
             <div class="block-heading">登陆界面</div>
             <div class="block-body">
-                <form action="sign-in.php" method="post" onSubmit="return check()">
+                <form action="<?php echo base_url('student_login')?>" method="post" onSubmit="return check()">
                     <label>学生学号</label>
                     <input type="text" name="student_id" id="student_id" class="span12">
                     <label>密码</label>

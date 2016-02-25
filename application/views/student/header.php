@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/lib/bootstrap/css/bootstrap.css')?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/stylesheets/theme.css'); ?>">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://oss.aifuwu.org/font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <script src="<?php echo base_url('assets/lib/jquery-1.8.1.min.js'); ?>" type="text/javascript"></script>
 
@@ -70,26 +70,26 @@
     <div class="navbar">
         <div class="navbar-inner">
             <div class="container-fluid">
-                <a class="brand" href="index.php"><img src="images/logo.png" width="195" height="22"></a>
+                <a class="brand" href="<?php echo base_url('student')?>"><img src="<?php echo base_url('assets/images/logo.png')?>" width="195" height="22"></a>
                 <ul class="nav pull-right">
                   <li id="fat-menu" class="dropdown">
                       <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                          <i class="fa fa-firefox"></i> 方垣闰
-                          <i class="icon-caret-down"></i>
+                          <i class="fa fa-user"></i> 方垣闰
+                          <i class="fa fa-caret-down"></i>
                       </a>
 
                       <ul class="dropdown-menu">
-                         <li><a tabindex="-1" href="check_registration_information.php">查看报名人员信息</a></li>
-                             <li><a tabindex="-1" href="interview_situation_input.php">面试情况录入</a></li>
-                  <li><a tabindex="-1" href="registration_information_static.php">报名信息统计</a></li>
-                          <li><a tabindex="-1" href="password_change.php">部门密码修改</a></li>
+                         <li><a tabindex="-1" href="<?php echo base_url('student/data_entry')?>">查课情况录入</a></li>
+                             <li><a tabindex="-1" href="<?php echo base_url('student/data_query')?>">本人录入信息</a></li>
+                  <li><a tabindex="-1" href="<?php echo base_url('student/login_situation')?>">本人登陆情况</a></li>
+                          <li><a tabindex="-1" href="<?php echo base_url('student/change_password')?>">个人密码修改</a></li>
                           <li class="divider"></li>
-                          <li><a tabindex="-1" href="sign-in.php">注销</a></li>
+                          <li><a tabindex="-1" href="<?php echo base_url('student/sign-out')?>">注销</a></li>
                       </ul>
                     </li>
                     
                     <li id="fat-menu" class="dropdown">
-                        <a href="sign-in.php" id="drop3" role="button" class="dropdown-toggle">
+                        <a href="<?php echo base_url('student/sign-out')?>" id="drop3" role="button" class="dropdown-toggle">
                              注销
                         </a>
                     </li>
@@ -106,22 +106,20 @@
         <div class="row-fluid">
             <div class="span3">
                 <div class="sidebar-nav">
-                  <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu"><i class="icon-dashboard"></i>社团与系统介绍</div>
-                    <ul id="dashboard-menu" class="nav nav-list collapse in">
-                         <li><a href="association_introduction.php">社团介绍</a></li>
-                            <li><a href="department_introduction.php">部门介绍</a></li>
-                      <li><a href="system_description.php">关于系统</a></li>
-                        
-                    </ul>
-                <div class="nav-header" data-toggle="collapse" data-target="#accounts-menu"><i class="icon-briefcase"></i>信息与查看与录入</div>
+
+                <div class="nav-header" data-toggle="collapse" data-target="#accounts-menu"><i class="fa fa-briefcase"></i>信息与查看与录入</div>
                 <ul id="accounts-menu" class="nav nav-list collapse in">
-                  <li><a tabindex="-1" href="check_registration_information.php">查看报名人员信息</a></li>
-                  <li><a tabindex="-1" href="interview_situation_input.php">面试情况录入</a></li>
-                  <li><a tabindex="-1" href="registration_information_static.php">报名信息统计</a></li>
+                  <li><a tabindex="-1" href="<?php echo base_url('student/data_entry')?>">查课情况录入</a></li>
+                  <li><a tabindex="-1" href="<?php echo base_url('student/data_query')?>">本人录入信息</a></li>
+                  <li><a tabindex="-1" href="<?php echo base_url('student/login_situation')?>">本人登陆情况</a></li>
                 </ul>
-                <div class="nav-header" data-toggle="collapse" data-target="#legal-menu"><i class="icon-legal"></i>部门密码修改</div>
+                <div class="nav-header" data-toggle="collapse" data-target="#legal-menu"><i class="fa fa-wrench"></i>个人设置</div>
                 <ul id="legal-menu" class="nav nav-list collapse in">
-                 <li><a tabindex="-1" href="password_change.php">部门密码修改</a></li>
+                 <li><a tabindex="-1" href="p<?php echo base_url('student/sign-out')?>">个人密码修改</a></li>
                 </ul>
+                <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu"><i class="fa fa-align-justify"></i>系统介绍</div>
+                    <ul id="dashboard-menu" class="nav nav-list collapse in">
+                      <li><a href="<?php echo base_url('student/system_description')?>">关于系统</a></li>    
+                    </ul>
             </div>
         </div>

@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/lib/bootstrap/css/bootstrap.css')?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/stylesheets/theme.css'); ?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/lib/font-awesome/css/font-awesome.css'); ?>">
+    <link href="http://oss.aifuwu.org/font-awesome/css/font-awesome.css" rel="stylesheet">
 
     <script src="<?php echo base_url('assets/lib/jquery-1.8.1.min.js'); ?>" type="text/javascript"></script>
 
