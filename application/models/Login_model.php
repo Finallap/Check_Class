@@ -8,11 +8,23 @@ class Login_model extends CI_Model{
 		parent::__construct();
 	}
 
-	public function get_user($table_name,$id) 
+	public function get_password($type,$id) 
 	{
-		//$this->db->get($table_name);
-		//$query = $this->db->get_where($table_name, array('student_id' => $id));
-		//return $this->db->get()->row();
-		return $this->db->get($table_name);
+		$this->db->select('password');
+		$this->db->where($type.'_id',$id);
+		$query=$this->db->get($type.'_information');
+
+		return $query->result_array();
+
+	}
+
+	public function add_login_record($type,$id)
+	{
+		$data = array(
+					    $type.'_id' => $id,
+					    'login_time' => date('Y-m-d H:i:s')
+					);
+
+		$this->db->insert($type.'_login_information', $data);
 	}
 }

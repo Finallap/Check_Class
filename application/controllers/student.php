@@ -15,11 +15,10 @@
 
 			$this->load->model('Login_model');
 
-			var_dump($this->Login_model->get_user('student_login_information','1') );
+			$this->load->view('login/header-sign-in');
+			$this->load->view('login/sign-in');
+			$this->load->view('template/footer');
 
-			$this->load->view('student/header-sign-in');
-			$this->load->view('student/sign-in');
-			$this->load->view('student/footer');
 		}
 
 		public function main()
@@ -28,6 +27,6 @@
 
 			$this->load->view('student/header');
 			$this->load->view('student/main');
-			$this->load->view('student/footer');
+			$this->load->view('template/footer');
 		}
 	}
