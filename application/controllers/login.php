@@ -9,6 +9,15 @@
 			parent::_construct();
 		}
 
+		public function index()
+		{
+			$this->output->enable_profiler(TRUE);
+
+			$this->load->view('login/header-sign-in');
+			$this->load->view('login/sign-in');
+			$this->load->view('template/footer');
+		}
+
 		public function login_action()
 		{
 			$this->load->model('Login_model');
@@ -36,7 +45,7 @@
 			elseif($real_password==$password)
 			{
 				$data['alert_information']="登陆成功";
-				$data['href']="student/main";
+				$data['href']="";
 
 				$this->Login_model->add_login_record($type,$account);//增加登陆记录
 

@@ -1,6 +1,6 @@
 <div class="span9">
             <div class="faq-content">
-    <h1 class="page-title">欢迎进入查课系统（查课员版）</h1>
+    <h1 class="page-title">欢迎进入查课系统（班级版）</h1>
     <div class="row-fluid">
         <div class="span9">
           <div class="block">

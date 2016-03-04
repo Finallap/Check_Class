@@ -7,11 +7,31 @@ class Welcome extends CI_Controller {
 	{
 		$this->output->enable_profiler(TRUE);
 
-		$this->load->model('Login_model');
-
-		$this->load->view('login/header-sign-in');
-		$this->load->view('login/sign-in');
-		$this->load->view('template/footer');
+		if(!isset($this->session->type))
+		{
+			switch ($this->session->type) 
+			{
+				case 'class':
+					redirect('/the_class/');
+					break;
+				case 'teacher':
+					redirect('/teacher/');
+					break;
+				case 'student':
+					redirect('/student/');
+					break;
+				case 'admin':
+					redirect('/admin/');
+					break;
+				default:
+					redirect('/login/');
+					break;
+			}
+		}
+		else
+		{
+			redirect('/login/');
+		}	
 
 	}
 }
