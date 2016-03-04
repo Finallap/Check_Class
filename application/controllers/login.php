@@ -11,11 +11,22 @@
 
 		public function index()
 		{
-			$this->output->enable_profiler(TRUE);
+			//$this->output->enable_profiler(TRUE);
+			if($this->session->account)
+			{
+				$data['information']="您已登录，请先注销再次登录！";
+				$this->load->view('login/header-sign-in');
+				$this->load->view('template/error_redirect',$data);
+				$this->load->view('template/footer');
 
-			$this->load->view('login/header-sign-in');
-			$this->load->view('login/sign-in');
-			$this->load->view('template/footer');
+			}
+			else
+			{
+				echo isset($this->session->account);
+				$this->load->view('login/header-sign-in');
+				$this->load->view('login/sign-in');
+				$this->load->view('template/footer');
+			}
 		}
 
 		public function login_action()
