@@ -13,9 +13,10 @@
 		{
 			$this->session->sess_destroy();
 
-			$this->load->view('login/header-sign-in');
-			$this->load->view('login/sign-out');
-			$this->load->view('template/footer');
+			$data['alert_information']="注销成功！";
+			$data['href']="";
+
+			$this->load->view('template/alert_and_location_href',$data);
 		}
 
 	}

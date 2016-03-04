@@ -3,12 +3,6 @@
             <div class="container-fluid">
             	<a class="brand" href=""><img src="<?php echo base_url('assets/images/logo.png')?>" width="195" height="22"></a>
                 <ul class="nav pull-right">
-                
-                <li id="fat-menu" class="dropdown">
-                    <a href="<?php echo base_url('')?>" id="drop3" role="button" class="dropdown-toggle">
-                        返回首页
-                    </a>
-                </li>
                     
               </ul>
 
