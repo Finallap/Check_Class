@@ -70,7 +70,7 @@
     <div class="navbar">
         <div class="navbar-inner">
             <div class="container-fluid">
-                <a class="brand" href="<?php echo base_url('student')?>"><img src="<?php echo base_url('assets/images/logo.png')?>" width="195" height="22"></a>
+                <a class="brand" href="<?php echo base_url('')?>"><img src="<?php echo base_url('assets/images/logo.png')?>" width="195" height="22"></a>
                 <ul class="nav pull-right">
                   <li id="fat-menu" class="dropdown">
                       <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">

@@ -1,7 +1,7 @@
 <?php
 	defined('BASEPATH') OR exit('No direct script access allowed');
 
-	class Student extends CI_Controller
+	class Admin extends CI_Controller
 	{
 		
 		public function _construct()
@@ -13,11 +13,11 @@
 		{
 			$this->output->enable_profiler(TRUE);
 
-			if($this->session->type!="student")redirect('');
+			if($this->session->type!="admin")redirect('');
 
-			$this->load->view('student/header');
-			$this->load->view('student/main');
+			$this->load->view('admin/header');
+			$this->load->view('admin/main');
 			$this->load->view('template/footer');
-
 		}
+
 	}

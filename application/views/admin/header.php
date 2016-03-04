@@ -70,7 +70,7 @@
     <div class="navbar">
         <div class="navbar-inner">
             <div class="container-fluid">
-                <a class="brand" href="<?php echo base_url('student')?>"><img src="<?php echo base_url('assets/images/logo.png')?>" width="195" height="22"></a>
+                <a class="brand" href="<?php echo base_url('')?>"><img src="<?php echo base_url('assets/images/logo.png')?>" width="195" height="22"></a>
                 <ul class="nav pull-right">
                   <li id="fat-menu" class="dropdown">
                       <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">
@@ -79,10 +79,10 @@
                       </a>
 
                       <ul class="dropdown-menu">
-                         <li><a tabindex="-1" href="<?php echo base_url('student/data_entry')?>">查课情况录入</a></li>
-                             <li><a tabindex="-1" href="<?php echo base_url('student/data_query')?>">已录入信息</a></li>
-                  <li><a tabindex="-1" href="<?php echo base_url('student/login_situation')?>">登陆情况查看</a></li>
-                          <li><a tabindex="-1" href="<?php echo base_url('student/change_password')?>">个人密码修改</a></li>
+                         <li><a tabindex="-1" href="<?php echo base_url('admin/data_entry')?>">查课情况录入</a></li>
+                             <li><a tabindex="-1" href="<?php echo base_url('admin/data_query')?>">已录入信息</a></li>
+                  <li><a tabindex="-1" href="<?php echo base_url('admin/login_situation')?>">登陆情况查看</a></li>
+                          <li><a tabindex="-1" href="<?php echo base_url('admin/change_password')?>">个人密码修改</a></li>
                           <li class="divider"></li>
                           <li><a tabindex="-1" href="<?php echo base_url('sign_out')?>">注销</a></li>
                       </ul>
@@ -109,13 +109,13 @@
 
                 <div class="nav-header" data-toggle="collapse" data-target="#accounts-menu"><i class="fa fa-briefcase"></i>信息与查看与录入</div>
                 <ul id="accounts-menu" class="nav nav-list collapse in">
-                  <li><a tabindex="-1" href="<?php echo base_url('student/data_entry')?>">查课情况录入</a></li>
-                  <li><a tabindex="-1" href="<?php echo base_url('student/data_query')?>">已录入信息</a></li>
-                  <li><a tabindex="-1" href="<?php echo base_url('student/login_situation')?>">登陆情况查看</a></li>
+                  <li><a tabindex="-1" href="<?php echo base_url('admin/data_entry')?>">查课情况录入</a></li>
+                  <li><a tabindex="-1" href="<?php echo base_url('admin/data_query')?>">已录入信息</a></li>
+                  <li><a tabindex="-1" href="<?php echo base_url('admin/login_situation')?>">登陆情况查看</a></li>
                 </ul>
                 <div class="nav-header" data-toggle="collapse" data-target="#legal-menu"><i class="fa fa-wrench"></i>账号设置</div>
                 <ul id="legal-menu" class="nav nav-list collapse in">
-                 <li><a tabindex="-1" href="p<?php echo base_url('student/change_password')?>">账号密码修改</a></li>
+                 <li><a tabindex="-1" href="p<?php echo base_url('admin/change_password')?>">账号密码修改</a></li>
                 </ul>
                 <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu"><i class="fa fa-align-justify"></i>系统介绍</div>
                     <ul id="dashboard-menu" class="nav nav-list collapse in">

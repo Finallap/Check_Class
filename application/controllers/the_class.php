@@ -13,6 +13,8 @@
 		{
 			$this->output->enable_profiler(TRUE);
 
+			if($this->session->type!="class")redirect('');
+
 			$this->load->view('class/header');
 			$this->load->view('class/main');
 			$this->load->view('template/footer');
