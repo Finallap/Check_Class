@@ -74,15 +74,15 @@
                 <ul class="nav pull-right">
                   <li id="fat-menu" class="dropdown">
                       <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                          <i class="fa fa-user"></i> 方垣闰
+                          <i class="fa fa-user"></i> <?php echo $account;?>
                           <i class="fa fa-caret-down"></i>
                       </a>
 
                       <ul class="dropdown-menu">
-                         <li><a tabindex="-1" href="<?php echo base_url('teacher/data_entry')?>">查课情况录入</a></li>
-                             <li><a tabindex="-1" href="<?php echo base_url('teacher/data_query')?>">已录入信息</a></li>
+                         <li><a tabindex="-1" href="<?php echo base_url('teacher/data_entry')?>">查课情况查看</a></li>
+                             <li><a tabindex="-1" href="<?php echo base_url('teacher/data_query')?>">到课率统计</a></li>
                   <li><a tabindex="-1" href="<?php echo base_url('teacher/login_situation')?>">登陆情况查看</a></li>
-                          <li><a tabindex="-1" href="<?php echo base_url('teacher/change_password')?>">账号密码修改</a></li>
+                          <li><a tabindex="-1" href="<?php echo base_url('change_password')?>">账号密码修改</a></li>
                           <li class="divider"></li>
                           <li><a tabindex="-1" href="<?php echo base_url('sign_out')?>">注销</a></li>
                       </ul>
@@ -109,13 +109,14 @@
 
                 <div class="nav-header" data-toggle="collapse" data-target="#accounts-menu"><i class="fa fa-briefcase"></i>信息与查看与录入</div>
                 <ul id="accounts-menu" class="nav nav-list collapse in">
-                  <li><a tabindex="-1" href="<?php echo base_url('teacher/data_entry')?>">查课情况录入</a></li>
-                  <li><a tabindex="-1" href="<?php echo base_url('teacher/data_query')?>">已录入信息</a></li>
+                  <li><a tabindex="-1" href="<?php echo base_url('teacher/data_entry')?>">查课情况查看</a></li>
+                  <li><a tabindex="-1" href="<?php echo base_url('teacher/data_query')?>">到课率统计</a></li>
+                  <li><a tabindex="-1" href="<?php echo base_url('teacher/data_query')?>">统计表导出</a></li>
                   <li><a tabindex="-1" href="<?php echo base_url('teacher/login_situation')?>">登陆情况查看</a></li>
                 </ul>
                 <div class="nav-header" data-toggle="collapse" data-target="#legal-menu"><i class="fa fa-wrench"></i>账号设置</div>
                 <ul id="legal-menu" class="nav nav-list collapse in">
-                 <li><a tabindex="-1" href="p<?php echo base_url('teacher/change_password')?>">账号密码修改</a></li>
+                 <li><a tabindex="-1" href="<?php echo base_url('change_password')?>">账号密码修改</a></li>
                 </ul>
                 <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu"><i class="fa fa-align-justify"></i>系统介绍</div>
                     <ul id="dashboard-menu" class="nav nav-list collapse in">
