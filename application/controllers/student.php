@@ -24,7 +24,7 @@
 
 			$this->load->model('login_information_model');
 
-			var_dump($this->login_information_model->get_login_information_option($this->type,$this->account,1));
+			var_dump($this->login_information_model->get_login_information_option($this->type,$this->account,1,1));
 
 			$this->load->view('student/header',$header_data);
 			$this->load->view('student/main');

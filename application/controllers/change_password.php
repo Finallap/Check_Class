@@ -27,19 +27,18 @@
 			$account=$this->session->account;
 
 			$old_password = $this->input->post('old_password', TRUE);
-			$new_password = $this->input->post('password', TRUE);
+			$new_password = $this->encrypt->encode($this->input->post('password', TRUE));
 
 			$real_password=$this->Login_model->get_password($type,$account);
 
 			if(!empty($real_password))
-				$real_password=$real_password['0']['password'];
+				$real_password=$this->encrypt->decode($real_password['0']['password']);
 
 			if(empty($real_password))
 			{
 				$data['alert_information']="账号不存在";
 				$data['href']="change_password";
-			}
-				
+			}	
 			elseif ($real_password!=$old_password) 
 			{
 				$data['alert_information']="原密码不正确";
@@ -47,8 +46,6 @@
 			}
 			elseif($real_password==$old_password)
 			{
-
-
 				$this->Change_password_model->change_password($type,$account,$new_password);
 
 				$after_change_password=$this->Login_model->get_password($type,$account);
@@ -59,15 +56,10 @@
 					$data['alert_information']="修改成功";
 					$data['href']="";
 				}
-				elseif ($after_change_password==$old_password) 
-				{
-					$data['alert_information']="修改失败";
-					$data['href']="change_password";
-				}
 				else
 				{
-					$this->Change_password_model->change_password($type,$account,$old_password);
-					$data['alert_information']="未知错误";
+					$this->Change_password_model->change_password($type,$account,$this->encrypt->encode($real_password));
+					$data['alert_information']="修改失败";
 					$data['href']="change_password";
 				}
 

@@ -40,7 +40,7 @@
 			$real_password=$this->Login_model->get_password($type,$account);
 
 			if(!empty($real_password))
-				$real_password=$real_password['0']['password'];
+				$real_password=$this->encrypt->decode($real_password['0']['password']);	
 					
 			if(empty($real_password))
 			{

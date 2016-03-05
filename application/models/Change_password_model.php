@@ -15,4 +15,12 @@ class Change_password_model extends CI_Model{
 		$this->db->where($type.'_id',$id);
 		$query=$this->db->update($type.'_information',$data);
 	}
+
+	public function get_all_user($type)
+	{
+		$this->db->select($type.'_id');
+		$query=$this->db->get($type.'_information');
+
+		return $query->result_array();
+	}
 }
