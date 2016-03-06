@@ -11,7 +11,7 @@
 			parent::_construct();
 		}
 
-		public function index()
+		protected function login_status_detection()
 		{
 			$this->type=$this->session->type;
 			$this->account=$this->session->account;
@@ -19,6 +19,11 @@
 			$this->output->enable_profiler(TRUE);
 
 			if($this->type!="class")redirect('');
+		}
+
+		public function index()
+		{
+			$this->login_status_detection();
 
 			$header_data['account']=$this->account;
 
