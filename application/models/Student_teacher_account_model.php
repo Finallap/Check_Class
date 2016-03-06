@@ -29,7 +29,7 @@ class Student_teacher_account_model extends CI_Model{
 		{
 			$id=$type."_id";
 			$query[$key]['last_login_time']=$this->get_login_information_option($type,$value["$id"]);
-			$query[$key]['operation']='<a href="interview_situation.php?student_id=B12080527" class="btn btn-primary"><i class="fa fa-hand-o-right"></i> 操作</a>';
+			$query[$key]['operation']='<a href="'.base_url("admin/operation_$type")."?$id=".$value["$id"].'" class="btn btn-primary"><i class="fa fa-hand-o-right"></i> 操作</a>';
 		}
 
 		return $query;

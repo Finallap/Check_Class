@@ -83,16 +83,18 @@
 
 			$college_select = $this->load->view('template/select',$select_data, TRUE);
 
-			$template = array('table_open'  => ' <table width="563" class="table">',);
+			$template = array('table_open'  => ' <table width="563" class="table">');
 			$this->table->set_template($template);
 			$this->table->set_heading('登陆账户', '学院', '姓名','上次登陆时间','操作');
 			$table=$this->table->generate($this->Student_teacher_account_model->get_user_list($operation_type,$college_id));
 
 			$person_manager_data['college_select']=$college_select;
 			$person_manager_data['table']=$table;
+			$person_manager_data['type']=$operation_type;
 			$person_manager_data['account_type']=$operation_type_cn;
 			$person_manager_data['all_count']=$this->Student_teacher_account_model->all_count($operation_type);
 			$person_manager_data['count']=$this->Student_teacher_account_model->count_user_list($operation_type,$college_id);
+			$person_manager_data['pagination']=$this->admin_pagination($person_manager_data['count'],10,3);
 
 			$this->load->view('admin/header',$header_data);
 			$this->load->view('admin/person_manager',$person_manager_data);
@@ -101,11 +103,46 @@
 
 		public function teacher_manager()
 		{
-			$this->manager('teacher',"老师");
+			$this->manager('teacher',"教师");
 		}
 
 		public function student_manager()
 		{
 			$this->manager('student',"查课员");
+		}
+
+		protected function admin_pagination($total_rows,$per_page,$num_links)
+		{
+			$this->load->library('pagination');
+
+			$config['base_url'] = base_url('admin/teacher_manager');
+			$config['total_rows'] = $total_rows;
+			$config['per_page'] = $per_page;
+			$config['num_links'] = $num_links;
+			$config['use_page_numbers'] = TRUE;
+			$config['page_query_string']=TRUE;
+			$config['full_tag_open'] = '<ul>';
+			$config['full_tag_close'] = '</ul>';
+			$config['first_link'] = '首页';
+			$config['last_link'] = '尾页';
+			$config['next_link'] = '下一页';
+			$config['prev_link'] = '上一页';
+			$config['first_tag_open'] = '<li>';
+			$config['first_tag_close'] = '</li>';
+			$config['last_tag_open'] = '<li>';
+			$config['last_tag_close'] = '</li>';
+			$config['next_tag_open'] = '<li>';
+			$config['next_tag_close'] = '</li>';
+			$config['prev_tag_open'] = '<li>';
+			$config['prev_tag_close'] = '</li>';
+			$config['cur_tag_open'] = '<li><a>';
+			$config['cur_tag_close'] = '</a></li>';
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['attributes']['rel'] = FALSE;
+
+			$this->pagination->initialize($config);
+
+			return $this->pagination->create_links();
 		}
 	}

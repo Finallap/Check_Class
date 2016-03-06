@@ -4,6 +4,15 @@
     <div class="row-fluid">
         <div class="span9">
           
+<div class="block">
+      <p class="block-heading">可进行账户添加：</p>
+                <div class="block-body">
+                <div class="row-fluid">
+                点此进行添加：<a href="<?php echo base_url("admin/add_$type")?>"><button type="submit" class="btn btn-primary">添加</button></a>
+                    <div class="clearfix"></div>
+                  </div>
+      </div>
+          </div>
                    
 <div class="block">
       <p class="block-heading">共<?php echo $all_count;?>条记录，查询导符合条件的记录<?php echo $count;?>条！可进行记录筛选：</p>
@@ -31,9 +40,7 @@
             
            
             <div class="pagination">
-    <ul>
-<li><a href="?page=1&choice=-1&sex=-1&school=-1#">上一页</a></li><li><a href="?page=1&choice=-1&sex=-1&school=-1">1</a></li><li><a href="?page=2&choice=-1&sex=-1&school=-1">2</a></li><li><a href="?page=3&choice=-1&sex=-1&school=-1">3</a></li><li><a href="?page=4&choice=-1&sex=-1&school=-1">4</a></li><li><a href="?page=5&choice=-1&sex=-1&school=-1">5</a></li><li><a href="?page=6&choice=-1&sex=-1&school=-1">6</a></li><li><a href="?page=7&choice=-1&sex=-1&school=-1">7</a></li><li><a href="?page=8&choice=-1&sex=-1&school=-1">8</a></li><li><a href="?page=9&choice=-1&sex=-1&school=-1">9</a></li><li><a href="?page=10&choice=-1&sex=-1&school=-1">10</a></li><li><a href="?page=2&choice=-1&sex=-1&school=-1">下一页</a></li>
-    </ul>
+      <?php echo $pagination?>
 </div>
 
         </div>
