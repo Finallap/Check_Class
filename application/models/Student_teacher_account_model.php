@@ -13,7 +13,7 @@ class Student_teacher_account_model extends CI_Model{
 		$information_table_name=$type.'_information';
 		$college_table_name='college_information';
 
-		$this->db->select("$information_table_name.$type_id,$information_table_name.college_id,$college_table_name.college_name,$information_table_name.$type_name");
+		$this->db->select("$information_table_name.$type"."_id,$information_table_name.college_id,$college_table_name.college_name,$information_table_name.$type"."_name");
 		$this->db->from("$information_table_name,$college_table_name");
 
 		if(isset($college_id)&&($college_id!=-1))
@@ -27,7 +27,8 @@ class Student_teacher_account_model extends CI_Model{
 
 		foreach ($query as $key => $value) 
 		{
-			$query[$key]['last_login_time']=$this->get_login_information_option($type,$value["$type_id"]);
+			$id=$type."_id";
+			$query[$key]['last_login_time']=$this->get_login_information_option($type,$value["$id"]);
 		}
 
 		return $query;
@@ -38,6 +39,15 @@ class Student_teacher_account_model extends CI_Model{
 		$this->db->select("COUNT(*)");
 		if(isset($college_id)&&($college_id!=-1))
 			$this->db->where("college_id",$college_id);
+		$query=$this->db->get($type.'_information');
+		$query=$query->result_array();
+
+		return $query[0]['COUNT(*)'];
+	}
+
+	public function all_count($type) 
+	{
+		$this->db->select("COUNT(*)");
 		$query=$this->db->get($type.'_information');
 		$query=$query->result_array();
 

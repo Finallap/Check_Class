@@ -6,7 +6,7 @@
           
                    
 <div class="block">
-      <p class="block-heading">共661条记录，查询导符合条件的记录661条！可进行记录筛选：</p>
+      <p class="block-heading">共<?php echo $all_count;?>条记录，查询导符合条件的记录<?php echo $count;?>条！可进行记录筛选：</p>
                 <div class="block-body">
                 <div class="row-fluid">
                   <form action="" method="get">

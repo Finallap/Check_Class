@@ -16,8 +16,6 @@
 			$this->type=$this->session->type;
 			$this->account=$this->session->account;
 
-			echo $this->njupt_time->get_class_time();
-
 			$this->output->enable_profiler(TRUE);
 
 			if($this->type!="admin")redirect('');
@@ -26,6 +24,119 @@
 
 			$this->load->view('admin/header',$header_data);
 			$this->load->view('admin/main');
+			$this->load->view('template/footer');
+		}
+
+		public function add_teacher()
+		{
+			$this->type=$this->session->type;
+			$this->account=$this->session->account;
+
+			if($this->type!="admin")redirect('');
+
+			$this->load->model('College_information_model');
+
+			$header_data['account']=$this->account;
+			$select_data['name']='college';
+			$select_data['details']=$this->College_information_model->get_college_information();
+
+			$college_select = $this->load->view('template/select',$select_data, TRUE);
+
+			$add_user_data['college_select']=$college_select;
+			$add_user_data['account_type']='教师';
+			$add_user_data['action']='admin/add_teacher_action';
+
+			$this->load->view('admin/header',$header_data);
+			$this->load->view('admin/add_user',$add_user_data);
+			$this->load->view('template/footer');
+		}
+
+		public function add_student()
+		{
+			$this->type=$this->session->type;
+			$this->account=$this->session->account;
+
+			if($this->type!="admin")redirect('');
+
+			$this->load->model('College_information_model');
+
+			$header_data['account']=$this->account;
+			$select_data['name']='college';
+			$select_data['default_value']='——请选择——';
+			$select_data['details']=$this->College_information_model->get_college_information();
+
+			$college_select = $this->load->view('template/select',$select_data, TRUE);
+
+			$add_user_data['college_select']=$college_select;
+			$add_user_data['account_type']='查课员';
+			$add_user_data['action']='admin/add_student_action';
+
+			$this->load->view('admin/header',$header_data);
+			$this->load->view('admin/add_user',$add_user_data);
+			$this->load->view('template/footer');
+		}
+
+		public function teacher_manager()
+		{
+			$this->output->enable_profiler(TRUE);
+
+			$this->type=$this->session->type;
+			$this->account=$this->session->account;
+			$college_id= $this->input->get('college_id', TRUE);
+
+			if($this->type!="admin")redirect('');
+
+			$header_data['account']=$this->account;
+
+			$this->load->model('College_information_model');
+			$this->load->model('Student_teacher_account_model');
+
+			$header_data['account']=$this->account;
+			$select_data['name']='college_id';
+			$select_data['default_value']='不限';
+			$select_data['details']=$this->College_information_model->get_college_information();
+
+			$college_select = $this->load->view('template/select',$select_data, TRUE);
+
+			$person_manager_data['college_select']=$college_select;
+			$person_manager_data['account_type']='教师';
+			$person_manager_data['all_count']=$this->Student_teacher_account_model->all_count('teacher');
+			$person_manager_data['count']=$this->Student_teacher_account_model->count_user_list('teacher',$college_id);
+
+			$this->load->view('admin/header',$header_data);
+			$this->load->view('admin/person_manager',$person_manager_data);
+			$this->load->view('template/footer');
+
+			var_dump($this->Student_teacher_account_model->get_user_list('teacher',$college_id));
+		}
+
+		public function student_manager()
+		{
+			$this->type=$this->session->type;
+			$this->account=$this->session->account;
+			$college_id= $this->input->get('college_id', TRUE);
+
+			if($this->type!="admin")redirect('');
+
+			$header_data['account']=$this->account;
+
+			$this->load->model('College_information_model');
+			$this->load->model('Student_teacher_account_model');
+
+			$header_data['account']=$this->account;
+			$select_data['name']='college_id';
+			$select_data['default_value']='不限';
+			$select_data['details']=$this->College_information_model->get_college_information();
+
+			$college_select = $this->load->view('template/select',$select_data, TRUE);
+
+			$person_manager_data['college_select']=$college_select;
+			$person_manager_data['account_type']='学生';
+			$person_manager_data['all_count']=$this->Student_teacher_account_model->all_count('student');
+			$person_manager_data['count']=$this->Student_teacher_account_model->count_user_list('student',$college_id);
+
+			$this->load->view('admin/header',$header_data);
+			$this->load->view('admin/person_manager',$person_manager_data);
 			$this->load->view('template/footer');
 		}
 
