@@ -58,10 +58,10 @@ class  Njupt_time{
     {
     	$now_time  = date('H:i');
 
-    	$start_time_1 = '7:45';
-    	$end_time_1  = '9:40';
+    	$start_time_1 = '07:45';
+    	$end_time_1  = '09:40';
 
-    	$start_time_2 = '9:41';
+    	$start_time_2 = '09:41';
     	$end_time_2  = '12:20';
 
     	$start_time_3 = '13:35';
