@@ -90,6 +90,7 @@
 
 			$this->load->model('College_information_model');
 			$this->load->model('Student_teacher_account_model');
+			$this->load->library('table');
 
 			$header_data['account']=$this->account;
 			$select_data['name']='college_id';
@@ -98,7 +99,13 @@
 
 			$college_select = $this->load->view('template/select',$select_data, TRUE);
 
+			$template = array('table_open'  => ' <table width="563" class="table">',);
+			$this->table->set_template($template);
+			$this->table->set_heading('登陆账户', '学院', '姓名','上次登陆时间','操作');
+			$table=$this->table->generate($this->Student_teacher_account_model->get_user_list('teacher',$college_id));
+
 			$person_manager_data['college_select']=$college_select;
+			$person_manager_data['table']=$table;
 			$person_manager_data['account_type']='教师';
 			$person_manager_data['all_count']=$this->Student_teacher_account_model->all_count('teacher');
 			$person_manager_data['count']=$this->Student_teacher_account_model->count_user_list('teacher',$college_id);
@@ -106,8 +113,6 @@
 			$this->load->view('admin/header',$header_data);
 			$this->load->view('admin/person_manager',$person_manager_data);
 			$this->load->view('template/footer');
-
-			var_dump($this->Student_teacher_account_model->get_user_list('teacher',$college_id));
 		}
 
 		public function student_manager()
@@ -122,6 +127,7 @@
 
 			$this->load->model('College_information_model');
 			$this->load->model('Student_teacher_account_model');
+			$this->load->library('table');
 
 			$header_data['account']=$this->account;
 			$select_data['name']='college_id';
@@ -130,7 +136,13 @@
 
 			$college_select = $this->load->view('template/select',$select_data, TRUE);
 
+			$template = array('table_open'  => ' <table width="563" class="table">',);
+			$this->table->set_template($template);
+			$this->table->set_heading('登陆账户', '学院', '姓名','上次登陆时间','操作');
+			$table=$this->table->generate($this->Student_teacher_account_model->get_user_list('student',$college_id));
+
 			$person_manager_data['college_select']=$college_select;
+			$person_manager_data['table']=$table;
 			$person_manager_data['account_type']='学生';
 			$person_manager_data['all_count']=$this->Student_teacher_account_model->all_count('student');
 			$person_manager_data['count']=$this->Student_teacher_account_model->count_user_list('student',$college_id);

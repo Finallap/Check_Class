@@ -23,25 +23,7 @@
             
 
 <div class="well">
-    <table width="563" class="table">
-      <thead>
-        <tr>
-          <th width="29">#</th>
-          <th width="92">登陆账户</th>
-          <th width="57">姓名</th>
-          <th width="115">学院</th>
-          <th width="167">上次登陆时间</th>
-          <th width="75">操作</th>
-        </tr>
-      </thead>
-      <tbody>
-                <tr><td>1</td><td>B12080527</td><td>樊超</td><td>理学院</td><td>采编部</td><td><a href="interview_situation.php?student_id=B12080527&page=1&choice=-1&sex=-1&school=-1" class="btn btn-primary"><i class="fa fa-hand-o-right"></i> 操作</a></td></tr>
-                
-                <tr><td>2</td><td>B15120614</td><td>徐淑娟</td><td>经济学院</td><td>业务服务部</td><td><a href="interview_situation.php?student_id=B15120614&page=1&choice=-1&sex=-1&school=-1" class="btn btn-primary"><i class="fa fa-hand-o-right"></i> 操作</a></td></tr>
-                
-                
-      </tbody>
-    </table>
+    <?php echo $table;?>
 </div>
 
             

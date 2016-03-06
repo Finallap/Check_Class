@@ -13,7 +13,7 @@ class Student_teacher_account_model extends CI_Model{
 		$information_table_name=$type.'_information';
 		$college_table_name='college_information';
 
-		$this->db->select("$information_table_name.$type"."_id,$information_table_name.college_id,$college_table_name.college_name,$information_table_name.$type"."_name");
+		$this->db->select("$information_table_name.$type"."_id,$college_table_name.college_name,$information_table_name.$type"."_name");
 		$this->db->from("$information_table_name,$college_table_name");
 
 		if(isset($college_id)&&($college_id!=-1))
@@ -29,6 +29,7 @@ class Student_teacher_account_model extends CI_Model{
 		{
 			$id=$type."_id";
 			$query[$key]['last_login_time']=$this->get_login_information_option($type,$value["$id"]);
+			$query[$key]['operation']='<a href="interview_situation.php?student_id=B12080527" class="btn btn-primary"><i class="fa fa-hand-o-right"></i> 操作</a>';
 		}
 
 		return $query;
