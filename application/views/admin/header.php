@@ -117,8 +117,8 @@
                 <div class="nav-header" data-toggle="collapse" data-target="#legal-menu"><i class="fa fa-wrench"></i>账号设置</div>
                 <ul id="legal-menu" class="nav nav-list collapse in">
                  <li><a tabindex="-1" href="<?php echo base_url('change_password')?>">账号密码修改</a></li>
-                 <li><a tabindex="-1" href="<?php echo base_url('admin/change_password')?>">教师账户管理</a></li>
-                 <li><a tabindex="-1" href="<?php echo base_url('admin/change_password')?>">查课员账户管理</a></li>
+                 <li><a tabindex="-1" href="<?php echo base_url('admin/teacher_manager')?>">教师账户管理</a></li>
+                 <li><a tabindex="-1" href="<?php echo base_url('admin/student_manager')?>">查课员账户管理</a></li>
                 </ul>
                 <div class="nav-header" data-toggle="collapse" data-target="#legal-menu"><i class="fa fa-cog"></i>系统设置与信息导入</div>
                 <ul id="legal-menu" class="nav nav-list collapse in">
