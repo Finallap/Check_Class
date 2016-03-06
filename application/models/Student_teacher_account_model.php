@@ -8,7 +8,7 @@ class Student_teacher_account_model extends CI_Model{
 		parent::__construct();
 	}
 
-	public function get_user_list($type,$college_id=NULL,$count=15,$offset=0) //获取按条件搜索出的用户列表
+	public function get_user_list($type,$college_id=NULL,$count=10,$offset=0) //获取按条件搜索出的用户列表
 	{
 		$information_table_name=$type.'_information';
 		$college_table_name='college_information';

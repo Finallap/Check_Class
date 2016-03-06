@@ -8,7 +8,8 @@
       <p class="block-heading">可进行账户添加：</p>
                 <div class="block-body">
                 <div class="row-fluid">
-                点此进行添加：<a href="<?php echo base_url("admin/add_$type")?>"><button type="submit" class="btn btn-primary">添加</button></a>
+                点此进行添加：
+                <a href="<?php echo base_url("admin/add_$type")?>"><button type="submit" class="btn btn-primary"><i class="fa fa-plus"></i>添加</button></a>
                     <div class="clearfix"></div>
                   </div>
       </div>

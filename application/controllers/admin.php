@@ -69,6 +69,10 @@
 			$this->login_status_detection();
 
 			$college_id= $this->input->get('college_id', TRUE);
+			$per_page=$this->input->get('per_page', TRUE);
+			if(is_null($college_id))$college_id=-1;
+			if(is_null($per_page))$per_page=1;
+			$base_url=current_url()."?college_id=$college_id";
 
 			$header_data['account']=$this->account;
 
@@ -86,7 +90,7 @@
 			$template = array('table_open'  => ' <table width="563" class="table">');
 			$this->table->set_template($template);
 			$this->table->set_heading('登陆账户', '学院', '姓名','上次登陆时间','操作');
-			$table=$this->table->generate($this->Student_teacher_account_model->get_user_list($operation_type,$college_id));
+			$table=$this->table->generate($this->Student_teacher_account_model->get_user_list($operation_type,$college_id,10,($per_page-1)*10));
 
 			$person_manager_data['college_select']=$college_select;
 			$person_manager_data['table']=$table;
@@ -94,7 +98,7 @@
 			$person_manager_data['account_type']=$operation_type_cn;
 			$person_manager_data['all_count']=$this->Student_teacher_account_model->all_count($operation_type);
 			$person_manager_data['count']=$this->Student_teacher_account_model->count_user_list($operation_type,$college_id);
-			$person_manager_data['pagination']=$this->admin_pagination($person_manager_data['count'],10,3);
+			$person_manager_data['pagination']=$this->admin_pagination($person_manager_data['count'],10,3,$base_url);
 
 			$this->load->view('admin/header',$header_data);
 			$this->load->view('admin/person_manager',$person_manager_data);
@@ -111,11 +115,11 @@
 			$this->manager('student',"查课员");
 		}
 
-		protected function admin_pagination($total_rows,$per_page,$num_links)
+		protected function admin_pagination($total_rows,$per_page,$num_links,$base_url)
 		{
 			$this->load->library('pagination');
 
-			$config['base_url'] = base_url('admin/teacher_manager');
+			$config['base_url'] = $base_url;
 			$config['total_rows'] = $total_rows;
 			$config['per_page'] = $per_page;
 			$config['num_links'] = $num_links;
