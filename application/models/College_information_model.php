@@ -25,4 +25,18 @@ class College_information_model extends CI_Model{
 
 		return $result;
 	}
+
+	public function get_user_college_name($type,$id)
+	{
+		$table_name=$type.'_information';
+
+		$this->db->select("college_information.college_name");
+		$this->db->from("$table_name,college_information");
+		$this->db->where("$table_name.".$type.'_id',$id);
+		$this->db->where("$table_name.college_id=college_information.college_id");
+		$query=$this->db->get();
+		$query=$query->result_array();
+
+		return $query[0]['college_name'];
+	}
 }

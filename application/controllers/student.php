@@ -5,6 +5,7 @@
 	{
 		protected $type;
 		protected $account;
+		protected $user_name;
 		
 		public function _construct()
 		{
@@ -16,6 +17,9 @@
 			$this->type=$this->session->type;
 			$this->account=$this->session->account;
 
+			$this->load->model('Account_information_model');
+			$this->user_name=$this->Account_information_model-> get_user_name($this->type,$this->account);
+
 			$this->output->enable_profiler(TRUE);
 
 			if($this->type!="student")redirect('');
@@ -25,11 +29,7 @@
 		{
 			$this->login_status_detection();
 
-			$header_data['account']=$this->account;
-
-			$this->load->model('login_information_model');
-
-			var_dump($this->login_information_model->get_login_information_option($this->type,$this->account,1,1));
+			$header_data['account']=$this->user_name;
 
 			$this->load->view('student/header',$header_data);
 			$this->load->view('student/main');
