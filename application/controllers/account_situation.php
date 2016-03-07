@@ -69,7 +69,7 @@ class Account_situation extends CI_Controller {
 		$situation_data['user_name']=$user_name;
 		$situation_data['table']=$table;
 
-		$this->load->view('teacher/header',$header_data);
+		$this->load->view($this->type.'/header',$header_data);
 		$this->load->view('template/account-situation',$situation_data);
 		$this->load->view('template/footer');
 	}
