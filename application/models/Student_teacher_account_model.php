@@ -70,4 +70,26 @@ class Student_teacher_account_model extends CI_Model{
 			return "从未登陆";
 	}
 
+	public function add_accout($type,$id,$name,$college_id,$password)
+	{
+		$this->db->select('*');
+		$this->db->where($type.'_id',$id);
+		$query=$this->db->get($type.'_information');
+		$query=$query->result_array();
+
+		if(!empty($query[0]))
+			return false;
+		else
+		{
+			$data = array(
+						    $type.'_id' => $id,
+						    $type.'_name' => $name,
+						    'college_id' => $college_id,
+						    'password' => $password
+						);
+			$this->db->insert($type.'_information', $data);
+			return true;
+		}
+	}
+
 }

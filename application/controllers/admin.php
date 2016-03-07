@@ -149,4 +149,38 @@
 
 			return $this->pagination->create_links();
 		}
+
+		protected function add_action($type)
+		{
+			$this->login_status_detection();
+
+			$id= $this->input->post('account', TRUE);
+			$name= $this->input->post('account_name', TRUE);
+			$college_id= $this->input->post('college_id', TRUE);
+			$password=$this->encrypt->encode($id);
+
+			$this->load->model('Student_teacher_account_model');
+
+			if($this->Student_teacher_account_model->add_accout($type,$id,$name,$college_id,$password))
+			{
+				$data['alert_information']="添加成功";
+				$data['href']="admin/$type"."_manager";
+			}
+			else
+			{
+				$data['alert_information']="账户已存在，添加失败！";
+				$data['href']="admin/add_$type";
+			}
+			$this->load->view('template/alert_and_location_href',$data);
+		}
+
+		public function add_teacher_action()
+		{
+			$this->add_action('teacher');
+		}
+
+		public function add_student_action()
+		{
+			$this->add_action('student');
+		}
 	}
