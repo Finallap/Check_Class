@@ -121,4 +121,74 @@
 			$this->load->view('template/alert_and_location_href',$data);
 		}
 
+		public function data_query()
+		{
+			$this->login_status_detection();
+
+			$header_data['account']=$this->account;
+
+			$per_page=$this->input->get('per_page', TRUE);
+			if(is_null($per_page))$per_page=1;
+
+			$base_url=current_url();
+
+			$this->load->model('Record_model');
+			$this->load->library('table');
+			if($this->Record_model->count_record_list($this->type,$this->account)==0)
+			{
+				$table="<label>抱歉，未查找到本账号录入的查课信息(╯3╰)</label>";
+			}
+			else
+			{
+				$template = array('table_open'  => ' <table class="table">');
+				$this->table->set_template($template);
+				//$this->table->set_heading('登陆账户', '学院', '姓名','上次登陆时间','操作');
+				$table=$this->table->generate($this->Record_model->get_record_list($this->type,$this->account,10,($per_page-1)*10));
+			}
+
+
+			$record_data['all_count']=$this->Record_model->count_record_list($this->type,$this->account);
+			$record_data['table']=$table;
+			$record_data['pagination']=$this->add_pagination($record_data['all_count'],10,3,$base_url);;
+
+			$this->load->view('class/header',$header_data);
+			$this->load->view('template/record_data_query',$record_data);
+			$this->load->view('template/footer');
+		}
+
+		protected function add_pagination($total_rows,$per_page,$num_links,$base_url)
+		{
+			$this->load->library('pagination');
+
+			$config['base_url'] = $base_url;
+			$config['total_rows'] = $total_rows;
+			$config['per_page'] = $per_page;
+			$config['num_links'] = $num_links;
+			$config['use_page_numbers'] = TRUE;
+			$config['page_query_string']=TRUE;
+			$config['full_tag_open'] = '<ul>';
+			$config['full_tag_close'] = '</ul>';
+			$config['first_link'] = '首页';
+			$config['last_link'] = '尾页';
+			$config['next_link'] = '下一页';
+			$config['prev_link'] = '上一页';
+			$config['first_tag_open'] = '<li>';
+			$config['first_tag_close'] = '</li>';
+			$config['last_tag_open'] = '<li>';
+			$config['last_tag_close'] = '</li>';
+			$config['next_tag_open'] = '<li>';
+			$config['next_tag_close'] = '</li>';
+			$config['prev_tag_open'] = '<li>';
+			$config['prev_tag_close'] = '</li>';
+			$config['cur_tag_open'] = '<li><a>';
+			$config['cur_tag_close'] = '</a></li>';
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['attributes']['rel'] = FALSE;
+
+			$this->pagination->initialize($config);
+
+			return $this->pagination->create_links();
+		}
+
 	}

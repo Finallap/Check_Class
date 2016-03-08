@@ -33,4 +33,32 @@ class Record_model extends CI_Model{
 		else
 			return true;
 	}
+
+	public function get_record_list($account_type=NULL,$account_id=NULL,$count=10,$offset=0)
+	{
+		$this->db->select("*");
+		$this->db->from('check_class_record');
+
+		$this->db->where("account_type",$account_type);
+		$this->db->where("account_id",$account_id);
+
+		$this->db->limit($count,$offset);
+		$this->db->order_by('recording_time','ASC');
+		$query=$this->db->get();
+		$query=$query->result_array();
+
+		return $query;
+	}
+
+	public function count_record_list($account_type=NULL,$account_id=NULL)
+	{
+		$this->db->select("COUNT(*)");
+		$this->db->from('check_class_record');
+		$this->db->where("account_type",$account_type);
+		$this->db->where("account_id",$account_id);
+		$query=$this->db->get();
+		$query=$query->result_array();
+
+		return $query[0]['COUNT(*)'];
+	}
 }
