@@ -40,7 +40,8 @@
         <label>选择学院</label>
         <?php echo $college_select;?>
         <label>增加账户类型：<?php echo $account_type;?></label>
-        <label><input name="submit" type="submit" value="增加" class="btn btn-primary pull-letf"><label>
+        <br>
+        <input name="submit" type="submit" value="增加" class="btn btn-primary pull-letf">
 
     </form>
       </div>
