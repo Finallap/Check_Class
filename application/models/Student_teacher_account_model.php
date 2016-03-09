@@ -37,22 +37,16 @@ class Student_teacher_account_model extends CI_Model{
 
 	public function count_user_list($type,$college_id=NULL) //获取按条件搜索出的用户列表的条数
 	{
-		$this->db->select("COUNT(*)");
 		if(isset($college_id)&&($college_id!=-1))
 			$this->db->where("college_id",$college_id);
-		$query=$this->db->get($type.'_information');
-		$query=$query->result_array();
+		$this->db->from($type.'_information');
 
-		return $query[0]['COUNT(*)'];
+		return $this->db->count_all_results();;
 	}
 
 	public function all_count($type) 
 	{
-		$this->db->select("COUNT(*)");
-		$query=$this->db->get($type.'_information');
-		$query=$query->result_array();
-
-		return $query[0]['COUNT(*)'];
+		return $this->db->count_all($type.'_information');
 	}
 
 	public function get_login_information_option($type,$id) //获取最近一条登陆信息

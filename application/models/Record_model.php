@@ -56,9 +56,7 @@ class Record_model extends CI_Model{
 		$this->db->from('check_class_record');
 		$this->db->where("account_type",$account_type);
 		$this->db->where("account_id",$account_id);
-		$query=$this->db->get();
-		$query=$query->result_array();
 
-		return $query[0]['COUNT(*)'];
+		return $this->db->count_all_results();
 	}
 }
