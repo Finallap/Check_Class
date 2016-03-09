@@ -47,6 +47,26 @@ class Record_model extends CI_Model{
 		$query=$this->db->get();
 		$query=$query->result_array();
 
+		foreach ($query as $key => $value) 
+		{
+			$this->db->reset_query();
+			$this->db->select("*");
+			$this->db->where("course_id",$value["course_id"]);
+			$this->db->from('course_information');
+			$query1=$this->db->get();
+			$query1=$query1->result_array();
+
+			$query[$key]['course_name']=$query1[0]['course_name'];
+			$query[$key]['weekday']=$query1[0]['weekday'];
+			$query[$key]['classroom']=$query1[0]['classroom'];
+			$query[$key]['tercher_name']=$query1[0]['tercher_name'];
+			$query[$key]['choices_number']=$query1[0]['choices_number'];
+			if(!empty($query1[0]['choices_number']))
+				$query[$key]['students_attendance']=$value["real_number"]/$query1[0]['choices_number'];
+			else
+				$query[$key]['students_attendance']=0;
+		}
+
 		return $query;
 	}
 

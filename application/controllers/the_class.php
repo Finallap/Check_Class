@@ -142,17 +142,24 @@
 			{
 				$template = array('table_open'  => ' <table class="table">');
 				$this->table->set_template($template);
-				//$this->table->set_heading('登陆账户', '学院', '姓名','上次登陆时间','操作');
-				$table=$this->table->generate($this->Record_model->get_record_list($this->type,$this->account,10,($per_page-1)*10));
-			}
+				$this->table->set_heading('周数', '课程名称', '教室','任课教师','星期几','应到人数','实到人数','到课率','录入时间');
+				$query_result=$this->Record_model->get_record_list($this->type,$this->account,10,($per_page-1)*10);
 
+				foreach ($query_result as $key => $value) 
+				{
+					$this->table->add_row($value['week'], $value['course_name'], $value['classroom'],$value['tercher_name'],$value['weekday'],$value['choices_number'],$value['real_number'],$value['students_attendance'],$value['recording_time']);
+				}
+
+				$table=$this->table->generate();
+				//var_dump($this->Record_model->get_record_list($this->type,$this->account,10,($per_page-1)*10));
+			}
 
 			$record_data['all_count']=$this->Record_model->count_record_list($this->type,$this->account);
 			$record_data['table']=$table;
 			$record_data['pagination']=$this->add_pagination($record_data['all_count'],10,3,$base_url);;
 
 			$this->load->view('class/header',$header_data);
-			$this->load->view('template/record_data_query',$record_data);
+			$this->load->view('class/record_data_query',$record_data);
 			$this->load->view('template/footer');
 		}
 
