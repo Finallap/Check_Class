@@ -81,8 +81,6 @@
 
 			$data['course']=$this->course_now;
 
-			var_dump($data['course']);
-
 			$this->load->view('teacher/header',$header_data);
 			$this->load->view('teacher/record_entry',$data);
 			$this->load->view('template/footer');
@@ -116,7 +114,7 @@
 			if(empty($this->course_now))
 			{
 				$data['alert_information']="现在这班级并没有课，你在干嘛呢(｡˘•ε•˘｡)";
-				$data['href']="student/data_entry";
+				$data['href']="teacher/data_entry";
 			}
 			else
 			{
@@ -158,7 +156,7 @@
 					$this->Record_model->record_input($input_data);
 
 					$data['alert_information']="信息录入成功！ o(*￣▽￣*)ブ";
-					$data['href']="the_class/data_entry";
+					$data['href']="teacher/data_entry";
 				}
 			}	
 

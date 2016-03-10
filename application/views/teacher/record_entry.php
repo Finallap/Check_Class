@@ -65,7 +65,8 @@
           else
           {
             echo "<label>目前课程名称：".$course[0]['course_name']."</label>\n";
-            echo "<label>目前上课教室：".$course[0]['classroom']."</label>\n";
+            echo "<label>上课教室：".$course[0]['classroom']."</label>\n";
+            echo "<label>班级组成：".$course[0]['class_list']."</label>\n";
             echo "<label>任课教师：".$course[0]['tercher_name']."</label>\n";
             echo "<label>选课人数：".$course[0]['choices_number']."</label>\n";
             echo "<label>请输入实到人数:</label>";

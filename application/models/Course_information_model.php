@@ -46,8 +46,8 @@ class Course_information_model extends CI_Model{
 				$class_list.=$value['class_id'].",";
 			}
 			$class_list=substr($class_list, 0, -1);
-			$query['class_list']=$class_list;
-
+			$query[0]['class_list']=$class_list;
+			return $query;
 		}
 	}
 
@@ -62,6 +62,6 @@ class Course_information_model extends CI_Model{
 		$query=$this->db->get();
 		$query=$query->result_array();
 
-		return $query[0];
+		return $query;
 	}
 }
