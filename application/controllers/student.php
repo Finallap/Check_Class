@@ -149,7 +149,7 @@
 					$this->Record_model->record_input($input_data);
 
 					$data['alert_information']="信息录入成功！ o(*￣▽￣*)ブ";
-					$data['href']="the_class/data_entry";
+					$data['href']="student/data_entry";
 				}
 			}	
 

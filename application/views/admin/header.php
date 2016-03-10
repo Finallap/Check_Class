@@ -11,8 +11,10 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/lib/bootstrap/css/bootstrap.css')?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/stylesheets/theme.css'); ?>">
     <link href="http://oss.aifuwu.org/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="<?php echo base_url('assets/lib/jquery-ui.min.css'); ?>" rel="stylesheet">
 
-    <script src="<?php echo base_url('assets/lib/jquery-1.8.1.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets/lib/jquery-ui.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/lib/jquery.min.js'); ?>" type="text/javascript"></script>
 
     <!-- Demo page code -->
     
@@ -47,22 +49,23 @@
   <!--[if IE 8 ]> <body class="ie ie8"> <![endif]-->
   <!--[if IE 9 ]> <body class="ie ie9"> <![endif]-->
   <!--[if (gt IE 9)|!(IE)]><!--> 
-
-    <!-- Piwik -->
-    <script type="text/javascript">
-      var _paq = _paq || [];
-      _paq.push(['trackPageView']);
-      _paq.push(['enableLinkTracking']);
-      (function() {
-        var u="//piwik.aifuwu.org/";
-        _paq.push(['setTrackerUrl', u+'piwik.php']);
-        _paq.push(['setSiteId', 21]);
-        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
-      })();
-    </script>
-    <noscript><p><img src="//piwik.aifuwu.org/piwik.php?idsite=21" style="border:0;" alt="" /></p></noscript>
-    <!-- End Piwik Code -->
+  
+  <!-- Piwik -->
+  <script type="text/javascript">
+    var _paq = _paq || [];
+    _paq.push(["setDomains", ["*.checkclass.aifuwu.org"]]);
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="//piwik.aifuwu.org/";
+      _paq.push(['setTrackerUrl', u+'piwik.php']);
+      _paq.push(['setSiteId', 24]);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <noscript><p><img src="//piwik.aifuwu.org/piwik.php?idsite=24" style="border:0;" alt="" /></p></noscript>
+  <!-- End Piwik Code -->
 
   <body> 
   <!--<![endif]-->

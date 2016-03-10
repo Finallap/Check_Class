@@ -139,7 +139,7 @@
 				if($this->Record_model->exist_record($select_data))
 				{
 					$data['alert_information']="已经进行过本节课的信息录入，请不要再次尝试录入(｡˘•ε•˘｡)";
-					$data['href']="student/data_entry";
+					$data['href']="teacher/data_entry";
 				}
 				else
 				{
