@@ -11,10 +11,10 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/lib/bootstrap/css/bootstrap.css')?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/stylesheets/theme.css'); ?>">
     <link href="http://oss.aifuwu.org/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="<?php echo base_url('assets/lib/jquery-ui.min.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/lib/jquery-ui-1.11.4.custom/jquery-ui.min.css'); ?>" rel="stylesheet">
 
-    <script src="<?php echo base_url('assets/lib/jquery-ui.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/lib/jquery.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets/lib/jquery-ui-1.11.4.custom/jquery-ui.min.js'); ?>"></script>
 
     <!-- Demo page code -->
     

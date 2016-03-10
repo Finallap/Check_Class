@@ -11,10 +11,11 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/lib/bootstrap/css/bootstrap.css')?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/stylesheets/theme.css'); ?>">
     <link href="http://oss.aifuwu.org/font-awesome/css/font-awesome.css" rel="stylesheet">
-    <link href="<?php echo base_url('assets/lib/jquery-ui.min.css'); ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/lib/jquery-ui-1.11.4.custom/jquery-ui.min.css'); ?>" rel="stylesheet">
 
-    <script src="<?php echo base_url('assets/lib/jquery-ui.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/lib/jquery.min.js'); ?>" type="text/javascript"></script>
+    <script src="<?php echo base_url('assets/lib/jquery-ui-1.11.4.custom/jquery-ui.min.js'); ?>"></script>
+
 
     <!-- Demo page code -->
     
@@ -125,7 +126,7 @@
                 </ul>
                 <div class="nav-header" data-toggle="collapse" data-target="#legal-menu"><i class="fa fa-cog"></i>系统设置与信息导入</div>
                 <ul id="legal-menu" class="nav nav-list collapse in">
-                 <li><a tabindex="-1" href="<?php echo base_url('admin/change_password')?>">学年学期设置</a></li>
+                 <li><a tabindex="-1" href="<?php echo base_url('admin/change_system_option')?>">学年学期设置</a></li>
                  <li><a tabindex="-1" href="<?php echo base_url('admin/change_password')?>">教室信息管理</a></li>
                  <li><a tabindex="-1" href="<?php echo base_url('admin/change_password')?>">班级信息管理</a></li>
                  <li><a tabindex="-1" href="<?php echo base_url('admin/change_password')?>">课程信息管理</a></li>

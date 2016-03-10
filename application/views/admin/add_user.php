@@ -21,10 +21,6 @@
 
         <div class="span9">
             <h1 class="page-title">添加<?php echo $account_type;?>账户</h1>
-<div class="btn-toolbar">
-  <div class="btn-group">
-  </div>
-</div>
 <div class="well">
     <ul class="nav nav-tabs">
       <li class="active"><a href="#home" data-toggle="tab">信息填写</a></li>

@@ -56,7 +56,7 @@
 
 		public function add_teacher()
 		{
-			$this->add_operation('teacher',"老师");
+			$this->add_operation('teacher',"教师");
 		}
 
 		public function add_student()
@@ -182,5 +182,36 @@
 		public function add_student_action()
 		{
 			$this->add_action('student');
+		}
+
+		public function change_system_option()
+		{
+			$this->login_status_detection();
+			$this->load->model('System_option_model');
+
+			if($this->input->post('school_year', TRUE))
+			{
+				$school_year= str_replace(' ','',$this->input->post('school_year', TRUE));
+				$term= str_replace(' ','',$this->input->post('term', TRUE));
+				$start_day= str_replace(' ','',$this->input->post('start_day', TRUE));
+
+				$this->System_option_model->update_system_option($school_year,$term,$start_day);
+
+				$data['alert_information']="修改系统时间完成！";
+				$data['href']="admin";
+
+				$this->load->view('template/alert_and_location_href',$data);
+			}
+			else
+			{
+				$header_data['account']=$this->account;
+
+				$data=$this->System_option_model->get_system_option();
+
+				$this->load->view('admin/header',$header_data);
+				$this->load->view('admin/change_system_option',$data);
+				$this->load->view('template/footer');
+				$this->load->view('admin/datepicker_js');
+			}
 		}
 	}
