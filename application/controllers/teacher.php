@@ -62,4 +62,106 @@
 			$this->load->view('teacher/classid_select_js');
 		}
 
+		public function data_entry_middleware()
+		{
+			$this->login_status_detection();
+
+			$class_id=$this->input->post('class_id');
+
+			$header_data['account']=$this->user_name;
+
+			$this->get_course_now($class_id);
+
+			$data['school_year']=$this->njupt_time->get_school_year();
+			$data['term']=$this->njupt_time->get_term();
+			$data['odd_even']=$this->njupt_time->get_odd_even();
+			$data['class_time']=$this->njupt_time->get_class_time();
+			$data['week']=$this->njupt_time->get_week();
+			$data['class_id']=$class_id;
+
+			$data['course']=$this->course_now;
+
+			var_dump($data['course']);
+
+			$this->load->view('teacher/header',$header_data);
+			$this->load->view('teacher/record_entry',$data);
+			$this->load->view('template/footer');
+		}
+
+		protected function get_course_now($class_id)
+		{
+			$this->load->model('Course_information_model');
+			$this->course_now=$this->Course_information_model->get_course_id
+			(
+				$this->njupt_time->get_school_year(),
+				$this->njupt_time->get_term(),
+				$class_id,
+				$this->njupt_time->get_odd_even(),
+				$this->njupt_time->get_class_time(),
+				date("w"),
+				$this->njupt_time->get_week(),
+				NULL
+			);
+		}
+
+		public function data_entry_action()
+		{
+			$this->login_status_detection();
+
+			$this->load->model('Record_model');
+
+			$class_id=$this->input->post('class_id');
+			$this->get_course_now($class_id);
+
+			if(empty($this->course_now))
+			{
+				$data['alert_information']="现在这班级并没有课，你在干嘛呢(｡˘•ε•˘｡)";
+				$data['href']="student/data_entry";
+			}
+			else
+			{
+				$real_number=$this->input->post('real_number');
+				$remark=$this->input->post('remark');
+
+				$school_year=$this->njupt_time->get_school_year();
+				$term=$this->njupt_time->get_term();
+				$week=$this->njupt_time->get_week();
+				$class=$this->account;
+
+				$course_id=$this->course_now[0]['course_id'];
+
+				$select_data = array('school_year' => $school_year,
+									'term' => $term,
+									'account_type' => $this->type,
+									'account_id' => $this->account,
+									'week' => $week,
+									'course_id' => $course_id
+									 );
+
+				if($this->Record_model->exist_record($select_data))
+				{
+					$data['alert_information']="已经进行过本节课的信息录入，请不要再次尝试录入(｡˘•ε•˘｡)";
+					$data['href']="student/data_entry";
+				}
+				else
+				{
+					$input_data = array('school_year' => $school_year,
+										'term' => $term,
+										'account_type' => $this->type,
+										'account_id' => $this->account,
+										'week' => $week,
+										'course_id' => $course_id,
+										'real_number' => $real_number,
+										'recording_time' => date('Y-m-d H:i:s',time()),
+										'remark' => $remark
+										 );
+					$this->Record_model->record_input($input_data);
+
+					$data['alert_information']="信息录入成功！ o(*￣▽￣*)ブ";
+					$data['href']="the_class/data_entry";
+				}
+			}	
+
+			$this->load->view('template/alert_and_location_href',$data);
+		}
 	}

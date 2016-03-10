@@ -34,6 +34,34 @@ class Course_information_model extends CI_Model{
 		$query=$this->db->get();
 		$query=$query->result_array();
 
-		return $query;
+		if(empty($query))
+			return $query;
+		else
+		{
+			$course_id=$query[0]['course_id'];
+			$class_array=$this->get_all_class_id($school_year,$term,$course_id);
+			$class_list=NULL;
+			foreach ($class_array as $key => $value) 
+			{
+				$class_list.=$value['class_id'].",";
+			}
+			$class_list=substr($class_list, 0, -1);
+			$query['class_list']=$class_list;
+
+		}
+	}
+
+	public function get_all_class_id($school_year,$term,$course_id)
+	{
+		$this->db->select('class_id');
+		$this->db->from('course_class_information');
+		$this->db->where('school_year',$school_year);
+		$this->db->where('term',$term);
+		$this->db->where('course_id',$course_id);
+
+		$query=$this->db->get();
+		$query=$query->result_array();
+
+		return $query[0];
 	}
 }
