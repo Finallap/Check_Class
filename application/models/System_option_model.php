@@ -18,4 +18,12 @@ class System_option_model extends CI_Model{
 		if($result)
 			return $result['0'];
 	}
+
+	public function update_system_option($school_year,$term,$start_day)
+	{
+		if(!empty($school_year))$this->db->set('school_year', $school_year);
+		if(!empty($term))$this->db->set('term', $term);
+		if(!empty($start_day))$this->db->set('start_day', $start_day);
+		$this->db->update('system_option');
+	}
 }
