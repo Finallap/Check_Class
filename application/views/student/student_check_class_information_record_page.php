@@ -35,7 +35,7 @@
     </ul>
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane active in" id="home">
-    <form id="tab" action="<?php echo base_url('the_class/data_entry_action')?>" method="post" onSubmit="return check()">
+    <form id="tab" action="<?php echo base_url('student/data_entry_action')?>" method="post" onSubmit="return check()">
         <label>现在时间：<?php echo date('Y-m-d H:i:s',time());?></label>
         <label>目前学年：<?php echo $school_year;?></label>
         <label>目前学期：<?php echo $term;?></label>
@@ -57,7 +57,8 @@
 
         <hr />
         <label>选择教室：<?php echo $classroom;?></label>
-        
+        <input type="hidden" name="classroom" value="<?php echo $classroom;?>">
+         
         <?php 
           if(empty($course))
             echo "这个教室现在并没有课程，咱们换个班吧o(*////▽////*)q";
