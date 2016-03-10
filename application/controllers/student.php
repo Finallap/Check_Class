@@ -192,7 +192,7 @@
 			$record_data['table']=$table;
 			$record_data['pagination']=$this->add_pagination($record_data['all_count'],10,3,$base_url);;
 
-			$this->load->view('class/header',$header_data);
+			$this->load->view('student/header',$header_data);
 			$this->load->view('template/record_data_query',$record_data);
 			$this->load->view('template/footer');
 		}

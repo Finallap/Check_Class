@@ -86,4 +86,29 @@ class Student_teacher_account_model extends CI_Model{
 		}
 	}
 
+	public function teacher_get_class_id($id)
+	{
+		$this->db->select('college_id');
+		$this->db->from('teacher_information');
+		$this->db->where('teacher_id',$id);
+		$query=$this->db->get();
+		$query=$query->result_array();
+
+		$college_id=$query[0]['college_id'];
+
+		$this->db->select('class_id');
+		$this->db->from('class_information');
+		$this->db->where('college_id',$college_id);
+		$query=$this->db->get();
+		$query=$query->result_array();
+
+		foreach ($query as $key => $value) 
+		{
+			$id=$value['class_id'];
+			$result[$id]=$value['class_id'];
+		}
+
+		return $result;
+	}
+
 }

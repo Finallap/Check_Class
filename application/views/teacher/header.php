@@ -79,7 +79,7 @@
                       </a>
 
                       <ul class="dropdown-menu">
-                         <li><a tabindex="-1" href="<?php echo base_url('teacher/data_entry')?>">查课情况查看</a></li>
+                         <li><a tabindex="-1" href="<?php echo base_url('teacher/data_entry')?>">查课情况录入</a></li>
                              <li><a tabindex="-1" href="<?php echo base_url('teacher/data_query')?>">到课率统计</a></li>
                   <li><a tabindex="-1" href="<?php echo base_url('account_situation')?>">账号信息查看</a></li>
                           <li><a tabindex="-1" href="<?php echo base_url('change_password')?>">账号密码修改</a></li>
@@ -109,7 +109,7 @@
 
                 <div class="nav-header" data-toggle="collapse" data-target="#accounts-menu"><i class="fa fa-briefcase"></i>信息与查看与录入</div>
                 <ul id="accounts-menu" class="nav nav-list collapse in">
-                  <li><a tabindex="-1" href="<?php echo base_url('teacher/data_entry')?>">查课情况查看</a></li>
+                  <li><a tabindex="-1" href="<?php echo base_url('teacher/data_entry')?>">查课情况录入</a></li>
                   <li><a tabindex="-1" href="<?php echo base_url('teacher/data_query')?>">到课率统计</a></li>
                   <li><a tabindex="-1" href="<?php echo base_url('teacher/data_query')?>">统计表导出</a></li>
                 </ul>
