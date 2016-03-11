@@ -236,8 +236,25 @@
 			{
 				$header_data['account']=$this->account;
 
+				$class_notification_array=$this->Notification_model->get_notification('class');
+				$teacher_notification_array=$this->Notification_model->get_notification('teacher');
+				$student_notification_array=$this->Notification_model->get_notification('student');
+
+				$class_notification['notification']=$class_notification_array;
+				$class_notification['notification_target']='班级';
+
+				$teacher_notification['notification']=$teacher_notification_array;
+				$teacher_notification['notification_target']='教师';
+
+				$student_notification['notification']=$student_notification_array;
+				$student_notification['notification_target']='查课员';
+
+				$notification_release_data['class_notification']=$this->load->view('template/notification',$class_notification,TRUE);
+				$notification_release_data['teacher_notification']=$this->load->view('template/notification',$teacher_notification,TRUE);
+				$notification_release_data['student_notification']=$this->load->view('template/notification',$student_notification,TRUE);
+
 				$this->load->view('admin/header',$header_data);
-				$this->load->view('admin/notification_release');
+				$this->load->view('admin/notification_release',$notification_release_data);
 				$this->load->view('template/footer');
 			}
 		}
