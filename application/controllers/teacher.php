@@ -162,4 +162,16 @@
 
 			$this->load->view('template/alert_and_location_href',$data);
 		}
+
+
+		public function data_query()
+		{
+			$this->login_status_detection();
+
+			$header_data['account']=$this->user_name;
+
+			$this->load->view('teacher/header',$header_data);
+			$this->load->view('teacher/data_query');
+			$this->load->view('template/footer');
+		}
 	}

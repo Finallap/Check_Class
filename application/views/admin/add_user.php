@@ -24,7 +24,7 @@
 <div class="well">
     <ul class="nav nav-tabs">
       <li class="active"><a href="#home" data-toggle="tab">信息填写</a></li>
-      <li><a href="<?php echo base_url('')?>">返回首页</a></li>
+      <li><a href="<?php echo base_url('admin/notification_release')?>">返回首页</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane active in" id="home">

@@ -214,4 +214,31 @@
 				$this->load->view('admin/datepicker_js');
 			}
 		}
+
+		public function notification_release()
+		{
+			$this->login_status_detection();
+			$this->load->model('Notification_model');
+
+			if($this->input->post('submit', TRUE))
+			{
+				$notification_target= str_replace(' ','',$this->input->post('notification_target', TRUE));
+				$notification_content= $this->input->post('notification_content', TRUE);
+
+				$this->Notification_model->add_notification($notification_target,$this->account,$notification_content);
+
+				$data['alert_information']="公告发布成功！";
+				$data['href']="admin/notification_release";
+
+				$this->load->view('template/alert_and_location_href',$data);
+			}
+			else
+			{
+				$header_data['account']=$this->account;
+
+				$this->load->view('admin/header',$header_data);
+				$this->load->view('admin/notification_release');
+				$this->load->view('template/footer');
+			}
+		}
 	}
