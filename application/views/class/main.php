@@ -3,46 +3,8 @@
     <h1 class="page-title">欢迎进入查课系统（班级版）</h1>
     <div class="row-fluid">
         <div class="span9">
-          <div class="block">
-            <p class="block-heading">下面是一些部门报名信息的统计了~</p>
-                <div class="block-body">
-                  <p>部门名称：网络部</p>
-                  <p>报名总人数：50</p>
-                  
-                  <table class="table-condensed" border="1" cellspacing="0" cellpadding="0">
-                    <tr>
-                      <td width="138"><p align="center">&nbsp;</p></td>
-                      <td width="138"><p align="center">&nbsp;</p></td>
-                      <td width="138"><p align="center">人数 </p></td>
-                      <td width="138"><p align="center">百分比 </p></td>
-                    </tr>
-                    <tr>
-                      <td width="138" rowspan="2"><p align="center">性别 </p></td>
-                      <td width="138"><p align="center">男 </p></td>
-                      <td width="138"><p align="center">30</p></td>
-                      <td width="138"><p align="center">60%</p></td>
-                    </tr>
-                    <tr>
-                      <td width="138"><p align="center">女 </p></td>
-                      <td width="138"><p align="center">20</p></td>
-                      <td width="138"><p align="center">40%</p></td>
-                    </tr>
-                    <tr>
-                      <td width="138" rowspan="2"><p align="center">志愿顺序 </p></td>
-                      <td width="138"><p align="center">第一志愿 </p></td>
-                      <td width="138"><p align="center">25</p></td>
-                      <td width="138"><p align="center">50%</p></td>
-                    </tr>
-                    <tr>
-                      <td width="138"><p align="center">第二志愿 </p></td>
-                      <td width="138"><p align="center">25</p></td>
-                      <td width="138"><p align="center">50%</p></td>
-                    </tr>
-                  </table>
-<p>&nbsp;</p>
-                </div>
-          </div>
           
+          <?php echo $notification;?>
           
           
            <div class="block">

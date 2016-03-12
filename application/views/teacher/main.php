@@ -44,6 +44,8 @@
           </div>
           
           
+          <?php echo $notification;?>
+          
           
            <div class="block">
               <p class="block-heading">想导出报名汇总表了？</p>

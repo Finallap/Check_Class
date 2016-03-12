@@ -28,11 +28,18 @@
 		public function index()
 		{
 			$this->login_status_detection();
+			$this->load->model('Notification_model');
 
 			$header_data['account']=$this->user_name;
 
+			$teacher_notification_array=$this->Notification_model->get_notification('teacher',3);
+			$teacher_notification['notification']=$teacher_notification_array;
+			$teacher_notification['notification_target']='教师';
+			$main_data['notification']=$this->load->view('template/notification',$teacher_notification,TRUE);
+
+
 			$this->load->view('teacher/header',$header_data);
-			$this->load->view('teacher/main');
+			$this->load->view('teacher/main',$main_data);
 			$this->load->view('template/footer');
 		}
 

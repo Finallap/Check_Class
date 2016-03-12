@@ -29,11 +29,18 @@
 		public function index()
 		{
 			$this->login_status_detection();
+			$this->load->model('Notification_model');
 
 			$header_data['account']=$this->user_name;
 
+			$student_notification_array=$this->Notification_model->get_notification('student',3);
+			$student_notification['notification']=$student_notification_array;
+			$student_notification['notification_target']='查课员';
+
+			$main_data['notification']=$this->load->view('template/notification',$student_notification,TRUE);
+
 			$this->load->view('student/header',$header_data);
-			$this->load->view('student/main');
+			$this->load->view('student/main',$main_data);
 			$this->load->view('template/footer');
 		}
 
@@ -160,7 +167,7 @@
 		{
 			$this->login_status_detection();
 
-			$header_data['account']=$this->account;
+			$header_data['account']=$this->user_name;
 
 			$per_page=$this->input->get('per_page', TRUE);
 			if(is_null($per_page))$per_page=1;

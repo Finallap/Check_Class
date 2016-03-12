@@ -14,7 +14,7 @@
             <input type="radio" name="notification_target" value="teacher" />教师
             <input type="radio" name="notification_target" value="student" />查课员
             </label>
-          <input name="submit" type="submit" value="发布" class="btn btn-primary pull-letf">
+          <input name="submit" type="submit" value="发布" class="btn btn-primary pull-letf" onclick= "if(confirm( '请确认是否发布公告？ ')==false)return   false; ">
       </form>
     </div>
 </div>

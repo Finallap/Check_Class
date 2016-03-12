@@ -25,11 +25,17 @@
 		public function index()
 		{
 			$this->login_status_detection();
+			$this->load->model('Notification_model');
 
 			$header_data['account']=$this->account;
 
+			$class_notification_array=$this->Notification_model->get_notification('class',3);
+			$class_notification['notification']=$class_notification_array;
+			$class_notification['notification_target']='班级';
+			$main_data['notification']=$this->load->view('template/notification',$class_notification,TRUE);
+
 			$this->load->view('class/header',$header_data);
-			$this->load->view('class/main');
+			$this->load->view('class/main',$main_data);
 			$this->load->view('template/footer');
 		}
 

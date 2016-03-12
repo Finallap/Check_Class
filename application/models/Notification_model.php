@@ -8,13 +8,14 @@ class Notification_model extends CI_Model{
 		parent::__construct();
 	}
 
-	public function get_notification($type) 
+	public function get_notification($type,$count=5,$offset=0) 
 	{
 		$this->db->select('@rownum:=@rownum+1 AS rownum', FALSE);
 		$this->db->select('notification_information.*');
 		$this->db->from("(SELECT @rownum:=0) r", FALSE);
 		$this->db->from("notification_information");
 		$this->db->where('notification_information.notification_target',$type);
+		$this->db->limit($count,$offset);
 		$this->db->order_by('notification_information.release_time',"DESC");
 		$query=$this->db->get();
 

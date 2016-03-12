@@ -236,9 +236,9 @@
 			{
 				$header_data['account']=$this->account;
 
-				$class_notification_array=$this->Notification_model->get_notification('class');
-				$teacher_notification_array=$this->Notification_model->get_notification('teacher');
-				$student_notification_array=$this->Notification_model->get_notification('student');
+				$class_notification_array=$this->Notification_model->get_notification('class',3);
+				$teacher_notification_array=$this->Notification_model->get_notification('teacher',3);
+				$student_notification_array=$this->Notification_model->get_notification('student',3);
 
 				$class_notification['notification']=$class_notification_array;
 				$class_notification['notification_target']='班级';
