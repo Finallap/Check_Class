@@ -3,14 +3,17 @@
                 <div class="block-body">
                 <div class="row-fluid">
                 <?php
+                  $notification_count = count($notification);
+                  $count = 0;
                 	foreach ($notification as $key => $value) 
                 	{
-                		echo '<p>'.$value['notification_content'].'</p>'."\n";
-						echo '<p class="pull-right">'.$value['release_account'].'发布于'.$value['release_time'].'</p>'."\n";
-						echo '<br><hr/>'."\n";
+                  		echo '<p>'.$value['rownum'].'.'.$value['notification_content'].'</p>'."\n";
+          						echo '<p class="pull-right">'.$value['release_account'].'发布于'.$value['release_time'].'</p>'."\n";
+                      $count++;
+                      if($count<$notification_count)
+          						    echo '<br><hr/>'."\n";
                 	}
                 ?>
-                  <br><hr/>
                   </div>
                 </div>
             </div>

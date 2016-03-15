@@ -62,9 +62,10 @@ class Record_model extends CI_Model{
 			$query[$key]['tercher_name']=$query1[0]['tercher_name'];
 			$query[$key]['choices_number']=$query1[0]['choices_number'];
 			if(!empty($query1[0]['choices_number']))
-				$query[$key]['students_attendance']=$value["real_number"]/$query1[0]['choices_number'];
+				$query[$key]['students_attendance']=round($value["real_number"]/$query1[0]['choices_number'],4)*100;
 			else
 				$query[$key]['students_attendance']=0;
+			$query[$key]['students_attendance'].="%";
 		}
 
 		return $query;
