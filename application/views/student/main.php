@@ -8,41 +8,27 @@
           
           
            <div class="block">
-              <p class="block-heading">想导出报名汇总表了？</p>
+              <p class="block-heading">快速录入</p>
                 <div class="block-body">
-                <div class="row-fluid">
-                  <p>好多小鲜肉，快来戳这里导出信息总表吧~</p>
-                <form action="summary_output.php" method="post">
-                <label>导出志愿选择：</label>
-                <select name="choice" id="choice">
-                 	<option value="1">第一志愿</option>
-          			<option value="2">第二志愿</option>
-                </select>
-                <input type="submit" value="导出签到表" class="btn btn-primary"/>
-                </form> 
-                  </div>
+                      <div class="tab-pane active in" id="home">
+                       <p>请选择教室查询课程并录入：</p>
+                      <form id="tab" action="<?php echo base_url('student/data_entry_middleware')?>" method="post" onSubmit="return check()">
+                          <label>教学楼编号</label>
+                          <select id="teaching_building" name="teaching_building" onchange="selectschool(this);" class="input-xlarge"></select>
+                          <label>教室编号</label>
+                          <select id="classroom" name="classroom" class="input-xlarge"></select>
+                          <br>
+                          <button type="submit" name="" value="send" class="btn btn-primary">查询课程，并进行录入</button>
+                      </form>
+                        </div>
                 </div>
             </div>
-            
 
-            <div class="block">
-              <p class="block-heading">想录取小鲜肉了？</p>
-                <div class="block-body">
-                <div class="row-fluid">
-                  <p>小鲜肉速速到碗里来，想让小鲜肉速速进入部门快来戳这里吧~</p>
-                  <a href="interview_situation_input.php" class="btn btn-primary"><i class="icon-hand-right"></i> 面试情况录入</a>
-                    <div class="clearfix"></div>
-                  </div>
-                </div>
-            </div>
-            
-            
-            
            
             <div class="block">
-              <p class="block-heading">一些关于线上招新系统的使用提示</p>
+              <p class="block-heading">一些关于查课系统的使用提示</p>
                 <div class="block-body">
-                    <h3>很高兴大家能使用线上招新系统后台管理系统，接下来我们一起阅读一些系统使用提醒吧~</h3>
+                    <h3>很高兴大家能使用线上查课系统（查课员版），接下来我们一起阅读一些系统使用提醒吧~</h3>
                     <p>1.本后台管理系统部门登陆后只能看到本部门报名人员的信息，且必须该同学已经确认提交报名信息。</p>
 
                     <p>2.本后台管理系统在录入面试信息的时候可以无限次修改，且有未录入选项，但请大家本着负责的态度来填写了~</p>

@@ -30,8 +30,12 @@
 		{
 			$this->login_status_detection();
 			$this->load->model('Notification_model');
+			$this->load->model('Classroom_model');
 
 			$header_data['account']=$this->user_name;
+
+			$data['teaching_building_array'] = $this->Classroom_model->get_teaching_building_number();
+			$data['classroom_array'] = $this->Classroom_model->get_classroom_number();
 
 			$student_notification_array=$this->Notification_model->get_notification('student',3);
 			$student_notification['notification']=$student_notification_array;
@@ -42,6 +46,7 @@
 			$this->load->view('student/header',$header_data);
 			$this->load->view('student/main',$main_data);
 			$this->load->view('template/footer');
+			$this->load->view('student/two_select_js',$data);
 		}
 
 		public function data_entry()
