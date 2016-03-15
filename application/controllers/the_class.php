@@ -32,11 +32,14 @@
 			$class_notification_array=$this->Notification_model->get_notification('class',3);
 			$class_notification['notification']=$class_notification_array;
 			$class_notification['notification_target']='班级';
+
 			$main_data['notification']=$this->load->view('template/notification',$class_notification,TRUE);
+			$main_data['course_information']=$this->get_course_div();
 
 			$this->load->view('class/header',$header_data);
 			$this->load->view('class/main',$main_data);
 			$this->load->view('template/footer');
+			$this->load->view('class/record_js');
 		}
 
 		public function data_entry()
@@ -45,20 +48,12 @@
 
 			$header_data['account']=$this->account;
 
-			$this->get_course_now();
-
-			$data['school_year']=$this->njupt_time->get_school_year();
-			$data['term']=$this->njupt_time->get_term();
-			$data['odd_even']=$this->njupt_time->get_odd_even();
-			$data['class_time']=$this->njupt_time->get_class_time();
-			$data['week']=$this->njupt_time->get_week();
-			$data['class']=$this->account;
-
-			$data['course']=$this->course_now;
+			$data['course_information']=$this->get_course_div();
 
 			$this->load->view('class/header',$header_data);
 			$this->load->view('class/check_class_information_record_page',$data);
 			$this->load->view('template/footer');
+			$this->load->view('class/record_js');
 		}
 
 		protected function get_course_now()
@@ -210,6 +205,23 @@
 			$this->pagination->initialize($config);
 
 			return $this->pagination->create_links();
+		}
+
+		protected function get_course_div()
+		{
+			$this->get_course_now();
+
+			$data['school_year']=$this->njupt_time->get_school_year();
+			$data['term']=$this->njupt_time->get_term();
+			$data['odd_even']=$this->njupt_time->get_odd_even();
+			$data['class_time']=$this->njupt_time->get_class_time();
+			$data['week']=$this->njupt_time->get_week();
+			$data['class']=$this->account;
+
+			$data['course']=$this->course_now;
+
+			return $this->load->view('class/course_div',$data,TRUE);
+
 		}
 
 	}

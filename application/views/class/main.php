@@ -8,41 +8,19 @@
           
           
            <div class="block">
-              <p class="block-heading">想导出报名汇总表了？</p>
+              <p class="block-heading">查课信息快速录入</p>
                 <div class="block-body">
-                <div class="row-fluid">
-                  <p>好多小鲜肉，快来戳这里导出信息总表吧~</p>
-                <form action="summary_output.php" method="post">
-                <label>导出志愿选择：</label>
-                <select name="choice" id="choice">
-                 	<option value="1">第一志愿</option>
-          			<option value="2">第二志愿</option>
-                </select>
-                <input type="submit" value="导出签到表" class="btn btn-primary"/>
-                </form> 
-                  </div>
-                </div>
-            </div>
-            
 
-            <div class="block">
-              <p class="block-heading">想录取小鲜肉了？</p>
-                <div class="block-body">
-                <div class="row-fluid">
-                  <p>小鲜肉速速到碗里来，想让小鲜肉速速进入部门快来戳这里吧~</p>
-                  <a href="interview_situation_input.php" class="btn btn-primary"><i class="icon-hand-right"></i> 面试情况录入</a>
-                    <div class="clearfix"></div>
-                  </div>
+                <?php echo $course_information;?>
+
                 </div>
             </div>
-            
-            
             
            
             <div class="block">
-              <p class="block-heading">一些关于线上招新系统的使用提示</p>
+              <p class="block-heading">一些关于查课系统的使用提示</p>
                 <div class="block-body">
-                    <h3>很高兴大家能使用线上招新系统后台管理系统，接下来我们一起阅读一些系统使用提醒吧~</h3>
+                    <h3>很高兴大家能使用线上查课系统（班级版），接下来我们一起阅读一些系统使用提醒吧~</h3>
                     <p>1.本后台管理系统部门登陆后只能看到本部门报名人员的信息，且必须该同学已经确认提交报名信息。</p>
 
                     <p>2.本后台管理系统在录入面试信息的时候可以无限次修改，且有未录入选项，但请大家本着负责的态度来填写了~</p>
