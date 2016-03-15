@@ -174,6 +174,9 @@
 		public function data_query()
 		{
 			$this->login_status_detection();
+			$this->load->model('Record_model');
+
+			var_dump($this->Record_model->record_query($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term()));
 
 			$header_data['account']=$this->user_name;
 
