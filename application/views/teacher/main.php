@@ -45,25 +45,7 @@
           
           
           <?php echo $notification;?>
-          
-          
-           <div class="block">
-              <p class="block-heading">想导出报名汇总表了？</p>
-                <div class="block-body">
-                <div class="row-fluid">
-                  <p>好多小鲜肉，快来戳这里导出信息总表吧~</p>
-                <form action="summary_output.php" method="post">
-                <label>导出志愿选择：</label>
-                <select name="choice" id="choice">
-                 	<option value="1">第一志愿</option>
-          			<option value="2">第二志愿</option>
-                </select>
-                <input type="submit" value="导出签到表" class="btn btn-primary"/>
-                </form> 
-                  </div>
-                </div>
-            </div>
-            
+
 
             <div class="block">
               <p class="block-heading">想录取小鲜肉了？</p>

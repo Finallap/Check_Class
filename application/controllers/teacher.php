@@ -176,12 +176,12 @@
 			$this->login_status_detection();
 			$this->load->model('Record_model');
 
-			var_dump($this->Record_model->record_query($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term()));
-
 			$header_data['account']=$this->user_name;
 
+			$data['course_list']=$this->Record_model->record_query($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term());
+
 			$this->load->view('teacher/header',$header_data);
-			$this->load->view('teacher/data_query');
+			$this->load->view('teacher/data_query',$data);
 			$this->load->view('template/footer');
 		}
 	}

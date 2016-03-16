@@ -112,14 +112,31 @@ class Record_model extends CI_Model{
 			$result[$rownum]['real_number_min']=$value['real_number'];
 			$result[$rownum]['recording_time']=$value['recording_time'];
 
+			$result[$rownum]['class_date']= date('Y-m-d',strtotime($value['recording_time']));
+
 			$this->db->select('*');
 			$this->db->from('course_information');
 			$this->db->where('course_id',$value['course_id']);
 			$course_query=$this->db->get();
 			$course_query=$course_query->result_array();
 
+			$course_query[0]['weekday']=$this->weekday_chinese($course_query[0]['weekday']);//星期几转换为中文
+
+			//查询该课程所上班级号
+			$course_id=$course_query[0]['course_id'];
+			$class_array=$this->get_all_class_id($school_year,$term,$course_id);
+			$class_list=NULL;
+			foreach ($class_array as $key => $class_value) 
+			{
+				$class_list.=$class_value['class_id'].",";
+			}
+			$class_list=substr($class_list, 0, -1);
+			$course_query[0]['class_list']=$class_list;
+
+			//合并数组，课程信息和最低到课率
 			$result[$rownum] = array_merge($result[$rownum], $course_query[0]);
 
+			//查询具体的查课记录，就是多条查询记录
 			$this->db->select('@rownum:=@rownum+1 AS rownum', FALSE);
 			$this->db->select('check_class_record.*');
 			$this->db->from("(SELECT @rownum:=0) r", FALSE);
@@ -130,7 +147,6 @@ class Record_model extends CI_Model{
 			$detail_query=$detail_query->result_array();
 
 			$result[$rownum]['detail']=$detail_query;
-
 		}
 
 		return $result;
@@ -181,5 +197,49 @@ class Record_model extends CI_Model{
 		}
 
 		return $result;
+	}
+
+	protected function weekday_chinese($weekday)
+	{
+		switch ($weekday) {
+			case '1':
+				return "周一";
+				break;
+			case '2':
+				return "周二";
+				break;
+			case '3':
+				return "周三";
+				break;
+			case '4':
+				return "周四";
+				break;
+			case '5':
+				return "周五";
+				break;
+			case '6':
+				return "周六";
+				break;
+			case '0':
+				return "周日";
+				break;
+			default:
+				return "周日";
+				break;
+		}
+	}
+
+	public function get_all_class_id($school_year,$term,$course_id)
+	{
+		$this->db->select('class_id');
+		$this->db->from('course_class_information');
+		$this->db->where('school_year',$school_year);
+		$this->db->where('term',$term);
+		$this->db->where('course_id',$course_id);
+
+		$query=$this->db->get();
+		$query=$query->result_array();
+
+		return $query;
 	}
 }
