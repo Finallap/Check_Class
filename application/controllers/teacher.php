@@ -178,10 +178,49 @@
 
 			$header_data['account']=$this->user_name;
 
-			$data['course_list']=$this->Record_model->record_query($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term());
+			$data_count = $this->Record_model->record_query_count($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term());
+
+			$data['all_count'] = $data_count;
+			$data['course_list'] = $this->Record_model->record_query($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term());
+			$data['pagination'] = $this->teacher_pagination($data_count,10,3,current_url());
 
 			$this->load->view('teacher/header',$header_data);
 			$this->load->view('teacher/data_query',$data);
 			$this->load->view('template/footer');
+		}
+
+		protected function teacher_pagination($total_rows,$per_page,$num_links,$base_url)
+		{
+			$this->load->library('pagination');
+
+			$config['base_url'] = $base_url;
+			$config['total_rows'] = $total_rows;
+			$config['per_page'] = $per_page;
+			$config['num_links'] = $num_links;
+			$config['use_page_numbers'] = TRUE;
+			$config['page_query_string']=TRUE;
+			$config['full_tag_open'] = '<ul>';
+			$config['full_tag_close'] = '</ul>';
+			$config['first_link'] = '首页';
+			$config['last_link'] = '尾页';
+			$config['next_link'] = '下一页';
+			$config['prev_link'] = '上一页';
+			$config['first_tag_open'] = '<li>';
+			$config['first_tag_close'] = '</li>';
+			$config['last_tag_open'] = '<li>';
+			$config['last_tag_close'] = '</li>';
+			$config['next_tag_open'] = '<li>';
+			$config['next_tag_close'] = '</li>';
+			$config['prev_tag_open'] = '<li>';
+			$config['prev_tag_close'] = '</li>';
+			$config['cur_tag_open'] = '<li><a>';
+			$config['cur_tag_close'] = '</a></li>';
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['attributes']['rel'] = FALSE;
+
+			$this->pagination->initialize($config);
+
+			return $this->pagination->create_links();
 		}
 	}

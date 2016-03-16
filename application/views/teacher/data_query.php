@@ -1,6 +1,18 @@
  <div class="span9">
             <h1 class="page-title">到课率统计</h1>
 
+            <div class="block">
+              <p class="block-heading">共<?php echo $all_count?>条记录，查询导符合条件的记录<?php echo $all_count?>条！可进行记录筛选：</p>
+                <div class="block-body">
+                <div class="row-fluid">
+                  <form action="" method="get">
+                      <button type="submit" name="" value="send" class="btn btn-primary" onclick="GetRequest()">检索</button>
+                  </form>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+            </div>
+
             <?php 
               foreach ($course_list as $key => $course_detail) 
               {
@@ -14,6 +26,8 @@
                 echo '<p>上课教室：'.$course_detail['classroom'].'</p>'."\n";
                 echo '<p>任课教师：'.$course_detail['tercher_name'].'</p>'."\n";
                 echo '<p>所上班级：'.$course_detail['class_list'].'</p>'."\n";
+                echo '<p>应到人数：'.$course_detail['choices_number'].'</p>'."\n";
+                echo '<p>具体录入情况：</p>'."\n";
 
                 $table_header = <<<EOF
                   <table class="table-condensed" border="1" cellspacing="0" cellpadding="0">
@@ -45,6 +59,9 @@ EOF;
                 echo '</ul>'."\n";
                 echo '</div>'."\n";
               }
+
+
+              echo $pagination;
             ?>
           
 <!-- 

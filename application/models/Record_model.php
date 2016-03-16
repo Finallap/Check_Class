@@ -99,6 +99,7 @@ class Record_model extends CI_Model{
 
 		$this->db->group_by("check_class_record.course_id");
 		$this->db->group_by("check_class_record.week");
+		$this->db->order_by("check_class_record.recording_time","DESC");
 		$query=$this->db->get();
 
 		$query=$query->result_array();
@@ -241,5 +242,28 @@ class Record_model extends CI_Model{
 		$query=$query->result_array();
 
 		return $query;
+	}
+
+	public function record_query_count($account_id,$school_year,$term)
+	{
+		$course_id_list=$this->college_course_query($account_id,$school_year,$term);
+
+		$this->db->select_min('real_number');
+		$this->db->select('course_id');
+		$this->db->select('recording_time');
+		$this->db->from('check_class_record');
+
+		foreach ($course_id_list as $key => $value)
+		{
+			$this->db->or_where('course_id',$value['course_id']);
+		}
+
+		$this->db->group_by("course_id");
+		$this->db->group_by("week");
+
+		$query=$this->db->get();
+		$query=$query->result_array();
+
+		return count($query);
 	}
 }
