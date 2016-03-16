@@ -211,7 +211,7 @@
 				$this->load->view('admin/header',$header_data);
 				$this->load->view('admin/change_system_option',$data);
 				$this->load->view('template/footer');
-				$this->load->view('admin/datepicker_js');
+				$this->load->view('template/datepicker_js');
 			}
 		}
 

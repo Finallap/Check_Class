@@ -6,6 +6,12 @@
                 <div class="block-body">
                 <div class="row-fluid">
                   <form action="" method="get">
+                      <label>查询起始日期选择</label>
+                      <input type="text" id="datepicker" name="start_day" value="2016-03-16" class="input-xlarge">
+                      <br>
+                      <label>查询结束日期选择</label>
+                      <input type="text" id="datepicker" name="end_day" value="2016-03-16" class="input-xlarge">
+                      <br>
                       <button type="submit" name="" value="send" class="btn btn-primary" onclick="GetRequest()">检索</button>
                   </form>
                     <div class="clearfix"></div>

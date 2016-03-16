@@ -187,6 +187,7 @@
 			$this->load->view('teacher/header',$header_data);
 			$this->load->view('teacher/data_query',$data);
 			$this->load->view('template/footer');
+			$this->load->view('template/datepicker_js');
 		}
 
 		protected function teacher_pagination($total_rows,$per_page,$num_links,$base_url)
