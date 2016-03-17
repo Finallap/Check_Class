@@ -111,4 +111,10 @@ class Student_teacher_account_model extends CI_Model{
 		return $result;
 	}
 
+	public function delete_account($type,$id)
+	{
+		$where_array = array($type.'_id' => $id);
+		$this->db->delete($type.'_information', $where_array);
+	}
+
 }

@@ -258,4 +258,113 @@
 				$this->load->view('template/footer');
 			}
 		}
+
+		protected function account_operation($operation_type,$operation_id)
+		{
+			$this->login_status_detection();
+
+			$this->check_account_exist($operation_type,$operation_id);
+
+			$this->load->model('login_information_model');
+			$this->load->model('College_information_model');
+			$this->load->model('Account_information_model');
+			$this->load->model('Student_teacher_account_model');
+			$this->load->library('table');
+
+			$college_name=$this->College_information_model->get_user_college_name($operation_type,$operation_id);
+			$user_name=$this->Account_information_model-> get_user_name($operation_type,$operation_id);
+
+			$current_login_time=$this->Student_teacher_account_model->get_login_information_option($operation_type,$operation_id);
+			$current_login=$this->login_information_model->get_login_information_option($operation_type,$operation_id);
+			$login_count=$this->login_information_model->get_login_information_count($operation_type,$operation_id);
+
+			$template = array('table_open'  => ' <table class="table">');
+			$this->table->set_template($template);
+			$this->table->set_heading('#', '登陆时间');
+			$table=$this->table->generate($current_login);
+
+			$header_data['account']=$this->account;
+
+			$situation_data['account']=$operation_id;
+			$situation_data['account_type']=$operation_type;
+			switch ($operation_type) 
+			{
+				case 'admin':
+					$situation_data['type']='admin';
+					break;
+				case 'teacher':
+					$situation_data['type']='教师';
+					break;
+				case 'student':
+					$situation_data['type']='查课员';
+					break;
+				case 'class':
+					$situation_data['type']='班级';
+					break;
+				default:
+					$situation_data['type']='';
+					break;
+			}
+			$situation_data['college_name']=$college_name;
+			$situation_data['current_login_time']=$current_login_time;
+			$situation_data['login_count']=$login_count;
+			$situation_data['user_name']=$user_name;
+			$situation_data['table']=$table;
+
+			$this->load->view('admin/header',$header_data);
+			$this->load->view('admin/account_operation',$situation_data);
+			$this->load->view('template/footer');
+		}
+
+		protected function check_account_exist($type,$id)
+		{
+			$this->load->model('Account_information_model');
+
+			if(!$this->Account_information_model->check_account_exist($type,$id))
+				redirect('');
+		}
+
+		public function operation_teacher()
+		{
+			$teacher_id=$this->input->get('teacher_id', TRUE);
+			if(is_null($teacher_id))$teacher_id=NULL;
+			$this->account_operation('teacher',$teacher_id);
+		}
+
+		public function operation_student()
+		{
+			$student_id=$this->input->get('student_id', TRUE);
+			if(is_null($student_id))$student_id=NULL;
+			$this->account_operation('student',$student_id);
+		}
+
+		protected function delete_account($type,$id)
+		{
+			$this->login_status_detection();
+			$this->check_account_exist($type,$id);
+
+			$this->load->model('Student_teacher_account_model');
+			$this->Student_teacher_account_model->delete_account($type,$id);
+
+			$data['alert_information']="删除账号完成！";
+			$data['href']="admin/".$type."_manager";
+
+			$this->load->view('template/alert_and_location_href',$data);
+		}
+
+		public function delete_teacher()
+		{
+			$teacher_id=$this->input->get('teacher_id', TRUE);
+			if(is_null($teacher_id))$teacher_id=NULL;
+
+			$this->delete_account('teacher',$teacher_id);
+		}
+
+		public function delete_student()
+		{
+			$student_id=$this->input->get('student_id', TRUE);
+			if(is_null($student_id))$student_id=NULL;
+
+			$this->delete_account('student',$student_id);
+		}
 	}

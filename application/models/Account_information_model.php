@@ -43,4 +43,50 @@ class Account_information_model extends CI_Model{
 		}
 	}
 
+	public function check_account_exist($type,$id)
+	{
+		switch ($type) 
+		{
+			case 'admin':
+				return TRUE;
+				break;
+			case 'teacher':
+				{
+					$this->db->select($type.'_name');
+					$this->db->where($type.'_id',$id);
+					$query=$this->db->get($type.'_information');
+					$query=$query->result_array();
+
+					if($query)return TRUE;
+					else return FALSE;
+				}
+				break;
+			case 'student':
+				{
+					$this->db->select($type.'_name');
+					$this->db->where($type.'_id',$id);
+					$query=$this->db->get($type.'_information');
+					$query=$query->result_array();
+
+					if($query)return TRUE;
+					else return FALSE;
+				}
+				break;
+			case 'class':
+				{
+					$this->db->select($type.'_name');
+					$this->db->where($type.'_id',$id);
+					$query=$this->db->get($type.'_information');
+					$query=$query->result_array();
+
+					if($query)return TRUE;
+					else return FALSE;
+				}
+				break;
+			default:
+				return FALSE;
+				break;
+		}
+	}
+
 }
