@@ -338,9 +338,12 @@
 			$this->account_operation('student',$student_id);
 		}
 
-		protected function delete_account($type,$id)
+		protected function delete_account($type)
 		{
 			$this->login_status_detection();
+
+			$id=$this->input->get($type.'_id', TRUE);
+			if(is_null($id))$id=NULL;
 			$this->check_account_exist($type,$id);
 
 			$this->load->model('Student_teacher_account_model');
@@ -354,17 +357,42 @@
 
 		public function delete_teacher()
 		{
-			$teacher_id=$this->input->get('teacher_id', TRUE);
-			if(is_null($teacher_id))$teacher_id=NULL;
-
-			$this->delete_account('teacher',$teacher_id);
+			$this->delete_account('teacher');
 		}
 
 		public function delete_student()
 		{
-			$student_id=$this->input->get('student_id', TRUE);
-			if(is_null($student_id))$student_id=NULL;
-
-			$this->delete_account('student',$student_id);
+			$this->delete_account('student');
 		}
+
+		protected function reset_password($type)
+		{
+			$this->login_status_detection();
+
+			$id=$this->input->get($type.'_id', TRUE);
+			if(is_null($id))$id=NULL;
+			$this->check_account_exist($type,$id);
+
+			$new_password=$this->encrypt->encode($id);
+
+			$this->load->model('Change_password_model');
+
+			$this->Change_password_model->change_password($type,$id,$new_password);
+
+			$data['alert_information']="重置密码完成！";
+			$data['href']="admin/".$type."_manager";
+
+			$this->load->view('template/alert_and_location_href',$data);
+		}
+
+		public function reset_password_teacher()
+		{
+			$this->reset_password('teacher');
+		}
+
+		public function reset_password_student()
+		{
+			$this->reset_password('student');
+		}
+
 	}

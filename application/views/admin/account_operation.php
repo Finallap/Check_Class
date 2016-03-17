@@ -30,13 +30,13 @@
                     <tr>
                       <td>密码重置</td>
                       <td>
-                       <a href="<?php echo base_url('admin/reset_password_'.$account_type.'?id='.$account); ?>" class="btn btn-primary" onclick= "if(confirm( '是否确定重置该账号密码？ ')==false)return   false; ">重置</a>
+                       <a href="<?php echo base_url('admin/reset_password_'.$account_type.'?'.$account_type.'_id='.$account); ?>" class="btn btn-primary" onclick= "if(confirm( '是否确定重置该账号密码？ ')==false)return   false; ">重置</a>
                       </tr>
 
                     <tr>
                       <td>删除注册</td>
                       <td>
-                        <a href="<?php echo base_url('admin/delete_'.$account_type.'?id='.$account); ?>" class="btn btn-primary" onclick= "if(confirm( '是否确定删除该账号？ ')==false)return   false; ">删除</a>
+                        <a href="<?php echo base_url('admin/delete_'.$account_type.'?'.$account_type.'_id='.$account); ?>" class="btn btn-primary" onclick= "if(confirm( '是否确定删除该账号？ ')==false)return   false; ">删除</a>
                       </td>
                       </tr>
                   </tbody>
