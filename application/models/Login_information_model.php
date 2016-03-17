@@ -10,19 +10,16 @@ class Login_information_model extends CI_Model{
 
 	public function get_login_information_option($type,$id,$count=10,$offset=0) 
 	{
-		// $table_name=$type.'_login_information';
+		$table_name=$type.'_login_information';
 
-		// $this->db->select('@rownum:=@rownum+1 AS rownum');
-		// $this->db->select("$table_name.login_time");
-		// $this->db->from("(SELECT @rownum:=0) r,$table_name");
-		// $this->db->where("$table_name.".$type.'_id',$id);
-		// $this->db->limit($count,$offset);
-		// $this->db->order_by("$table_name.login_time",'DESC');
-		//$query=$this->db->get();
-
-		$sql = "SELECT @rownum:=@rownum+1 AS rownum, `".$type."_login_information`.`login_time` FROM (SELECT @rownum:=0) r, `".$type."_login_information` WHERE `".$type."_login_information`.`".$type."_id` = ? ORDER BY `".$type."_login_information`.`login_time` DESC LIMIT ?, ?";
-
-		$query=$this->db->query($sql, array($id, $offset, $count));
+		$this->db->select('@rownum:=@rownum+1 AS rownum', FALSE);
+		$this->db->select("$table_name.login_time");
+		$this->db->from("(SELECT @rownum:=0) r", FALSE);
+		$this->db->from($table_name);
+		$this->db->where("$table_name.".$type.'_id',$id);
+		$this->db->limit($count,$offset);
+		$this->db->order_by("$table_name.login_time",'DESC');
+		$query=$this->db->get();
 
 		return $query->result_array();
 	}
