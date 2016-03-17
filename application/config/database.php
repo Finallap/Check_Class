@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
+	'hostname' => 'rds1hq3v6d8f98sm33i0.mysql.rds.aliyuncs.com',
+	'username' => 'check_class',
+	'password' => 'aifuwu2014',
 	'database' => 'check_class',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
