@@ -1,7 +1,7 @@
 <script>
 
 $(document).ready(function(){
-$( "#datepicker" ).datepicker({  
+$( "#datepicker_end" ).datepicker({  
             dateFormat:'yy-mm-dd',  //更改时间显示模式  
             showAnim:"slide",       //显示日历的效果slide、fadeIn、show等  
             changeMonth:true,       //是否显示月份的下拉菜单，默认为false  

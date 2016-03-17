@@ -81,7 +81,7 @@ class Record_model extends CI_Model{
 		return $this->db->count_all_results();
 	}
 
-	public function record_query($account_id,$school_year,$term)
+	public function record_query($account_id,$school_year,$term,$start_time=NULL,$end_time=NULL)
 	{
 		$course_id_list=$this->college_course_query($account_id,$school_year,$term);
 
@@ -92,10 +92,15 @@ class Record_model extends CI_Model{
 		$this->db->from("(SELECT @rownum:=0) r", FALSE);
 		$this->db->from('check_class_record');
 
+		if($start_time)$this->db->where("check_class_record.recording_time>=",$start_time);
+		if($end_time)$this->db->where("check_class_record.recording_time<=",$end_time);
+
+		$course_id_list_array = NULL;
 		foreach ($course_id_list as $key => $value)
 		{
-			$this->db->or_where('check_class_record.course_id',$value['course_id']);
+			$course_id_list_array[] = $value['course_id'];
 		}
+		$this->db->where_in('check_class_record.course_id', $course_id_list_array);
 
 		$this->db->group_by("check_class_record.course_id");
 		$this->db->group_by("check_class_record.week");
@@ -160,10 +165,7 @@ class Record_model extends CI_Model{
 		$this->db->select('course_id');
 		$this->db->from('course_class_information');
 
-		foreach ($class_id_list as $key => $value)
-		{
-			$this->db->or_where('class_id',$value);
-		}
+		$this->db->where_in('class_id', $class_id_list);
 
 		$this->db->where('school_year',$school_year);
 		$this->db->where('term',$term);
@@ -253,10 +255,12 @@ class Record_model extends CI_Model{
 		$this->db->select('recording_time');
 		$this->db->from('check_class_record');
 
+		$course_id_list_array = NULL;
 		foreach ($course_id_list as $key => $value)
 		{
-			$this->db->or_where('course_id',$value['course_id']);
+			$course_id_list_array[] = $value['course_id'];
 		}
+		$this->db->where_in('course_id', $course_id_list_array);
 
 		$this->db->group_by("course_id");
 		$this->db->group_by("week");

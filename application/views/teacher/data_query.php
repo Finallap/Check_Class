@@ -5,12 +5,12 @@
               <p class="block-heading">共<?php echo $all_count?>条记录，查询导符合条件的记录<?php echo $all_count?>条！可进行记录筛选：</p>
                 <div class="block-body">
                 <div class="row-fluid">
-                  <form action="" method="get">
+                  <form action="<?php echo current_url();?>" method="post">
                       <label>查询起始日期选择</label>
                       <input type="text" id="datepicker" name="start_day" value="2016-03-16" class="input-xlarge">
                       <br>
                       <label>查询结束日期选择</label>
-                      <input type="text" id="datepicker" name="end_day" value="2016-03-16" class="input-xlarge">
+                      <input type="text" id="datepicker_end" name="end_day" value="2016-03-16" class="input-xlarge">
                       <br>
                       <button type="submit" name="" value="send" class="btn btn-primary" onclick="GetRequest()">检索</button>
                   </form>

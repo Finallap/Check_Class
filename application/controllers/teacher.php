@@ -178,16 +178,20 @@
 
 			$header_data['account']=$this->user_name;
 
-			$data_count = $this->Record_model->record_query_count($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term());
+			if($this->input->post('start_day'))$start_day=$this->input->post('start_day');else$start_day=NULL;
+			if($this->input->post('end_day'))$end_day=$this->input->post('end_day');else$end_day=NULL;
+
+			$data_count = $this->Record_model->record_query_count($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),$start_day,$end_day);
 
 			$data['all_count'] = $data_count;
-			$data['course_list'] = $this->Record_model->record_query($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term());
+			$data['course_list'] = $this->Record_model->record_query($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),$start_day,$end_day);
 			$data['pagination'] = $this->teacher_pagination($data_count,10,3,current_url());
 
 			$this->load->view('teacher/header',$header_data);
 			$this->load->view('teacher/data_query',$data);
 			$this->load->view('template/footer');
 			$this->load->view('template/datepicker_js');
+			$this->load->view('template/datepicker_end_js');
 		}
 
 		protected function teacher_pagination($total_rows,$per_page,$num_links,$base_url)
