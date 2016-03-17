@@ -41,7 +41,7 @@ class Student_teacher_account_model extends CI_Model{
 			$this->db->where("college_id",$college_id);
 		$this->db->from($type.'_information');
 
-		return $this->db->count_all_results();;
+		return $this->db->count_all_results();
 	}
 
 	public function all_count($type) 

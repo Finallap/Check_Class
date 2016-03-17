@@ -178,13 +178,19 @@
 
 			$header_data['account']=$this->user_name;
 
-			if($this->input->post('start_day'))$start_day=$this->input->post('start_day');else$start_day=NULL;
-			if($this->input->post('end_day'))$end_day=$this->input->post('end_day');else$end_day=NULL;
+			if($this->input->post('start_day'))$start_day=$this->input->post('start_day', TRUE);else$start_day=NULL;
+			if($this->input->post('end_day'))$end_day=$this->input->post('end_day', TRUE);else$end_day=NULL;
+			$per_page=$this->input->get('per_page', TRUE);
+			if(is_null($per_page))$per_page=1;
 
+			$data_all_count = $this->Record_model->record_query_count($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term());
 			$data_count = $this->Record_model->record_query_count($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),$start_day,$end_day);
 
-			$data['all_count'] = $data_count;
-			$data['course_list'] = $this->Record_model->record_query($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),$start_day,$end_day);
+			$data['all_count'] = $data_all_count;
+			$data['data_count'] = $data_count;
+			$data['start_day'] = date("Y-m-d",strtotime("-1 week"));
+			$data['end_day'] = date("Y-m-d");
+			$data['course_list'] = $this->Record_model->record_query($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),$start_day,$end_day,10,($per_page-1)*10);
 			$data['pagination'] = $this->teacher_pagination($data_count,10,3,current_url());
 
 			$this->load->view('teacher/header',$header_data);

@@ -81,7 +81,7 @@ class Record_model extends CI_Model{
 		return $this->db->count_all_results();
 	}
 
-	public function record_query($account_id,$school_year,$term,$start_time=NULL,$end_time=NULL)
+	public function record_query($account_id,$school_year,$term,$start_time=NULL,$end_time=NULL,$count=10000,$offset=0)
 	{
 		$course_id_list=$this->college_course_query($account_id,$school_year,$term);
 
@@ -104,6 +104,7 @@ class Record_model extends CI_Model{
 
 		$this->db->group_by("check_class_record.course_id");
 		$this->db->group_by("check_class_record.week");
+		$this->db->limit($count,$offset);
 		$this->db->order_by("check_class_record.recording_time","DESC");
 		$query=$this->db->get();
 
@@ -151,6 +152,12 @@ class Record_model extends CI_Model{
 
 			$detail_query=$this->db->get();
 			$detail_query=$detail_query->result_array();
+
+			//把账户类型转换为中文
+			foreach ($detail_query as $key => $detail_query_value)
+			{
+				$detail_query[$key]['account_type']=$this->account_type_chinese($detail_query_value['account_type']);
+			}
 
 			$result[$rownum]['detail']=$detail_query;
 		}
@@ -246,7 +253,7 @@ class Record_model extends CI_Model{
 		return $query;
 	}
 
-	public function record_query_count($account_id,$school_year,$term)
+	public function record_query_count($account_id,$school_year,$term,$start_time=NULL,$end_time=NULL)
 	{
 		$course_id_list=$this->college_course_query($account_id,$school_year,$term);
 
@@ -254,6 +261,9 @@ class Record_model extends CI_Model{
 		$this->db->select('course_id');
 		$this->db->select('recording_time');
 		$this->db->from('check_class_record');
+
+		if($start_time)$this->db->where("recording_time>=",$start_time);
+		if($end_time)$this->db->where("recording_time<=",$end_time);
 
 		$course_id_list_array = NULL;
 		foreach ($course_id_list as $key => $value)
@@ -269,5 +279,26 @@ class Record_model extends CI_Model{
 		$query=$query->result_array();
 
 		return count($query);
+	}
+
+	protected function account_type_chinese($type)
+	{
+		switch ($type) {
+			case 'teacher':
+				return "教师";
+				break;
+			case 'student':
+				return "查课员";
+				break;
+			case 'admin':
+				return "超级管理员";
+				break;
+			case 'class':
+				return "班级";
+				break;
+			default:
+				return "类型未知";
+				break;
+		}
 	}
 }
