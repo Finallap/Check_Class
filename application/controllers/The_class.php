@@ -17,7 +17,7 @@
 			$this->type=$this->session->type;
 			$this->account=$this->session->account;
 
-			$this->output->enable_profiler(TRUE);
+			// $this->output->enable_profiler(TRUE);
 
 			if($this->type!="class")redirect('');
 		}

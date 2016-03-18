@@ -15,7 +15,7 @@ class Account_situation extends CI_Controller {
 		$this->load->model('Account_information_model');
 		$this->user_name=$this->Account_information_model-> get_user_name($this->type,$this->account);
 
-		$this->output->enable_profiler(TRUE);
+		// $this->output->enable_profiler(TRUE);
 
 		if(is_null($this->type))redirect('');
 		if($this->type=='admin')redirect('');

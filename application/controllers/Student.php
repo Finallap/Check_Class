@@ -21,7 +21,7 @@
 			$this->load->model('Account_information_model');
 			$this->user_name=$this->Account_information_model-> get_user_name($this->type,$this->account);
 
-			$this->output->enable_profiler(TRUE);
+			// $this->output->enable_profiler(TRUE);
 
 			if($this->type!="student")redirect('');
 		}
