@@ -167,7 +167,10 @@ class Record_model extends CI_Model{
 
 	public function college_course_query($account_id,$school_year,$term)
 	{
-		$class_id_list=$this->teacher_get_class_id($account_id);
+		if($account_id=='admin')
+			$class_id_list=$this->admin_get_class_id();
+		else
+			$class_id_list=$this->teacher_get_class_id($account_id);
 
 		$this->db->select('course_id');
 		$this->db->from('course_class_information');
@@ -197,6 +200,23 @@ class Record_model extends CI_Model{
 		$this->db->select('class_id');
 		$this->db->from('class_information');
 		$this->db->where('college_id',$college_id);
+		$query=$this->db->get();
+		$query=$query->result_array();
+
+		foreach ($query as $key => $value)
+		{
+			$id=$value['class_id'];
+			$result[$id]=$value['class_id'];
+		}
+
+		return $result;
+	}
+
+	public function admin_get_class_id()
+	{
+
+		$this->db->select('class_id');
+		$this->db->from('class_information');
 		$query=$this->db->get();
 		$query=$query->result_array();
 
