@@ -23,7 +23,7 @@
                   <thead>
                     <tr>
                       <th>操作动作</th>
-                      <th>面试情况</th>
+                      <th>点击操作</th>
                       </tr>
                   </thead>
                   <tbody>
