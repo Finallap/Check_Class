@@ -25,16 +25,18 @@
                 foreach ($course_list as $key => $course_detail) 
                 {
                   echo '<div class="sidebar-nav">'."\n";
-                  echo '<div class="nav-header" data-toggle="collapse" data-target="#course'.$course_detail['rownum'].'"><i class="fa fa-arrow-circle-down"></i>&nbsp&nbsp'.$course_detail['class_date'].'&nbsp&nbsp'.$course_detail['weekday'].'&nbsp&nbsp第'.$course_detail['class_time'].'大节&nbsp&nbsp'.$course_detail['course_name'].'&nbsp&nbsp'.$course_detail['class_list'].'&nbsp&nbsp到课人数：'.$course_detail['real_number_min'].'&nbsp&nbsp到课率：'.$course_detail['class_rate_min'].'</div>'."\n";
+                  echo '<div class="nav-header" data-toggle="collapse" data-target="#course'.$course_detail['rownum'].'"><i class="fa fa-arrow-circle-down"></i>&nbsp&nbsp'.$course_detail['class_date'].'&nbsp&nbsp'.$course_detail['weekday'].'&nbsp&nbsp第'.$course_detail['class_time'].'大节&nbsp&nbsp'.$course_detail['course_name'].'&nbsp&nbsp'.$course_detail['class_list'].'&nbsp&nbsp应到人数：'.$course_detail['choices_number'].'&nbsp&nbsp实到人数：'.$course_detail['real_number_min'].'&nbsp&nbsp到课率：'.$course_detail['class_rate_min'].'</div>'."\n";
 
                   echo '<ul id=course'.$course_detail['rownum'].' class="nav nav-list collapse in">'."\n";
                   echo '<div class="block-body">'."\n";
-                  echo '<p>课程名称：'.$course_detail['course_name'].'</p>'."\n";
-                  echo '<p>上课时间：'.$course_detail['class_date'].'&nbsp&nbsp'.$course_detail['weekday'].'&nbsp&nbsp第'.$course_detail['class_time'].'大节&nbsp&nbsp</p>'."\n";
-                  echo '<p>上课教室：'.$course_detail['classroom'].'</p>'."\n";
-                  echo '<p>任课教师：'.$course_detail['tercher_name'].'</p>'."\n";
-                  echo '<p>所上班级：'.$course_detail['class_list'].'</p>'."\n";
-                  echo '<p>应到人数：'.$course_detail['choices_number'].'</p>'."\n";
+                  // echo '<p>课程名称：'.$course_detail['course_name'].'</p>'."\n";
+                  // echo '<p>上课时间：'.$course_detail['class_date'].'&nbsp&nbsp'.$course_detail['weekday'].'&nbsp&nbsp第'.$course_detail['class_time'].'大节&nbsp&nbsp</p>'."\n";
+                  // echo '<p>上课教室：'.$course_detail['classroom'].'</p>'."\n";
+                  // echo '<p>任课教师：'.$course_detail['tercher_name'].'</p>'."\n";
+                  // echo '<p>所上班级：'.$course_detail['class_list'].'</p>'."\n";
+                  // echo '<p>应到人数：'.$course_detail['choices_number'].'</p>'."\n";
+
+                  echo '<p>上课教室：'.$course_detail['classroom'].'&nbsp&nbsp任课教师：'.$course_detail['tercher_name'].'</p>'."\n";
                   echo '<p>具体录入情况：</p>'."\n";
 
                   $table_header = <<<EOF
