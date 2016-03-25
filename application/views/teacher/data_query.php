@@ -56,7 +56,7 @@ EOF;
                     echo ' <td width="120"><p align="center"> '.$detail['account_type'].' </p></td>'."\n";
                     echo ' <td width="120"><p align="center"> '.$detail['account_id'].' </p></td>'."\n";
                     echo ' <td width="120"><p align="center"> '.$detail['real_number'].' </p></td>'."\n";
-                    echo ' <td width="120"><p align="center"> '.$detail['real_number'].' </p></td>'."\n";
+                    echo ' <td width="120"><p align="center"> '.$detail['class_rate'].' </p></td>'."\n";
                     echo ' <td width="138"><p align="center"> '.$detail['remark'].' </p></td>'."\n";
                     echo ' <td width="160"><p align="center"> '.$detail['recording_time'].' </p></td>'."\n";
                     echo ' </tr>'."\n";

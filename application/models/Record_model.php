@@ -61,11 +61,8 @@ class Record_model extends CI_Model{
 			$query[$key]['classroom']=$query1[0]['classroom'];
 			$query[$key]['tercher_name']=$query1[0]['tercher_name'];
 			$query[$key]['choices_number']=$query1[0]['choices_number'];
-			if(!empty($query1[0]['choices_number']))
-				$query[$key]['students_attendance']=round($value["real_number"]/$query1[0]['choices_number'],4)*100;
-			else
-				$query[$key]['students_attendance']=0;
-			$query[$key]['students_attendance'].="%";
+
+			$query[$key]['students_attendance']=$this->calculation_class_rate($value["real_number"],$query1[0]['choices_number']);
 		}
 
 		return $query;
@@ -153,10 +150,11 @@ class Record_model extends CI_Model{
 			$detail_query=$this->db->get();
 			$detail_query=$detail_query->result_array();
 
-			//把账户类型转换为中文
+			//把账户类型转换为中文并计算每条的最低到课率
 			foreach ($detail_query as $key => $detail_query_value)
 			{
 				$detail_query[$key]['account_type']=$this->account_type_chinese($detail_query_value['account_type']);
+				$detail_query[$key]['class_rate']=$this->calculation_class_rate($detail_query_value['real_number'],$course_query[0]['choices_number']);
 			}
 
 			$result[$rownum]['detail']=$detail_query;
@@ -320,5 +318,17 @@ class Record_model extends CI_Model{
 				return "类型未知";
 				break;
 		}
+	}
+
+	protected function calculation_class_rate($real_number,$choices_number)
+	{
+		if($choices_number)
+		{
+			$result = round($real_number/$choices_number,4)*100;
+			$result.="%";
+			return $result;
+		}
+		else
+			return "无";
 	}
 }
