@@ -25,7 +25,7 @@
                 foreach ($course_list as $key => $course_detail) 
                 {
                   echo '<div class="sidebar-nav">'."\n";
-                  echo '<div class="nav-header" data-toggle="collapse" data-target="#course'.$course_detail['rownum'].'"><i class="fa fa-arrow-circle-down"></i>&nbsp&nbsp'.$course_detail['class_date'].'&nbsp&nbsp'.$course_detail['weekday'].'&nbsp&nbsp第'.$course_detail['class_time'].'大节&nbsp&nbsp'.$course_detail['course_name'].'&nbsp&nbsp'.$course_detail['class_list'].'&nbsp&nbsp最低到课人数：'.$course_detail['real_number_min'].'</div>'."\n";
+                  echo '<div class="nav-header" data-toggle="collapse" data-target="#course'.$course_detail['rownum'].'"><i class="fa fa-arrow-circle-down"></i>&nbsp&nbsp'.$course_detail['class_date'].'&nbsp&nbsp'.$course_detail['weekday'].'&nbsp&nbsp第'.$course_detail['class_time'].'大节&nbsp&nbsp'.$course_detail['course_name'].'&nbsp&nbsp'.$course_detail['class_list'].'&nbsp&nbsp到课人数：'.$course_detail['real_number_min'].'&nbsp&nbsp到课率：'.$course_detail['class_rate_min'].'</div>'."\n";
 
                   echo '<ul id=course'.$course_detail['rownum'].' class="nav nav-list collapse in">'."\n";
                   echo '<div class="block-body">'."\n";

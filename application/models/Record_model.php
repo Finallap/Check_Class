@@ -136,6 +136,7 @@ class Record_model extends CI_Model{
 			}
 			$class_list=substr($class_list, 0, -1);
 			$course_query[0]['class_list']=$class_list;
+			$course_query[0]['class_rate_min']=$this->calculation_class_rate($result[$rownum]['real_number_min'],$course_query[0]['choices_number']);
 
 			//合并数组，课程信息和最低到课率
 			$result[$rownum] = array_merge($result[$rownum], $course_query[0]);
