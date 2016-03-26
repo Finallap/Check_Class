@@ -137,6 +137,7 @@ class Record_model extends CI_Model{
 			$class_list=substr($class_list, 0, -1);
 			$course_query[0]['class_list']=$class_list;
 			$course_query[0]['class_rate_min']=$this->calculation_class_rate($result[$rownum]['real_number_min'],$course_query[0]['choices_number']);
+			$course_query[0]['class_rate_min_number']=$this->calculation_class_rate_number($result[$rownum]['real_number_min'],$course_query[0]['choices_number']);
 
 			//合并数组，课程信息和最低到课率
 			$result[$rownum] = array_merge($result[$rownum], $course_query[0]);
@@ -332,4 +333,40 @@ class Record_model extends CI_Model{
 		else
 			return "无";
 	}
+
+	protected function calculation_class_rate_number($real_number,$choices_number)
+	{
+		if($choices_number)
+		{
+			$result = round($real_number/$choices_number,4)*100;
+			return $result;
+		}
+		else
+			return "0";
+	}
+
+	public function lowest_ranking($account_id,$school_year,$term,$start_time,$end_time)
+	{
+		$result=$this->record_query($account_id,$school_year,$term,$start_time,$end_time,100000000000000000,0);
+
+		$result = $this->my_sort($result,'class_rate_min_number',SORT_ASC,SORT_NUMERIC);  
+		return $result;
+	}
+
+	public function my_sort($arrays,$sort_key,$sort_order=SORT_ASC,$sort_type=SORT_NUMERIC)
+	{   
+        if(is_array($arrays)){   
+            foreach ($arrays as $array){   
+                if(is_array($array)){   
+                    $key_arrays[] = $array[$sort_key];   
+                }else{   
+                    return false;   
+                }   
+            }   
+        }else{   
+            return false;   
+        }  
+        array_multisort($key_arrays,$sort_order,$sort_type,$arrays);   
+        return $arrays;   
+    }  
 }

@@ -29,6 +29,7 @@
 		{
 			$this->login_status_detection();
 			$this->load->model('Notification_model');
+			$this->load->model('Record_model');
 
 			$header_data['account']=$this->user_name;
 
@@ -36,6 +37,12 @@
 			$teacher_notification['notification']=$teacher_notification_array;
 			$teacher_notification['notification_target']='教师';
 			$main_data['notification']=$this->load->view('template/notification',$teacher_notification,TRUE);
+
+			$lowest_ranking_array=$this->Record_model->lowest_ranking($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),date("Y-m-d"),date("Y-m-d"));
+			$lowest_ranking['course_list']=$lowest_ranking_array;
+			$main_data['lowest_ranking']=$this->load->view('template/lowest_ranking',$lowest_ranking,TRUE);
+
+			// var_dump($this->Record_model->lowest_ranking($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),"2016-03-05",date("Y-m-d")));
 
 
 			$this->load->view('teacher/header',$header_data);
