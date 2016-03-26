@@ -2,7 +2,7 @@
             <p class="block-heading">今日到课率最低排行</p>
                 <div class="block-body">
                   <p>日期：<?php echo date("Y-m-d");?></p>
-                  <p>今日已录入查课信息50条，与28节课相关！其中到课率最低排行如下：</p>
+                  <p>今日已录入<?php echo $today_data_count;?>节课查课信息！</p>
 
                     <?php
                       if($course_list)
@@ -19,7 +19,7 @@
                       <td width="138"><p align="center">到课率 </p></td>
                     </tr>
 EOF;
-
+                        echo "<p>其中到课率最低排行如下：</p>";
                         echo $table_header;
                         $rank=1;
                         foreach ($course_list as $key => $course_detail) 
@@ -36,6 +36,7 @@ EOF;
                           echo '<td width="138"><p align="center">'.$course_detail['class_rate_min'].'</p></td>';
                           echo "</tr>";
 
+                          if($rank>=20)break;
                           $rank++;
                         }
 
