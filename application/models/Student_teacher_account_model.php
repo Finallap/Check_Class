@@ -129,7 +129,8 @@ class Student_teacher_account_model extends CI_Model{
 		
 		foreach ($query as $key => $value)
 		{
-			$result[] = $value['grade'];
+			$grade=$value['grade'];
+			$result[$grade] = $grade.'级';
 		}
 
 		return $result;
