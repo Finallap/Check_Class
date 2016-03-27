@@ -181,6 +181,7 @@
 		{
 			$this->login_status_detection();
 			$this->load->model('Record_model');
+			$this->load->model('Student_teacher_account_model');
 
 			$header_data['account']=$this->user_name;
 
@@ -189,9 +190,15 @@
 			$per_page=$this->input->get('per_page', TRUE);
 			if(is_null($per_page))$per_page=1;
 
+			$select_data['name']='grade';
+			$select_data['default_value']='——请选择——';
+			$select_data['details']=$this->Student_teacher_account_model->get_grade_list();
+			$grade_select = $this->load->view('template/select',$select_data, TRUE);
+
 			$data_all_count = $this->Record_model->record_query_count($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term());
 			$data_count = $this->Record_model->record_query_count($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),$start_day,$end_day);
 
+			$data['grade_select'] = $grade_select;
 			$data['all_count'] = $data_all_count;
 			$data['data_count'] = $data_count;
 			$data['start_day'] = date("Y-m-d",strtotime("-1 week"));

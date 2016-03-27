@@ -117,4 +117,22 @@ class Student_teacher_account_model extends CI_Model{
 		$this->db->delete($type.'_information', $where_array);
 	}
 
+	public function get_grade_list()
+	{
+		$this->db->select('grade');
+		$this->db->from('class_information');
+		$this->db->group_by('grade');
+		$query=$this->db->get();
+		$query=$query->result_array();
+
+		$result = NULL;
+		
+		foreach ($query as $key => $value)
+		{
+			$result[] = $value['grade'];
+		}
+
+		return $result;
+	}
+
 }

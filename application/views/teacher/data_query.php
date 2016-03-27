@@ -12,6 +12,9 @@
                       <label>查询结束日期选择</label>
                       <input type="text" id="datepicker_end" name="end_day" value="<?php echo $end_day;?>" class="input-xlarge">
                       <br>
+                      <label>年级选择</label>
+                      <?php echo $grade_select;?>
+                      <br>
                       <button type="submit" name="" value="send" class="btn btn-primary" onclick="GetRequest()">检索</button>
                   </form>
                     <div class="clearfix"></div>
