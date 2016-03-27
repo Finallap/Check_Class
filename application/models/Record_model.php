@@ -78,9 +78,9 @@ class Record_model extends CI_Model{
 		return $this->db->count_all_results();
 	}
 
-	public function record_query($account_id,$school_year,$term,$start_time=NULL,$end_time=NULL,$count=10000,$offset=0)
+	public function record_query($account_id,$school_year,$term,$start_time=NULL,$end_time=NULL,$grade=-1,$count=10000,$offset=0)
 	{
-		$course_id_list=$this->college_course_query($account_id,$school_year,$term);
+		$course_id_list=$this->college_course_query($account_id,$school_year,$term,$grade);
 
 		$this->db->select('@rownum:=@rownum+1 AS rownum', FALSE);
 		$this->db->select_min('check_class_record.real_number');
@@ -165,12 +165,12 @@ class Record_model extends CI_Model{
 		return $result;
 	}
 
-	public function college_course_query($account_id,$school_year,$term)
+	public function college_course_query($account_id,$school_year,$term,$grade)
 	{
 		if($account_id=='admin')
-			$class_id_list=$this->admin_get_class_id();
+			$class_id_list=$this->admin_get_class_id($grade);
 		else
-			$class_id_list=$this->teacher_get_class_id($account_id);
+			$class_id_list=$this->teacher_get_class_id($account_id,$grade);
 
 		$this->db->select('course_id');
 		$this->db->from('course_class_information');
@@ -187,7 +187,7 @@ class Record_model extends CI_Model{
 		return $query;
 	}
 
-	public function teacher_get_class_id($id)
+	public function teacher_get_class_id($id,$grade)
 	{
 		$this->db->select('college_id');
 		$this->db->from('teacher_information');
@@ -200,6 +200,7 @@ class Record_model extends CI_Model{
 		$this->db->select('class_id');
 		$this->db->from('class_information');
 		$this->db->where('college_id',$college_id);
+		if($grade!='-1')$this->db->where('grade',$grade);
 		$query=$this->db->get();
 		$query=$query->result_array();
 
@@ -212,11 +213,12 @@ class Record_model extends CI_Model{
 		return $result;
 	}
 
-	public function admin_get_class_id()
+	public function admin_get_class_id($grade)
 	{
 
 		$this->db->select('class_id');
 		$this->db->from('class_information');
+		if($grade!='-1')$this->db->where('grade',$grade);
 		$query=$this->db->get();
 		$query=$query->result_array();
 
@@ -273,9 +275,9 @@ class Record_model extends CI_Model{
 		return $query;
 	}
 
-	public function record_query_count($account_id,$school_year,$term,$start_time=NULL,$end_time=NULL)
+	public function record_query_count($account_id,$school_year,$term,$start_time=NULL,$end_time=NULL,$grade=-1)
 	{
-		$course_id_list=$this->college_course_query($account_id,$school_year,$term);
+		$course_id_list=$this->college_course_query($account_id,$school_year,$term,$grade);
 
 		$this->db->select_min('real_number');
 		$this->db->select('course_id');

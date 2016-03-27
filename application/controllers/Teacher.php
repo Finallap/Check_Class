@@ -210,13 +210,13 @@
 			$select_data['details']=$this->Student_teacher_account_model->get_grade_list();
 			$grade_select = $this->load->view('template/select',$select_data, TRUE);
 
-			$data_all_count = $this->Record_model->record_query_count($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term());
-			$data_count = $this->Record_model->record_query_count($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),$start_day,$end_day);
+			$data_all_count = $this->Record_model->record_query_count($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),'','',-1);
+			$data_count = $this->Record_model->record_query_count($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),$start_day,$end_day,$grade);
 
 			$data['grade_select'] = $grade_select;
 			$data['all_count'] = $data_all_count;
 			$data['data_count'] = $data_count;
-			$data['course_list'] = $this->Record_model->record_query($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),$start_day,$end_day,10,($per_page-1)*10);
+			$data['course_list'] = $this->Record_model->record_query($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),$start_day,$end_day,$grade,10,($per_page-1)*10);
 
 			$pagination_url=current_url().'?';
 			if($this->input->get('start_day'))$pagination_url=$pagination_url."start_day=$start_day&";

@@ -399,23 +399,51 @@
 		{
 			$this->login_status_detection();
 			$this->load->model('Record_model');
+			$this->load->model('Student_teacher_account_model');
 
 			$header_data['account']=$this->account;
 
-			if($this->input->post('start_day'))$start_day=$this->input->post('start_day', TRUE);else$start_day=NULL;
-			if($this->input->post('end_day'))$end_day=$this->input->post('end_day', TRUE);else$end_day=NULL;
+			if($this->input->get('start_day'))$start_day=$this->input->get('start_day', TRUE);else$start_day=NULL;
+			if($this->input->get('end_day'))$end_day=$this->input->get('end_day', TRUE);else$end_day=NULL;
+			if($this->input->get('grade'))$grade=$this->input->get('grade', TRUE);else$grade='-1';
 			$per_page=$this->input->get('per_page', TRUE);
 			if(is_null($per_page))$per_page=1;
 
-			$data_all_count = $this->Record_model->record_query_count($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term());
-			$data_count = $this->Record_model->record_query_count($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),$start_day,$end_day);
+			$start_time=strtotime($start_day);
+			$end_time=strtotime($end_day);
+			if($start_time>$end_time){$temp=$start_day;$start_day=$end_day;$end_day=$temp;}
 
+			if($this->input->get('start_day'))
+				$data['start_day'] = $start_day;
+			else
+				$data['start_day'] = date("Y-m-d",strtotime("-1 week"));
+
+			if($this->input->get('end_day'))
+				$data['end_day'] = $end_day;
+			else
+				$data['end_day'] = date("Y-m-d");
+
+			$select_data['name']='grade';
+			$select_data['default_value']='——请选择——';
+			$select_data['details']=$this->Student_teacher_account_model->get_grade_list();
+			$grade_select = $this->load->view('template/select',$select_data, TRUE);
+
+			$data_all_count = $this->Record_model->record_query_count($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),'','',-1);
+			$data_count = $this->Record_model->record_query_count($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),$start_day,$end_day,$grade);
+
+			$data['grade_select'] = $grade_select;
 			$data['all_count'] = $data_all_count;
 			$data['data_count'] = $data_count;
-			$data['start_day'] = date("Y-m-d",strtotime("-1 week"));
-			$data['end_day'] = date("Y-m-d");
-			$data['course_list'] = $this->Record_model->record_query($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),$start_day,$end_day,10,($per_page-1)*10);
-			$data['pagination'] = $this->admin_pagination($data_count,10,3,current_url());
+			$data['course_list'] = $this->Record_model->record_query($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),$start_day,$end_day,$grade,10,($per_page-1)*10);
+
+			$pagination_url=current_url().'?';
+			if($this->input->get('start_day'))$pagination_url=$pagination_url."start_day=$start_day&";
+			if($this->input->get('end_day'))$pagination_url=$pagination_url."end_day=$end_day&";
+			if($this->input->get('grade'))$pagination_url=$pagination_url."grade=$grade&";
+			if(substr($pagination_url, -1)=='&')$pagination_url=substr($pagination_url, 0, -1);
+			if(substr($pagination_url, -1)=='?')$pagination_url=substr($pagination_url, 0, -1);
+
+			$data['pagination'] = $this->admin_pagination($data_count,10,3,$pagination_url);
 
 			$this->load->view('admin/header',$header_data);
 			$this->load->view('teacher/data_query',$data);
