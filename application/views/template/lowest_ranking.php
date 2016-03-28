@@ -26,15 +26,15 @@ EOF;
                         {
                           if ($course_detail['class_rate_min']==0)continue;
 
-                          echo "<tr>";
+                          echo "<tr>\n";
                           echo '<td width="60"><p align="center">'.$rank.'</p></td>';
-                          echo '<td width="230"><p align="center">'.$course_detail['course_name'].'</p></td>';
-                          echo '<td width="100"><p align="center">'.'第'.$course_detail['class_time'].'大节</p></td>';
-                          echo '<td width="138"><p align="center">'.$course_detail['class_list'].'</p></td>';
-                          echo '<td width="60"><p align="center">'.$course_detail['choices_number'].'</p></td>';
-                          echo '<td width="60"><p align="center">'.$course_detail['real_number_min'].'</p></td>';
-                          echo '<td width="80"><p align="center">'.$course_detail['class_rate_min'].'</p></td>';
-                          echo "</tr>";
+                          echo '<td width="230"><p align="center">'.$course_detail['course_name'].'</p></td>'."\n";
+                          echo '<td width="100"><p align="center">'.'第'.$course_detail['class_time'].'大节</p></td>'."\n";
+                          echo '<td width="138"><p align="center">'.$course_detail['class_list'].'</p></td>'."\n";
+                          echo '<td width="60"><p align="center">'.$course_detail['choices_number'].'</p></td>'."\n";
+                          echo '<td width="60"><p align="center">'.$course_detail['real_number_min'].'</p></td>'."\n";
+                          echo '<td width="80"><p align="center">'.$course_detail['class_rate_min'].'</p></td>'."\n";
+                          echo "</tr>\n";
 
                           if($rank>=20)break;
                           $rank++;

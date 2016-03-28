@@ -81,6 +81,7 @@ class Record_model extends CI_Model{
 	public function record_query($account_id,$school_year,$term,$start_time=NULL,$end_time=NULL,$grade=-1,$count=10000,$offset=0)
 	{
 		$course_id_list=$this->college_course_query($account_id,$school_year,$term,$grade);
+		if($course_id_list==NULL)return NULL;
 
 		$this->db->select('@rownum:=@rownum+1 AS rownum', FALSE);
 		$this->db->select_min('check_class_record.real_number');
@@ -290,6 +291,7 @@ class Record_model extends CI_Model{
 	public function record_query_count($account_id,$school_year,$term,$start_time=NULL,$end_time=NULL,$grade=-1)
 	{
 		$course_id_list=$this->college_course_query($account_id,$school_year,$term,$grade);
+		if($course_id_list==NULL)return 0;
 
 		$this->db->select_min('real_number');
 		$this->db->select('course_id');
