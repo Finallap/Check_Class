@@ -8,6 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <link rel="Shortcut Icon" href="<?php echo base_url('assets/images/icon.png')?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/lib/bootstrap/css/bootstrap.css')?>">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/stylesheets/theme.css'); ?>">
     <link href="http://oss.aifuwu.org/font-awesome/css/font-awesome.css" rel="stylesheet">
