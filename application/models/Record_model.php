@@ -89,7 +89,7 @@ class Record_model extends CI_Model{
 		$this->db->from("(SELECT @rownum:=0) r", FALSE);
 		$this->db->from('check_class_record');
 
-		if($start_time==$end_time)
+		if(($start_time==$end_time)&&($start_time!=NULL))
 		{
 			$this->db->where("check_class_record.recording_time>=",$start_time);
 			$end_time_unix=strtotime($end_time);
@@ -302,7 +302,7 @@ class Record_model extends CI_Model{
 			$end_time_unix=strtotime($end_time);
 			$end_time_unix=$end_time_unix+86400;
 			$end_time=date("Y-m-d",$end_time_unix);
-			if($end_time)$this->db->where("check_class_record.recording_time<=",$end_time);
+			$this->db->where("check_class_record.recording_time<=",$end_time);
 		}
 		else
 		{
