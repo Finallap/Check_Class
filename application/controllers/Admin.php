@@ -24,11 +24,18 @@
 		public function index()
 		{
 			$this->login_status_detection();
+			$this->load->model('Record_model');
 
 			$header_data['account']=$this->account;
 
+			$today_data_count = $this->Record_model->record_query_count($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),date("Y-m-d"),date("Y-m-d"),-1);
+			$lowest_ranking_array=$this->Record_model->lowest_ranking($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),date("Y-m-d"),date("Y-m-d"),-1);
+			$lowest_ranking['today_data_count']=$today_data_count;
+			$lowest_ranking['course_list']=$lowest_ranking_array;
+			$main_data['lowest_ranking']=$this->load->view('template/lowest_ranking',$lowest_ranking,TRUE);
+
 			$this->load->view('admin/header',$header_data);
-			$this->load->view('admin/main');
+			$this->load->view('admin/main',$main_data);
 			$this->load->view('template/footer');
 		}
 

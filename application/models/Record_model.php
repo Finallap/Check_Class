@@ -89,9 +89,20 @@ class Record_model extends CI_Model{
 		$this->db->from("(SELECT @rownum:=0) r", FALSE);
 		$this->db->from('check_class_record');
 
-		if($start_time)$this->db->where("check_class_record.recording_time>=",$start_time);
-		if($end_time)$this->db->where("check_class_record.recording_time<=",$end_time);
-
+		if($start_time==$end_time)
+		{
+			$this->db->where("check_class_record.recording_time>=",$start_time);
+			$end_time_unix=strtotime($end_time);
+			$end_time_unix=$end_time_unix+86400;
+			$end_time=date("Y-m-d",$end_time_unix);
+			if($end_time)$this->db->where("check_class_record.recording_time<=",$end_time);
+		}
+		else
+		{
+			if($start_time)$this->db->where("check_class_record.recording_time>=",$start_time);
+			if($end_time)$this->db->where("check_class_record.recording_time<=",$end_time);
+		}
+			
 		$course_id_list_array = NULL;
 		foreach ($course_id_list as $key => $value)
 		{
@@ -222,6 +233,7 @@ class Record_model extends CI_Model{
 		$query=$this->db->get();
 		$query=$query->result_array();
 
+		$result=NULL;
 		foreach ($query as $key => $value)
 		{
 			$id=$value['class_id'];
@@ -284,8 +296,19 @@ class Record_model extends CI_Model{
 		$this->db->select('recording_time');
 		$this->db->from('check_class_record');
 
-		if($start_time)$this->db->where("recording_time>=",$start_time);
-		if($end_time)$this->db->where("recording_time<=",$end_time);
+		if(($start_time==$end_time)&&($start_time!=NULL))
+		{
+			$this->db->where("check_class_record.recording_time>=",$start_time);
+			$end_time_unix=strtotime($end_time);
+			$end_time_unix=$end_time_unix+86400;
+			$end_time=date("Y-m-d",$end_time_unix);
+			if($end_time)$this->db->where("check_class_record.recording_time<=",$end_time);
+		}
+		else
+		{
+			if($start_time)$this->db->where("check_class_record.recording_time>=",$start_time);
+			if($end_time)$this->db->where("check_class_record.recording_time<=",$end_time);
+		}
 
 		$course_id_list_array = NULL;
 		foreach ($course_id_list as $key => $value)
@@ -347,10 +370,9 @@ class Record_model extends CI_Model{
 			return "0";
 	}
 
-	public function lowest_ranking($account_id,$school_year,$term,$start_time,$end_time)
+	public function lowest_ranking($account_id,$school_year,$term,$start_time=NULL,$end_time=NULL,$grade=-1)
 	{
-		$result=$this->record_query($account_id,$school_year,$term,$start_time,$end_time,100000000000000000,0);
-
+		$result=$this->record_query($account_id,$school_year,$term,$start_time,$end_time,$grade,1000000000,0);
 		$result = $this->my_sort($result,'class_rate_min_number',SORT_ASC,SORT_NUMERIC);  
 		return $result;
 	}
