@@ -8,12 +8,12 @@
                       if($course_list)
                       {
                         $table_header = <<<EOF
-                    <table class="table-condensed" border="1" cellspacing="0" cellpadding="0">
+                    <table class="table" cellspacing="0" cellpadding="0">
                     <tr>
                       <td width="60"><p align="center">排名</p></td>
                       <td width="230"><p align="center">课程名称 </p></td>
                       <td width="100"><p align="center">上课时间 </p></td>
-                      <td width="138"><p align="center">所上班级 </p></td>
+                      <td width="140"><p align="center">所上班级 </p></td>
                       <td width="60"><p align="center">应到人数 </p></td>
                       <td width="60"><p align="center">实到人数 </p></td>
                       <td width="80"><p align="center">到课率 </p></td>
@@ -30,7 +30,7 @@ EOF;
                           echo '<td width="60"><p align="center">'.$rank.'</p></td>';
                           echo '<td width="230"><p align="center">'.$course_detail['course_name'].'</p></td>'."\n";
                           echo '<td width="100"><p align="center">'.'第'.$course_detail['class_time'].'大节</p></td>'."\n";
-                          echo '<td width="138"><p align="center">'.$course_detail['class_list'].'</p></td>'."\n";
+                          echo '<td width="140"><p align="center">'.$course_detail['class_list'].'</p></td>'."\n";
                           echo '<td width="60"><p align="center">'.$course_detail['choices_number'].'</p></td>'."\n";
                           echo '<td width="60"><p align="center">'.$course_detail['real_number_min'].'</p></td>'."\n";
                           echo '<td width="80"><p align="center">'.$course_detail['class_rate_min'].'</p></td>'."\n";
