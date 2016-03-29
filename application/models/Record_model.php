@@ -354,7 +354,64 @@ class Record_model extends CI_Model{
 
 	public function lowest_ranking($account_id,$school_year,$term,$start_time=NULL,$end_time=NULL,$grade=-1)
 	{
-		$course_id_list=$this->college_course_query($account_id,$school_year,$term,$grade);
+		$result = $this->get_class_rate_list($account_id,$school_year,$term,$start_time,$end_time,$grade);
+		$result = $this->my_sort($result,'class_rate_min_number',SORT_ASC,SORT_NUMERIC);
+
+		return $result;
+	}
+
+	protected function my_sort($arrays,$sort_key,$sort_order=SORT_ASC,$sort_type=SORT_NUMERIC)
+	{   
+        if(is_array($arrays)){   
+            foreach ($arrays as $array){   
+                if(is_array($array)){   
+                    $key_arrays[] = $array[$sort_key];   
+                }else{   
+                    return false;   
+                }   
+            }   
+        }else{   
+            return false;   
+        }  
+        array_multisort($key_arrays,$sort_order,$sort_type,$arrays);   
+        return $arrays;   
+    } 
+
+    protected function query_time_process($start_time=NULL,$end_time=NULL)
+    {
+    	if(($start_time!=NULL)&&($end_time!=NULL))
+    	{
+    		$start_time_unix=strtotime($start_time);
+			$end_time_unix=strtotime($end_time);
+			if($start_time_unix>$end_time_unix)
+				{$temp=$start_time;$start_time=$end_time;$end_time=$temp;}
+    	}	
+
+    	if(($start_time==$end_time)&&($start_time!=NULL))
+		{
+			$end_time_unix=strtotime($end_time);
+			$end_time_unix=$end_time_unix+86400;
+			$end_time=date("Y-m-d",$end_time_unix);
+		}
+		else
+		{
+			if($end_time)
+			{
+				$end_time_unix=strtotime($end_time);
+				$end_time_unix=$end_time_unix+86400;
+				$end_time=date("Y-m-d",$end_time_unix);
+			}
+		}
+
+		$result['start_time']=$start_time;
+		$result['end_time']=$end_time;
+
+		return $result;
+    }
+
+    public function get_class_rate_list($account_id,$school_year,$term,$start_time=NULL,$end_time=NULL,$grade=-1)
+    {
+    	$course_id_list=$this->college_course_query($account_id,$school_year,$term,$grade);
 		if($course_id_list==NULL)return NULL;
 
 		$this->db->select('@rownum:=@rownum+1 AS rownum', FALSE);
@@ -418,56 +475,17 @@ class Record_model extends CI_Model{
 			$result[$rownum] = array_merge($result[$rownum], $course_query[0]);
 		}
 
-		$result = $this->my_sort($result,'class_rate_min_number',SORT_ASC,SORT_NUMERIC);  
 		return $result;
-	}
+    }
 
-	protected function my_sort($arrays,$sort_key,$sort_order=SORT_ASC,$sort_type=SORT_NUMERIC)
-	{   
-        if(is_array($arrays)){   
-            foreach ($arrays as $array){   
-                if(is_array($array)){   
-                    $key_arrays[] = $array[$sort_key];   
-                }else{   
-                    return false;   
-                }   
-            }   
-        }else{   
-            return false;   
-        }  
-        array_multisort($key_arrays,$sort_order,$sort_type,$arrays);   
-        return $arrays;   
-    } 
-
-    protected function query_time_process($start_time=NULL,$end_time=NULL)
+    public function count_class_rate($query_array,$max_rate=100,$min_rate=0)
     {
-    	if(($start_time!=NULL)&&($end_time!=NULL))
+    	$result = NULL;
+    	foreach ($query_array as $key => $course)
     	{
-    		$start_time_unix=strtotime($start_time);
-			$end_time_unix=strtotime($end_time);
-			if($start_time_unix>$end_time_unix)
-				{$temp=$start_time;$start_time=$end_time;$end_time=$temp;}
-    	}	
-
-    	if(($start_time==$end_time)&&($start_time!=NULL))
-		{
-			$end_time_unix=strtotime($end_time);
-			$end_time_unix=$end_time_unix+86400;
-			$end_time=date("Y-m-d",$end_time_unix);
-		}
-		else
-		{
-			if($end_time)
-			{
-				$end_time_unix=strtotime($end_time);
-				$end_time_unix=$end_time_unix+86400;
-				$end_time=date("Y-m-d",$end_time_unix);
-			}
-		}
-
-		$result['start_time']=$start_time;
-		$result['end_time']=$end_time;
-
-		return $result;
+    		if(($course['class_rate_min_number']>$min_rate)&&($course['class_rate_min_number']<$max_rate))
+    			$result[]=$course;
+    	}
+		return count($result);
     }
 }

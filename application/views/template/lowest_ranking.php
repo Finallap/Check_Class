@@ -41,6 +41,7 @@ EOF;
                         }
 
                         echo '</table>';
+
                       }
                       else
                       {

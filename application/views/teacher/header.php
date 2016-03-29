@@ -16,6 +16,7 @@
 
     <script src="<?php echo base_url('assets/lib/jquery.min.js'); ?>" type="text/javascript"></script>
     <script src="<?php echo base_url('assets/lib/jquery-ui-1.11.4.custom/jquery-ui.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/lib/Highcharts-4.2.3/js/highcharts.js'); ?>" type="text/javascript"></script>
 
     <!-- Demo page code -->
     

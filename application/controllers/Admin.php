@@ -34,9 +34,15 @@
 			$lowest_ranking['course_list']=$lowest_ranking_array;
 			$main_data['lowest_ranking']=$this->load->view('template/lowest_ranking',$lowest_ranking,TRUE);
 
+			$pie_chart_data['chart_id'] = 'container';
+			$pie_chart_data['title'] = '到课率统计图';
+			$pie_chart_data['name'] = '到课率统计';
+			$pie_chart_data['data_array'] = $this->index_count_class_rate_array($lowest_ranking_array);
+
 			$this->load->view('admin/header',$header_data);
 			$this->load->view('admin/main',$main_data);
 			$this->load->view('template/footer');
+			$this->load->view('template/pie_chart',$pie_chart_data);
 		}
 
 		protected function add_operation($operation_type,$operation_type_cn)
@@ -458,5 +464,37 @@
 			$this->load->view('template/datepicker_js');
 			$this->load->view('template/datepicker_end_js');
 		}
+
+		protected function count_class_rate($query_array,$max_rate=100,$min_rate=0)
+	    {
+	    	$result = NULL;
+	    	foreach ($query_array as $key => $value)
+	    	{
+	    		if(($value['class_rate_min_number']>=$min_rate)&&($value['class_rate_min_number']<$max_rate))
+	    			$result[]=$value;
+	    	}
+			return count($result);
+	    }
+
+	    protected function count_class_rate_array($query_array,$data_name,$max_rate=100,$min_rate=0)
+	    {
+	    	$result = NULL;
+	    	$result['data_name']=$data_name;
+	    	$result['data']=$this->count_class_rate($query_array,$max_rate,$min_rate);
+
+	    	return $result;
+	    }
+
+	    protected function index_count_class_rate_array($query_array)
+	    {
+	    	$result = NULL;
+	    	$result[] = $this->count_class_rate_array($query_array,'90%以上',101,90);
+	    	$result[] = $this->count_class_rate_array($query_array,'80%-90%',90,80);
+	    	$result[] = $this->count_class_rate_array($query_array,'70%-80%',80,70);
+	    	$result[] = $this->count_class_rate_array($query_array,'60%-70%',70,60);
+	    	$result[] = $this->count_class_rate_array($query_array,'50%-60%',60,50);
+	    	$result[] = $this->count_class_rate_array($query_array,'50%以下',50,0);
+	    	return $result;
+	    }
 
 	}
