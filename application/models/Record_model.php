@@ -90,19 +90,9 @@ class Record_model extends CI_Model{
 		$this->db->from("(SELECT @rownum:=0) r", FALSE);
 		$this->db->from('check_class_record');
 
-		if(($start_time==$end_time)&&($start_time!=NULL))
-		{
-			$this->db->where("check_class_record.recording_time>=",$start_time);
-			$end_time_unix=strtotime($end_time);
-			$end_time_unix=$end_time_unix+86400;
-			$end_time=date("Y-m-d",$end_time_unix);
-			if($end_time)$this->db->where("check_class_record.recording_time<=",$end_time);
-		}
-		else
-		{
-			if($start_time)$this->db->where("check_class_record.recording_time>=",$start_time);
-			if($end_time)$this->db->where("check_class_record.recording_time<=",$end_time);
-		}
+		$time_array=$this->query_time_process($start_time,$end_time);
+		if($time_array['start_time'])$this->db->where("check_class_record.recording_time>=",$time_array['start_time']);
+		if($time_array['end_time'])$this->db->where("check_class_record.recording_time<=",$time_array['end_time']);
 			
 		$course_id_list_array = NULL;
 		foreach ($course_id_list as $key => $value)
@@ -298,19 +288,9 @@ class Record_model extends CI_Model{
 		$this->db->select('recording_time');
 		$this->db->from('check_class_record');
 
-		if(($start_time==$end_time)&&($start_time!=NULL))
-		{
-			$this->db->where("check_class_record.recording_time>=",$start_time);
-			$end_time_unix=strtotime($end_time);
-			$end_time_unix=$end_time_unix+86400;
-			$end_time=date("Y-m-d",$end_time_unix);
-			$this->db->where("check_class_record.recording_time<=",$end_time);
-		}
-		else
-		{
-			if($start_time)$this->db->where("check_class_record.recording_time>=",$start_time);
-			if($end_time)$this->db->where("check_class_record.recording_time<=",$end_time);
-		}
+		$time_array=$this->query_time_process($start_time,$end_time);
+		if($time_array['start_time'])$this->db->where("check_class_record.recording_time>=",$time_array['start_time']);
+		if($time_array['end_time'])$this->db->where("check_class_record.recording_time<=",$time_array['end_time']);
 
 		$course_id_list_array = NULL;
 		foreach ($course_id_list as $key => $value)
@@ -374,12 +354,75 @@ class Record_model extends CI_Model{
 
 	public function lowest_ranking($account_id,$school_year,$term,$start_time=NULL,$end_time=NULL,$grade=-1)
 	{
-		$result=$this->record_query($account_id,$school_year,$term,$start_time,$end_time,$grade,1000000000,0);
+		$course_id_list=$this->college_course_query($account_id,$school_year,$term,$grade);
+		if($course_id_list==NULL)return NULL;
+
+		$this->db->select('@rownum:=@rownum+1 AS rownum', FALSE);
+		$this->db->select_min('check_class_record.real_number');
+		$this->db->select('check_class_record.course_id');
+		$this->db->select('check_class_record.recording_time');
+		$this->db->from("(SELECT @rownum:=0) r", FALSE);
+		$this->db->from('check_class_record');
+
+		$time_array=$this->query_time_process($start_time,$end_time);
+		if($time_array['start_time'])$this->db->where("check_class_record.recording_time>=",$time_array['start_time']);
+		if($time_array['end_time'])$this->db->where("check_class_record.recording_time<=",$time_array['end_time']);
+			
+		$course_id_list_array = NULL;
+		foreach ($course_id_list as $key => $value)
+		{
+			$course_id_list_array[] = $value['course_id'];
+		}
+		$this->db->where_in('check_class_record.course_id', $course_id_list_array);
+
+		$this->db->group_by("check_class_record.course_id");
+		$this->db->group_by("check_class_record.week");
+		$this->db->order_by("check_class_record.recording_time","DESC");
+		$query=$this->db->get();
+
+		$query=$query->result_array();
+
+		$result=NULL;
+
+		foreach ($query as $key => $value)
+		{
+			$rownum=$value['rownum'];
+			$result[$rownum]['rownum']=$rownum;
+			$result[$rownum]['real_number_min']=$value['real_number'];
+			$result[$rownum]['recording_time']=$value['recording_time'];
+
+			$result[$rownum]['class_date']= date('Y-m-d',strtotime($value['recording_time']));
+
+			$this->db->select('*');
+			$this->db->from('course_information');
+			$this->db->where('course_id',$value['course_id']);
+			$course_query=$this->db->get();
+			$course_query=$course_query->result_array();
+
+			$course_query[0]['weekday']=$this->weekday_chinese($course_query[0]['weekday']);//星期几转换为中文
+
+			//查询该课程所上班级号
+			$course_id=$course_query[0]['course_id'];
+			$class_array=$this->get_all_class_id($school_year,$term,$course_id);
+			$class_list=NULL;
+			foreach ($class_array as $key => $class_value) 
+			{
+				$class_list.=$class_value['class_id'].",";
+			}
+			$class_list=substr($class_list, 0, -1);
+			$course_query[0]['class_list']=$class_list;
+			$course_query[0]['class_rate_min']=$this->calculation_class_rate($result[$rownum]['real_number_min'],$course_query[0]['choices_number']);
+			$course_query[0]['class_rate_min_number']=$this->calculation_class_rate_number($result[$rownum]['real_number_min'],$course_query[0]['choices_number']);
+
+			//合并数组，课程信息和最低到课率
+			$result[$rownum] = array_merge($result[$rownum], $course_query[0]);
+		}
+
 		$result = $this->my_sort($result,'class_rate_min_number',SORT_ASC,SORT_NUMERIC);  
 		return $result;
 	}
 
-	public function my_sort($arrays,$sort_key,$sort_order=SORT_ASC,$sort_type=SORT_NUMERIC)
+	protected function my_sort($arrays,$sort_key,$sort_order=SORT_ASC,$sort_type=SORT_NUMERIC)
 	{   
         if(is_array($arrays)){   
             foreach ($arrays as $array){   
@@ -394,5 +437,37 @@ class Record_model extends CI_Model{
         }  
         array_multisort($key_arrays,$sort_order,$sort_type,$arrays);   
         return $arrays;   
-    }  
+    } 
+
+    protected function query_time_process($start_time=NULL,$end_time=NULL)
+    {
+    	if(($start_time!=NULL)&&($end_time!=NULL))
+    	{
+    		$start_time_unix=strtotime($start_time);
+			$end_time_unix=strtotime($end_time);
+			if($start_time_unix>$end_time_unix)
+				{$temp=$start_time;$start_time=$end_time;$end_time=$temp;}
+    	}	
+
+    	if(($start_time==$end_time)&&($start_time!=NULL))
+		{
+			$end_time_unix=strtotime($end_time);
+			$end_time_unix=$end_time_unix+86400;
+			$end_time=date("Y-m-d",$end_time_unix);
+		}
+		else
+		{
+			if($end_time)
+			{
+				$end_time_unix=strtotime($end_time);
+				$end_time_unix=$end_time_unix+86400;
+				$end_time=date("Y-m-d",$end_time_unix);
+			}
+		}
+
+		$result['start_time']=$start_time;
+		$result['end_time']=$end_time;
+
+		return $result;
+    }
 }
