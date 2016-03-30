@@ -33,9 +33,7 @@ $(function () {
                     color: '#000000',
                     // distance: -100,
                     connectorColor: '#000000',
-                    formatter: function() {
-                        return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
-                    }
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
                 }
             }
         },
