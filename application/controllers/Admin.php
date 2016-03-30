@@ -468,6 +468,7 @@
 		protected function count_class_rate($query_array,$max_rate=100,$min_rate=0)
 	    {
 	    	$result = NULL;
+	    	if($query_array==NULL)return 0;
 	    	foreach ($query_array as $key => $value)
 	    	{
 	    		if(($value['class_rate_min_number']>=$min_rate)&&($value['class_rate_min_number']<$max_rate))

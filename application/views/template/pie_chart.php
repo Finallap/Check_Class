@@ -1,19 +1,28 @@
 <script>
 $(function () {
+		Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function(color) {
+    return {
+        radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+        stops: [
+            [0, color],
+            [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+        ]
+    };
+});
     $('<?php echo '#'.$chart_id;?>').highcharts({
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
             plotShadow: false
         },
+        credits:{
+                enabled:false // 禁用版权信息
+        },
         title: {
             text: '<?php echo $title;?>'
         },
         tooltip: {
     	    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        credits: {
-             enabled: false
         },
         plotOptions: {
             pie: {
@@ -22,8 +31,11 @@ $(function () {
                 dataLabels: {
                     enabled: true,
                     color: '#000000',
+                    // distance: -100,
                     connectorColor: '#000000',
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    formatter: function() {
+                        return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+                    }
                 }
             }
         },
