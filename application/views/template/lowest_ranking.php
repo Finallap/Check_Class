@@ -40,7 +40,7 @@
                         $i=24;
                         while ($i < $len)
                         {
-                          insertToStr($class_list, $i, "\n");
+                          $class_list = insertToStr($class_list, $i, "\n");
                           $i+=25;
                         }
                         return $class_list;
