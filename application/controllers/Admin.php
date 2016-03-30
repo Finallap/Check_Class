@@ -504,13 +504,14 @@
 			$this->login_status_detection();
 			$this->load->model('Suggestions_model');
 
+			$per_page=$this->input->get('per_page', TRUE);
+			if(is_null($per_page))$per_page=1;
+
 			$header_data['account']=$this->account;
 
-			$base_url=current_url();
-
 			$suggestions_display_data['all_count']=$this->Suggestions_model->count_suggestions();
-			$suggestions_display_data['suggestions_array']=$this->Suggestions_model->get_suggestions(100,0);
-			$suggestions_display_data['pagination']=$this->admin_pagination($suggestions_display_data['all_count'],10,3,$base_url);
+			$suggestions_display_data['suggestions_array']=$this->Suggestions_model->get_suggestions(10,($per_page-1)*10);
+			$suggestions_display_data['pagination']=$this->admin_pagination($suggestions_display_data['all_count'],10,3,current_url());
 
 			$this->load->view('admin/header',$header_data);
 			$this->load->view('admin/suggestions_display',$suggestions_display_data);
