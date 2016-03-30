@@ -36,7 +36,14 @@
 
                       function class_list_process($class_list)
                       {
-                        return insertToStr($class_list, 20, "\n");
+                        $len = strlen($class_list);
+                        $i=24;
+                        while ($i < $len)
+                        {
+                          insertToStr($class_list, $i, "\n");
+                          $i+=25;
+                        }
+                        return $class_list;
                       }
 
                       if($course_list)
