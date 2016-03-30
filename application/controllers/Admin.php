@@ -498,7 +498,6 @@
 	    	return $result;
 	    }
 
-
 	    public function suggestions()
 		{
 			$this->login_status_detection();

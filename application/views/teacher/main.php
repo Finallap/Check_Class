@@ -8,7 +8,14 @@
 
           <?php echo $notification;?>
             
-            
+          <div class="block">
+            <p class="block-heading">今日到课率统计</p>
+              <div class="block-body">
+                <div class="row-fluid">
+                    <div id="container" style="min-width:300px;height:300px"></div>
+                </div>
+              </div>
+          </div>
            
             <div class="block">
               <p class="block-heading">一些关于查课系统（教师版）的使用提示</p>
