@@ -493,7 +493,7 @@
 	    	$result[] = $this->count_class_rate_array($query_array,'70%-80%',80,70);
 	    	$result[] = $this->count_class_rate_array($query_array,'60%-70%',70,60);
 	    	$result[] = $this->count_class_rate_array($query_array,'50%-60%',60,50);
-	    	$result[] = $this->count_class_rate_array($query_array,'50%以下',50,0);
+	    	$result[] = $this->count_class_rate_array($query_array,'50%以下',50,0.001);
 	    	return $result;
 	    }
 
