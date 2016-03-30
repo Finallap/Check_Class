@@ -11,7 +11,7 @@
               <p class="block-heading">今日到课率统计</p>
                 <div class="block-body">
                   <div class="row-fluid">
-                      <div id="container" style="min-width:300px;height:300px" class="img-polaroid"></div>
+                      <div id="container" style="min-width:300px;height:300px"></div>
                   </div>
                 </div>
             </div>

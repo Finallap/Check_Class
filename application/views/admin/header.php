@@ -135,7 +135,8 @@
                 </ul>
                 <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu"><i class="fa fa-align-justify"></i>系统介绍</div>
                     <ul id="dashboard-menu" class="nav nav-list collapse in">
-                      <li><a href="<?php echo base_url('system_description')?>">关于系统</a></li>    
+                      <li><a href="<?php echo base_url('admin/suggestions')?>">查看系统反馈</a></li>    
+                      <li><a href="<?php echo base_url('system_description')?>">关于系统</a></li>
                     </ul>
             </div>
         </div>

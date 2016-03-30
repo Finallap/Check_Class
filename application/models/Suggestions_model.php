@@ -20,4 +20,22 @@ class Suggestions_model extends CI_Model{
 		$this->db->insert('suggestions', $data);
 	}
 
+	public function get_suggestions($count=10000000,$offset=0)
+	{
+		$this->db->select('@rownum:=@rownum+1 AS rownum', FALSE);
+		$this->db->select('suggestions.*');
+		$this->db->from("(SELECT @rownum:=0) r", FALSE);
+		$this->db->from("suggestions");
+		$this->db->limit($count,$offset);
+		$this->db->order_by('suggestions.release_time',"DESC");
+		$query=$this->db->get();
+
+		return $query->result_array();
+	}
+
+	public function count_suggestions()
+	{
+		return $this->db->count_all('suggestions');
+	}
+
 }
