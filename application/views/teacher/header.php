@@ -116,7 +116,7 @@
                 <ul id="accounts-menu" class="nav nav-list collapse in">
                   <li><a tabindex="-1" href="<?php echo base_url('teacher/data_entry')?>">查课情况录入</a></li>
                   <li><a tabindex="-1" href="<?php echo base_url('teacher/data_query')?>">到课率统计</a></li>
-                  <li><a tabindex="-1" href="<?php echo base_url('teacher/data_query')?>">统计表导出</a></li>
+                  <li><a tabindex="-1" href="<?php echo base_url('teacher/excel_out')?>">统计表格导出</a></li>
                 </ul>
                 <div class="nav-header" data-toggle="collapse" data-target="#legal-menu"><i class="fa fa-wrench"></i>账号设置</div>
                 <ul id="legal-menu" class="nav nav-list collapse in">

@@ -416,6 +416,7 @@ class Record_model extends CI_Model{
 
 		$this->db->select('@rownum:=@rownum+1 AS rownum', FALSE);
 		$this->db->select_min('check_class_record.real_number');
+		$this->db->select('check_class_record.week');
 		$this->db->select('check_class_record.course_id');
 		$this->db->select('check_class_record.recording_time');
 		$this->db->from("(SELECT @rownum:=0) r", FALSE);
@@ -445,6 +446,7 @@ class Record_model extends CI_Model{
 		{
 			$rownum=$value['rownum'];
 			$result[$rownum]['rownum']=$rownum;
+			$result[$rownum]['week']=$value['week'];
 			$result[$rownum]['real_number_min']=$value['real_number'];
 			$result[$rownum]['recording_time']=$value['recording_time'];
 
@@ -468,6 +470,7 @@ class Record_model extends CI_Model{
 			}
 			$class_list=substr($class_list, 0, -1);
 			$course_query[0]['class_list']=$class_list;
+			$course_query[0]['college']=$this->get_college($class_array);
 			$course_query[0]['class_rate_min']=$this->calculation_class_rate($result[$rownum]['real_number_min'],$course_query[0]['choices_number']);
 			$course_query[0]['class_rate_min_number']=$this->calculation_class_rate_number($result[$rownum]['real_number_min'],$course_query[0]['choices_number']);
 
@@ -487,6 +490,44 @@ class Record_model extends CI_Model{
     			$result[]=$course;
     	}
 		return count($result);
+    }
+
+    public function get_college($class_array)
+    {
+    	$class_list=NULL;
+
+    	foreach ($class_array as $key => $class_value) 
+		{
+			$class_list[]=$class_value['class_id'];
+		}
+
+    	$this->db->select('college_id');
+    	$this->db->from('class_information');
+    	$this->db->where_in('class_id', $class_list);
+    	$this->db->group_by('college_id');
+    	$college_id_query=$this->db->get();
+		$college_id_query=$college_id_query->result_array();
+
+		$college_id_array = NULL;
+		foreach ($college_id_query as $key => $value)
+		{
+			$college_id_array[] = $value['college_id'];
+		}
+
+		$this->db->select('college_name');
+    	$this->db->from('college_information');
+    	$this->db->where_in('college_id', $college_id_array);
+    	$college_name_query=$this->db->get();
+		$college_name_query=$college_name_query->result_array();
+
+		$college_name = NULL;
+		foreach ($college_name_query as $key => $value)
+		{
+			$college_name.= $value['college_name'].',';
+		}
+
+		$college_name=substr($college_name, 0, -1);
+		return $college_name;
     }
 
     public function update_record($check_class_record_id,$account_type,$account_id,$real_number,$remark)

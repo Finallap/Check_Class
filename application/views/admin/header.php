@@ -116,7 +116,7 @@
                 <div class="nav-header" data-toggle="collapse" data-target="#accounts-menu"><i class="fa fa-briefcase"></i>信息与查看与导出</div>
                 <ul id="accounts-menu" class="nav nav-list collapse in">
                   <li><a tabindex="-1" href="<?php echo base_url('admin/data_query')?>">到课率统计</a></li>
-                  <li><a tabindex="-1" href="<?php echo base_url('admin/data_query')?>">统计表导出</a></li>
+                  <li><a tabindex="-1" href="<?php echo base_url('admin/excel_out')?>">统计表格导出</a></li>
                   <li><a tabindex="-1" href="<?php echo base_url('admin/login_situation')?>">登陆情况查看</a></li>
                 </ul>
                 <div class="nav-header" data-toggle="collapse" data-target="#legal-menu"><i class="fa fa-wrench"></i>账号设置</div>

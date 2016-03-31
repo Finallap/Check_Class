@@ -517,4 +517,99 @@
 			$this->load->view('template/footer');
 		}
 
+		public function excel_out()
+		{
+			$this->login_status_detection();
+			$this->load->model('Record_model');
+			$this->load->model('Student_teacher_account_model');
+
+			$header_data['account']=$this->account;
+
+			$data['account_type'] = 'admin';
+			$data['all_count'] = $this->Record_model->record_query_count($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),'','',-1);
+
+			$select_data['name']='grade';
+			$select_data['default_value']='——请选择——';
+			$select_data['details']=$this->Student_teacher_account_model->get_grade_list();
+			$data['grade_select'] = $this->load->view('template/select',$select_data, TRUE);
+
+			if($this->input->get('start_day'))$start_day=$this->input->get('start_day', TRUE);else$start_day=NULL;
+			if($this->input->get('end_day'))$end_day=$this->input->get('end_day', TRUE);else$end_day=NULL;
+			if($this->input->get('grade'))$grade=$this->input->get('grade', TRUE);else$grade='-1';
+
+			$start_time=strtotime($start_day);
+			$end_time=strtotime($end_day);
+			if($start_time>$end_time){$temp=$start_day;$start_day=$end_day;$end_day=$temp;}
+
+			if($this->input->get('start_day'))
+				$data['start_day'] = $start_day;
+			else
+				$data['start_day'] = date("Y-m-d",strtotime("-1 week"));
+
+			if($this->input->get('end_day'))
+				$data['end_day'] = $end_day;
+			else
+				$data['end_day'] = date("Y-m-d");
+
+			$this->load->view('admin/header',$header_data);
+			$this->load->view('template/excel_out',$data);
+			$this->load->view('template/footer');
+			$this->load->view('template/datepicker_js');
+			$this->load->view('template/datepicker_end_js');
+		}
+
+		public function excel_out_action()
+		{
+			$this->login_status_detection();
+			$this->load->library('Excel_out_library');
+			$this->load->model('Record_model');
+			$this->load->model('Student_teacher_account_model');
+
+			if($this->input->get('start_day'))$start_day=$this->input->get('start_day', TRUE);else$start_day=$this->njupt_time->get_start_day();
+			if($this->input->get('end_day'))$end_day=$this->input->get('end_day', TRUE);else$end_day=$end_day = date("Y-m-d");
+			if($this->input->get('grade'))$grade=$this->input->get('grade', TRUE);else$grade='-1';
+
+			$start_time=strtotime($start_day);
+			$end_time=strtotime($end_day);
+			if($start_time>$end_time){$temp=$start_day;$start_day=$end_day;$end_day=$temp;}
+
+			$class_array=$this->Record_model->get_class_rate_list($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),$start_day,$end_day,$grade);
+
+			if($class_array)
+			{
+				$result_array = NULL;
+				$count = 0;
+
+				foreach ($class_array as $key => $value)
+				{
+					$result_array[$count]['record_id'] = $count+1;
+					$result_array[$count]['date'] = $value['class_date'];
+					$result_array[$count]['week'] = $value['week'];
+					$result_array[$count]['weekday'] = $value['weekday'];
+					$result_array[$count]['class_time'] = '第'.$value['class_time'].'大节';
+					$result_array[$count]['classroom'] = $value['classroom'];
+					$result_array[$count]['college'] = $value['college'];
+					$result_array[$count]['class_list'] = $value['class_list'];
+					$result_array[$count]['course_name'] = $value['course_name'];
+					$result_array[$count]['teacher_name'] = $value['tercher_name'];
+					$result_array[$count]['choice_number'] = $value['choices_number'];
+					$result_array[$count]['real_number'] = $value['real_number_min'];
+					$result_array[$count]['class_rate'] = $value['class_rate_min'];
+
+					$count++;
+				}
+
+				$this->excel_out_library->class_rate_out($result_array,'查课数据统计表（'.$start_day.'至'.$end_day.'）',$start_day,$end_day);
+				
+				$data['alert_information']="导出成功！";
+				$data['href']="admin/excel_out";
+				$this->load->view('template/alert_and_location_href',$data);
+			}
+			else
+			{
+				$data['alert_information']="该时间段未查询到数据，导出失败(｡˘•ε•˘｡)";
+				$data['href']="admin/excel_out";
+				$this->load->view('template/alert_and_location_href',$data);
+			}
+		}
 	}
