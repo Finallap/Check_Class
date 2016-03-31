@@ -43,7 +43,7 @@ class Record_model extends CI_Model{
 		$this->db->where("account_id",$account_id);
 
 		$this->db->limit($count,$offset);
-		$this->db->order_by('recording_time','ASC');
+		$this->db->order_by('recording_time','DESC');
 		$query=$this->db->get();
 		$query=$query->result_array();
 
@@ -487,5 +487,30 @@ class Record_model extends CI_Model{
     			$result[]=$course;
     	}
 		return count($result);
+    }
+
+    public function update_record($check_class_record_id,$account_type,$account_id,$real_number,$remark)
+    {
+    	$this->db->select('account_type');
+    	$this->db->select('account_id');
+    	$this->db->from('check_class_record');
+    	$this->db->where('check_class_record_id',$check_class_record_id);
+    	$query=$this->db->get();
+		$query=$query->result_array();
+
+		if(!empty($query[0]))
+		{
+			$data = array(
+						    'real_number' => $real_number,
+						    'remark' => $remark
+						);
+			// $this->db->where('check_class_record_id',$check_class_record_id);
+			// $query=$this->db->update('check_class_record',$data);
+			return true;
+		}
+		elseif (($account_type!=$query[0]['account_type'])||($account_id!=$query[0]['account_id']))
+			return false;
+		else
+			return false;
     }
 }
