@@ -59,7 +59,7 @@
 	                          ->setCellValue('G4', '所在学院')
 	                          ->setCellValue('H4', '所上班级')
 	                          ->setCellValue('I4', '课程名称')
-	                          ->setCellValue('J4', '任课老师')
+	                          ->setCellValue('J4', '任课教师')
 	                          ->setCellValue('K4', '应到人数')
 	                          ->setCellValue('L4', '实到人数')
 	                          ->setCellValue('M4', '到课率');
