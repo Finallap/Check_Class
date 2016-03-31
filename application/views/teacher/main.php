@@ -12,7 +12,12 @@
             <p class="block-heading">今日到课率统计</p>
               <div class="block-body">
                 <div class="row-fluid">
-                    <div id="container" style="min-width:300px;height:300px"></div>
+                    <?php
+                      if($today_data_count!=0)
+                        echo '<div id="container" style="min-width:300px;height:300px"></div>'."\n";
+                      else
+                       echo '<p>今天还没有课程录入，抱歉(′д｀ )…彡…彡</p>'."\n";
+                    ?>
                 </div>
               </div>
           </div>

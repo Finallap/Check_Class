@@ -42,6 +42,7 @@
 			$lowest_ranking_array=$this->Record_model->lowest_ranking($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),date("Y-m-d"),date("Y-m-d"),-1);
 			$lowest_ranking['today_data_count']=$today_data_count;
 			$lowest_ranking['course_list']=$lowest_ranking_array;
+			$main_data['today_data_count']=$today_data_count;
 			$main_data['lowest_ranking']=$this->load->view('template/lowest_ranking',$lowest_ranking,TRUE);
 
 
