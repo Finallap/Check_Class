@@ -43,6 +43,8 @@
 			$this->load->view('admin/main',$main_data);
 			$this->load->view('template/footer');
 			$this->load->view('template/pie_chart',$pie_chart_data);
+
+			$this->output->cache(5);
 		}
 
 		protected function add_operation($operation_type,$operation_type_cn)

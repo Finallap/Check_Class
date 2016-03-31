@@ -54,6 +54,8 @@
 			$this->load->view('teacher/main',$main_data);
 			$this->load->view('template/footer');
 			$this->load->view('template/pie_chart',$pie_chart_data);
+
+			$this->output->cache(5);
 		}
 
 		public function data_entry()
