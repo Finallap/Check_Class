@@ -1,8 +1,12 @@
      <select name="<?php echo $name;?>" id="<?php echo $name;?>" class="input-xlarge">
-         <option selected="selected" value="-1"><?php echo $default_value;?></option>
 <?php
-     foreach ($details as $key => $value) {
-          echo '         <option value="'.$key.'">'.$value."</option>\n";
-     }
+	echo '         <option value="-1">'.$default_value."</option>\n";
+    foreach ($details as $key => $value)
+    {
+	    if($select_key==$key)
+	    	echo '         <option selected="selected" value="'.$key.'">'.$value."</option>\n";
+	    else
+	    	echo '         <option value="'.$key.'">'.$value."</option>\n";
+    }
 ?>
     </select>

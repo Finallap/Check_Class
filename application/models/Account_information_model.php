@@ -89,4 +89,33 @@ class Account_information_model extends CI_Model{
 		}
 	}
 
+	public function get_user_telephone($type,$id) 
+	{
+		switch ($type) {
+			case 'teacher':
+				{
+					$this->db->select('telephone');
+					$this->db->where($type.'_id',$id);
+					$query=$this->db->get($type.'_information');
+					$query=$query->result_array();
+
+					return $query[0]['telephone'];
+				}
+				break;
+			case 'student':
+				{
+					$this->db->select('telephone');
+					$this->db->where($type.'_id',$id);
+					$query=$this->db->get($type.'_information');
+					$query=$query->result_array();
+
+					return $query[0]['telephone'];
+				}
+				break;
+			default:
+				return '无';
+				break;
+		}
+	}
+
 }

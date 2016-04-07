@@ -97,6 +97,7 @@
 			$header_data['account']=$this->account;
 			$select_data['name']='college_id';
 			$select_data['default_value']='不限';
+			$select_data['select_key']=$college_id;
 			$select_data['details']=$this->College_information_model->get_college_information();
 
 			$college_select = $this->load->view('template/select',$select_data, TRUE);
@@ -171,11 +172,12 @@
 			$id= $this->input->post('account', TRUE);
 			$name= $this->input->post('account_name', TRUE);
 			$college_id= $this->input->post('college_id', TRUE);
+			$telephone= $this->input->post('telephone', TRUE);
 			$password=$this->encrypt->encode($id);
 
 			$this->load->model('Student_teacher_account_model');
 
-			if($this->Student_teacher_account_model->add_accout($type,$id,$name,$college_id,$password))
+			if($this->Student_teacher_account_model->add_accout($type,$id,$name,$college_id,$telephone,$password))
 			{
 				$data['alert_information']="添加成功";
 				$data['href']="admin/$type"."_manager";
@@ -287,6 +289,7 @@
 
 			$college_name=$this->College_information_model->get_user_college_name($operation_type,$operation_id);
 			$user_name=$this->Account_information_model-> get_user_name($operation_type,$operation_id);
+			$telephone=$this->Account_information_model-> get_user_telephone($operation_type,$operation_id);
 
 			$current_login_time=$this->Student_teacher_account_model->get_login_information_option($operation_type,$operation_id);
 			$current_login=$this->login_information_model->get_login_information_option($operation_type,$operation_id);
@@ -320,6 +323,7 @@
 					break;
 			}
 			$situation_data['college_name']=$college_name;
+			$situation_data['telephone']=$telephone;
 			$situation_data['current_login_time']=$current_login_time;
 			$situation_data['login_count']=$login_count;
 			$situation_data['user_name']=$user_name;
@@ -439,6 +443,7 @@
 
 			$select_data['name']='grade';
 			$select_data['default_value']='——请选择——';
+			$select_data['select_key']=$grade;
 			$select_data['details']=$this->Student_teacher_account_model->get_grade_list();
 			$grade_select = $this->load->view('template/select',$select_data, TRUE);
 

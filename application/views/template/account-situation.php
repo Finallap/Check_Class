@@ -10,6 +10,7 @@
                   <p>账号类型：<?php echo $type;?></p>
                   <p>使用者姓名：<?php echo $user_name;?></p>
                   <p>所属学院：<?php echo $college_name;?></p>
+                  <p>联系电话：<?php echo $telephone;?></p>
                   <p>累计登陆次数：<?php echo $login_count;?></p>
                   <p>上次登陆时间：<?php echo $current_login_time;?></p>
                 </div>

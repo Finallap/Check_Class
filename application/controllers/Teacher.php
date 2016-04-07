@@ -216,6 +216,7 @@
 			$select_data['name']='grade';
 			$select_data['default_value']='——请选择——';
 			$select_data['details']=$this->Student_teacher_account_model->get_grade_list();
+			$select_data['select_key']=$grade;
 			$grade_select = $this->load->view('template/select',$select_data, TRUE);
 
 			$data_all_count = $this->Record_model->record_query_count($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),'','',-1);

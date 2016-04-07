@@ -32,6 +32,7 @@ class Account_situation extends CI_Controller {
 
 		$college_name=$this->College_information_model->get_user_college_name($this->type,$this->account);
 		$user_name=$this->Account_information_model-> get_user_name($this->type,$this->account);
+		$telephone=$this->Account_information_model-> get_user_telephone($this->type,$this->account);
 
 		$current_login_time=$this->login_information_model->get_login_information_option($this->type,$this->account,1,1);
 		$current_login_time=$current_login_time[0]['login_time'];
@@ -64,6 +65,7 @@ class Account_situation extends CI_Controller {
 				break;
 		}
 		$situation_data['college_name']=$college_name;
+		$situation_data['telephone']=$telephone;
 		$situation_data['current_login_time']=$current_login_time;
 		$situation_data['login_count']=$login_count;
 		$situation_data['user_name']=$user_name;

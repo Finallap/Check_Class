@@ -64,7 +64,7 @@ class Student_teacher_account_model extends CI_Model{
 			return "从未登陆";
 	}
 
-	public function add_accout($type,$id,$name,$college_id,$password)
+	public function add_accout($type,$id,$name,$college_id,$telephone,$password)
 	{
 		$this->db->select('*');
 		$this->db->where($type.'_id',$id);
@@ -79,6 +79,7 @@ class Student_teacher_account_model extends CI_Model{
 						    $type.'_id' => $id,
 						    $type.'_name' => $name,
 						    'college_id' => $college_id,
+						    'telephone' => $telephone,
 						    'password' => $password
 						);
 			$this->db->insert($type.'_information', $data);

@@ -1,7 +1,7 @@
     <script type="text/javascript"> 	
 		function check()
 		{
-            if(document.getElementById("college").value == "-1"){  
+            if(document.getElementById("college_id").value == "-1"){  
                 alert("请选择学院!"); 
 				return false;  
             }
@@ -35,10 +35,11 @@
         <input type="text" name="account_name" id="account_name" value="" class="input-xlarge">
         <label>选择学院</label>
         <?php echo $college_select;?>
+        <label>联系电话</label>
+        <input type="text" name="telephone" id="telephone" value="" class="input-xlarge">
         <label>增加账户类型：<?php echo $account_type;?></label>
         <br>
         <input name="submit" type="submit" value="增加" class="btn btn-primary pull-letf">
-
     </form>
       </div>
   </div>
