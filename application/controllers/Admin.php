@@ -535,7 +535,7 @@
 			$data['all_count'] = $this->Record_model->record_query_count($this->account,$this->njupt_time->get_school_year(),$this->njupt_time->get_term(),'','',-1);
 
 			$select_data['name']='grade';
-			$select_data['default_value']='——请选择——';
+			$select_data['default_value']='——不限——';
 			$select_data['details']=$this->Student_teacher_account_model->get_grade_list();
 			$data['grade_select'] = $this->load->view('template/select',$select_data, TRUE);
 
@@ -617,5 +617,98 @@
 				$data['href']="admin/excel_out";
 				$this->load->view('template/alert_and_location_href',$data);
 			}
+		}
+
+		public function change_course_information()
+		{
+			$this->login_status_detection();
+			$this->load->model('Course_information_model');
+			$this->load->model('Classroom_model');
+			$this->load->library('table');
+
+			$data['teaching_building_array'] = $this->Classroom_model->get_teaching_building_number();
+			$data['classroom_array'] = $this->Classroom_model->get_classroom_number();
+
+			$header_data['account']=$this->account;
+
+			if($this->input->get('teaching_building'))$teaching_building=$this->input->get('teaching_building', TRUE);else$teaching_building=-1;
+			if($this->input->get('classroom'))$classroom=$this->input->get('classroom', TRUE);else$classroom=-1;
+			$per_page=$this->input->get('per_page', TRUE);
+			if(is_null($per_page))$per_page=1;
+
+			$classroom_array = $this->Classroom_model-> get_classroom_list($teaching_building,$classroom);
+			$query_course_list = $this->Course_information_model->get_course_list($this->njupt_time->get_school_year(),$this->njupt_time->get_term(),$classroom_array,10,($per_page-1)*10);
+
+			$data['all_count'] = $this->Course_information_model->count_course_list($this->njupt_time->get_school_year(),$this->njupt_time->get_term());
+			$data['count'] = $this->Course_information_model->count_course_list($this->njupt_time->get_school_year(),$this->njupt_time->get_term(),$classroom_array);
+
+			$template = array('table_open'  => ' <table width="563" class="table">');
+			$this->table->set_template($template);
+			$this->table->set_heading('教室', '星期', '时间','课程名称','任课教师','应到人数','操作');
+			$table=$this->table->generate($query_course_list);
+			
+			$data['table'] = $table;
+
+			$pagination_url=current_url().'?';
+			if($this->input->get('teaching_building'))$pagination_url=$pagination_url."teaching_building=$teaching_building&";
+			if($this->input->get('classroom'))$pagination_url=$pagination_url."classroom=$classroom&";
+			if(substr($pagination_url, -1)=='&')$pagination_url=substr($pagination_url, 0, -1);
+			if(substr($pagination_url, -1)=='?')$pagination_url=substr($pagination_url, 0, -1);
+
+			$data['pagination']=$this->admin_pagination($data['count'],10,3,$pagination_url);
+
+			$this->load->view('admin/header',$header_data);
+			$this->load->view('admin/change_course_information',$data);
+			$this->load->view('template/footer');
+			$this->load->view('student/two_select_js',$data);
+		}
+
+		public function change_course_information_middleware()
+		{
+			$this->login_status_detection();
+			$this->load->model('Course_information_model');
+
+			$header_data['account']=$this->account;
+
+			if($this->input->get('course_id'))$course_id=$this->input->get('course_id', TRUE);else$course_id=NULL;
+
+			if($course_id==NULL)
+			{
+				$data['alert_information']="请填写课程号后再进行查询(｡˘•ε•˘｡)";
+				$data['href']="admin/change_course_information";
+				$this->load->view('template/alert_and_location_href',$data);
+			}
+
+			$course_information = $this->Course_information_model->get_course_information($course_id);
+			if($course_information==NULL)
+			{
+				$data['alert_information']="没有查询到对应该课程号的课程信息，出错了(｡˘•ε•˘｡)";
+				$data['href']="admin/change_course_information";
+				$this->load->view('template/alert_and_location_href',$data);
+			}
+	
+			$data = $course_information;
+
+			$this->load->view('admin/header',$header_data);
+			$this->load->view('admin/change_course_information_middleware',$data);
+			$this->load->view('template/footer');
+		}
+
+
+		public function change_course_information_action()
+		{
+			$this->login_status_detection();
+			
+			$course_id= $this->input->post('course_id', TRUE);
+			$choices_number= $this->input->post('choices_number', TRUE);
+
+			$this->load->model('Course_information_model');
+
+			$this->Course_information_model->update_course_information($course_id,$choices_number);
+
+			$data['alert_information']="修改课程信息成功！";
+			$data['href']="admin/change_course_information";
+
+			$this->load->view('template/alert_and_location_href',$data);
 		}
 	}

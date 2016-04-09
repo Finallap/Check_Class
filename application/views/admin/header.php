@@ -129,9 +129,9 @@
                 <ul id="legal1-menu" class="nav nav-list collapse in">
                  <li><a tabindex="-1" href="<?php echo base_url('admin/notification_release')?>">系统公告发布</a></li>
                  <li><a tabindex="-1" href="<?php echo base_url('admin/change_system_option')?>">学年学期设置</a></li>
+                 <li><a tabindex="-1" href="<?php echo base_url('admin/change_course_information')?>">课程信息管理</a></li>
                  <li><a tabindex="-1" href="<?php echo base_url('admin/change_password')?>">教室信息管理</a></li>
                  <li><a tabindex="-1" href="<?php echo base_url('admin/change_password')?>">班级信息管理</a></li>
-                 <li><a tabindex="-1" href="<?php echo base_url('admin/change_password')?>">课程信息管理</a></li>
                 </ul>
                 <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu"><i class="fa fa-align-justify"></i>系统介绍</div>
                     <ul id="dashboard-menu" class="nav nav-list collapse in">

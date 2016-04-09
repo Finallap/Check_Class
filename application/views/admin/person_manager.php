@@ -31,18 +31,14 @@
       </div>
           </div>
             
+      <div class="well">
+          <?php echo $table;?>
+      </div>
 
-<div class="well">
-    <?php echo $table;?>
-</div>
 
-            
-            
-            
-           
-            <div class="pagination">
-      <?php echo $pagination?>
-</div>
+      <div class="pagination">
+            <?php echo $pagination?>
+      </div>
 
         </div>
         <div class="span3">
