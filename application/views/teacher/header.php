@@ -77,16 +77,22 @@
             <div class="container-fluid">
                 <a class="brand" href="<?php echo base_url('')?>"><img src="<?php echo base_url('assets/images/logo.png')?>" width="195" height="22"></a>
                 <ul class="nav pull-right">
+                
+                  <li id="fat-menu" class="dropdown">
+                        <a href="<?php echo base_url('')?>" id="drop3" role="button" class="dropdown-toggle">
+                             首页
+                        </a>
+                  </li>
+
                   <li id="fat-menu" class="dropdown">
                       <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">
                           <i class="fa fa-user"></i> <?php echo $account;?>
                           <i class="fa fa-caret-down"></i>
                       </a>
-
                       <ul class="dropdown-menu">
                          <li><a tabindex="-1" href="<?php echo base_url('teacher/data_entry')?>">查课情况录入</a></li>
-                             <li><a tabindex="-1" href="<?php echo base_url('teacher/data_query')?>">到课率统计</a></li>
-                  <li><a tabindex="-1" href="<?php echo base_url('account_situation')?>">账号信息查看</a></li>
+                          <li><a tabindex="-1" href="<?php echo base_url('teacher/data_query')?>">到课率统计</a></li>
+                          <li><a tabindex="-1" href="<?php echo base_url('account_situation')?>">账号信息查看</a></li>
                           <li><a tabindex="-1" href="<?php echo base_url('change_password')?>">账号密码修改</a></li>
                           <li class="divider"></li>
                           <li><a tabindex="-1" href="<?php echo base_url('sign_out')?>">注销</a></li>

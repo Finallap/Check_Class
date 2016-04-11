@@ -38,24 +38,18 @@
 
         <div class="span3">
           <div class="well toc">
-          <h3>联系我们</h3>
-          <h4>微信公众号：</h4>
-           <p>njuptservice</p>
-                <h4>网址：</h4>
-                <p><a href="http://www.aifuwu.org">http://www.aifuwu.org</a></p>
+          <h3>联系方式</h3>
+          <h4>联系人：</h4>
+           <p>王晶</p>
+                <h4>联系电话：</h4>
+                <p>18951810421</p>
                 <h4>E-mail：</h4>
-                <p>aifuwu@aifuwu.org</p>
-                <h4>地址：</h4>
+                <p>wjing@njupt.edu.cn</p>
+                <h4>办公室地址：</h4>
                 <address>
-江苏省南京市栖霞区<br>
-南京邮电大学仙林校区<br>
-图书馆一楼学生事务中心大厅
-</address>
-                <div style="text-align: center;">
-                    <a class="btn" href=""><img src="<?php echo base_url('assets/images/wechat.png')?>" width="25" height="25"></a>
-                    <a class="btn" href="http://weibo.com/njuptaifuwu"><img src="<?php echo base_url('assets/images/sina.png')?>" width="25" height="25"></a>
-                    <a class="btn" href="http://page.renren.com/601861848"><img src="<?php echo base_url('assets/images/renren.png')?>" width="25"></a>
-                </div>
+                学生事务服务中心大楼<br>
+                三楼323室
+                </address>
           </div>
         </div>
 
