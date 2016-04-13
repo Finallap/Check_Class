@@ -85,6 +85,7 @@ class Record_model extends CI_Model{
 
 		$this->db->select('@rownum:=@rownum+1 AS rownum', FALSE);
 		$this->db->select_min('check_class_record.real_number');
+		$this->db->select('check_class_record.week');
 		$this->db->select('check_class_record.course_id');
 		$this->db->select('check_class_record.recording_time');
 		$this->db->from("(SELECT @rownum:=0) r", FALSE);
@@ -150,6 +151,7 @@ class Record_model extends CI_Model{
 			$this->db->from("(SELECT @rownum:=0) r", FALSE);
 			$this->db->from('check_class_record');
 			$this->db->where('check_class_record.course_id',$value['course_id']);
+			$this->db->where('check_class_record.week',$value['week']);
 
 			$detail_query=$this->db->get();
 			$detail_query=$detail_query->result_array();
