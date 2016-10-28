@@ -6,6 +6,7 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 		//$this->output->enable_profiler(TRUE);
+		var_dump($this->session->type);
 
 		if(!isset($this->session->type))
 		{
@@ -24,7 +25,7 @@ class Welcome extends CI_Controller {
 					redirect('/admin/');
 					break;
 				default:
-					redirect('/login/');
+					// redirect('/login/');
 					break;
 			}
 		}
