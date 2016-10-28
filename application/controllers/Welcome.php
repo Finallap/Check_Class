@@ -31,7 +31,7 @@ class Welcome extends CI_Controller {
 		}
 		else
 		{
-			redirect('/login/');
+			// redirect('/login/');
 		}	
 
 	}
