@@ -27,7 +27,7 @@
                 foreach ($course_list as $key => $course_detail) 
                 {
                   echo '<div class="sidebar-nav">'."\n";
-                  echo '<div class="nav-header" data-toggle="collapse" data-target="#course'.$course_detail['rownum'].'"><i class="fa fa-arrow-circle-down"></i>&nbsp&nbsp'.$course_detail['class_date'].'&nbsp&nbsp'.$course_detail['weekday'].'&nbsp&nbsp第'.$course_detail['class_time'].'大节&nbsp&nbsp'.$course_detail['course_name'].'&nbsp&nbsp'.$course_detail['class_list'].'&nbsp&nbsp应到人数：'.$course_detail['choices_number'].'&nbsp&nbsp实到人数：'.$course_detail['real_number_min'].'&nbsp&nbsp请假人数：'.$course_detail['real_number_min'].'&nbsp&nbsp到课率：'.$course_detail['class_rate_min'].'</div>'."\n";
+                  echo '<div class="nav-header" data-toggle="collapse" data-target="#course'.$course_detail['rownum'].'"><i class="fa fa-arrow-circle-down"></i>&nbsp&nbsp'.$course_detail['class_date'].'&nbsp&nbsp'.$course_detail['weekday'].'&nbsp&nbsp第'.$course_detail['class_time'].'大节&nbsp&nbsp'.$course_detail['course_name'].'&nbsp&nbsp'.$course_detail['class_list'].'&nbsp&nbsp应到人数：'.$course_detail['choices_number'].'&nbsp&nbsp实到人数：'.$course_detail['real_number_min'].'&nbsp&nbsp请假人数：'.$course_detail['Numberofleave'].'&nbsp&nbsp到课率：'.$course_detail['class_rate_min'].'</div>'."\n";
 
                   echo '<ul id=course'.$course_detail['rownum'].' class="nav nav-list collapse in">'."\n";
                   echo '<div class="block-body">'."\n";
@@ -47,6 +47,7 @@
                         <td width="138"><p align="center">账号类型</p></td>
                         <td width="138"><p align="center">录入账号</p></td>
                         <td width="138"><p align="center">实到人数 </p></td>
+                        <td width="138"><p align="center">请假人数 </p></td>
                         <td width="138"><p align="center">到课率 </p></td>
                         <td width="138"><p align="center">备注 </p></td>
                         <td width="160"><p align="center">录入时间 </p></td>
@@ -60,6 +61,7 @@ EOF;
                     echo ' <td width="120"><p align="center"> '.$detail['account_type'].' </p></td>'."\n";
                     echo ' <td width="120"><p align="center"> '.$detail['account_id'].' </p></td>'."\n";
                     echo ' <td width="120"><p align="center"> '.$detail['real_number'].' </p></td>'."\n";
+                    echo ' <td width="120"><p align="center"> '.$detail['Numberofleave'].' </p></td>'."\n";
                     echo ' <td width="120"><p align="center"> '.$detail['class_rate'].' </p></td>'."\n";
                     echo ' <td width="138"><p align="center"> '.$detail['remark'].' </p></td>'."\n";
                     echo ' <td width="160"><p align="center"> '.$detail['recording_time'].' </p></td>'."\n";
