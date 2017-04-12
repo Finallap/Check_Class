@@ -152,12 +152,12 @@
 			{
 				$template = array('table_open'  => ' <table class="table">');
 				$this->table->set_template($template);
-				$this->table->set_heading('周数', '课程名称', '教室','任课教师','星期几','应到人数','实到人数','到课率','录入时间');
+				$this->table->set_heading('周数', '课程名称', '教室','任课教师','星期几','应到人数','实到人数','应到人数','到课率','录入时间');
 				$query_result=$this->Record_model->get_record_list($this->type,$this->account,10,($per_page-1)*10);
 
 				foreach ($query_result as $key => $value) 
 				{
-					$this->table->add_row($value['week'], $value['course_name'], $value['classroom'],$value['tercher_name'],$value['weekday'],$value['choices_number'],$value['real_number'],$value['students_attendance'],$value['recording_time']);
+					$this->table->add_row($value['week'], $value['course_name'], $value['classroom'],$value['tercher_name'],$value['weekday'],$value['choices_number'],$value['real_number'],$value['real_number'],$value['students_attendance'],$value['recording_time']);
 				}
 
 				$table=$this->table->generate();

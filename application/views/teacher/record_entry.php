@@ -71,6 +71,8 @@
             echo "<label>选课人数：".$course[0]['choices_number']."</label>\n";
             echo "<label>请输入实到人数:</label>";
             echo '<input type="text" name="real_number" id="real_number" value="" class="input-xlarge">';
+            echo "<label>请输入请假人数:</label>";
+            echo '<input type="text" name="numberofleave" id="numberofleave" value="" class="input-xlarge">';
             echo "<label>备注（选填）:</label>";
             echo '<input type="text" name="remark" id="remark" value="" class="input-xlarge">';
             echo '<label><input name="submit" type="submit" value="提交" class="btn btn-primary pull-letf"><label>';

@@ -141,6 +141,7 @@
 			{
 				$real_number=$this->input->post('real_number');
 				$remark=$this->input->post('remark');
+				$numberofleave=$this->input->post('numberofleave');
 
 				$school_year=$this->njupt_time->get_school_year();
 				$term=$this->njupt_time->get_term();
@@ -154,7 +155,7 @@
 									'account_type' => $this->type,
 									'account_id' => $this->account,
 									'week' => $week,
-									'course_id' => $course_id
+									'course_id' => $course_id				                   
 									 );
 
 				if($this->Record_model->exist_record($select_data))
@@ -172,7 +173,8 @@
 										'course_id' => $course_id,
 										'real_number' => $real_number,
 										'recording_time' => date('Y-m-d H:i:s',time()),
-										'remark' => $remark
+										'remark' => $remark,
+					                      'Numberofleave' => $numberofleave
 										 );
 					$this->Record_model->record_input($input_data);
 
@@ -388,6 +390,7 @@
 					$result_array[$count]['teacher_name'] = $value['tercher_name'];
 					$result_array[$count]['choice_number'] = $value['choices_number'];
 					$result_array[$count]['real_number'] = $value['real_number_min'];
+					$result_array[$count]['Numberofleave'] = $value['Numberofleave'];//请假人数
 					$result_array[$count]['class_rate'] = $value['class_rate_min'];
 
 					$count++;
