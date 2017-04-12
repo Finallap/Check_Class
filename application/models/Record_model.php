@@ -61,6 +61,7 @@ class Record_model extends CI_Model{
 			$query[$key]['classroom']=$query1[0]['classroom'];
 			$query[$key]['tercher_name']=$query1[0]['tercher_name'];
 			$query[$key]['choices_number']=$query1[0]['choices_number'];
+			/* $query[$key]['Numberofleave']=$query1[0]['Numberofleave']; */
 
 			$query[$key]['students_attendance']=$this->calculation_class_rate($value["real_number"],$query1[0]['choices_number'],$value['Numberofleave']);
 		}
