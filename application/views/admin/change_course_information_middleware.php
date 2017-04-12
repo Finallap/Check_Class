@@ -51,7 +51,7 @@
                   <label>上课节数:第<?php echo $class_time;?>大节</label>
                   <label>任课教师：<?php echo $tercher_name;?></label>
 
-                  <label>选课人数：</label>
+                  <label>应到人数：</label>
                   <input type="text" name="choices_number" id="choices_number" value="<?php echo $choices_number;?>" class="input-xlarge"> 
 
                   <br>

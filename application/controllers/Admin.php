@@ -600,6 +600,7 @@
 					$result_array[$count]['teacher_name'] = $value['tercher_name'];
 					$result_array[$count]['choice_number'] = $value['choices_number'];
 					$result_array[$count]['real_number'] = $value['real_number_min'];
+					$result_array[$count]['Numberofleave'] = $value['Numberofleave'];//请假人数
 					$result_array[$count]['class_rate'] = $value['class_rate_min'];
 
 					$count++;

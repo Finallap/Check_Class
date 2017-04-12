@@ -42,6 +42,7 @@
 			$objPHPExcel->getActiveSheet()->getColumnDimension('J')->setWidth(10);
 			$objPHPExcel->getActiveSheet()->getColumnDimension('K')->setWidth(10);
 			$objPHPExcel->getActiveSheet()->getColumnDimension('L')->setWidth(10);
+			$objPHPExcel->getActiveSheet()->getColumnDimension('N')->setWidth(10);
 			$objPHPExcel->getActiveSheet()->getColumnDimension('M')->setWidth(10);
 
 	         $objPHPExcel->setActiveSheetIndex(0)
@@ -62,6 +63,7 @@
 	                          ->setCellValue('J4', '任课教师')
 	                          ->setCellValue('K4', '应到人数')
 	                          ->setCellValue('L4', '实到人数')
+	                          ->setCellValue('N4', '请假人数')
 	                          ->setCellValue('M4', '到课率');
 
 	        foreach($data as $k => $v)
@@ -80,6 +82,7 @@
 	                          ->setCellValue('J'.$num, $v['teacher_name'])
 	                          ->setCellValue('K'.$num, $v['choice_number'])
 	                          ->setCellValue('L'.$num, $v['real_number'])
+	                          ->setCellValue('N'.$num, $v['Numberofleave'])
 	                          ->setCellValue('M'.$num, $v['class_rate']);
 	        }
 	        $objPHPExcel->getActiveSheet()->setTitle('到课率统计');
