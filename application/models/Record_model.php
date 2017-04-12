@@ -162,7 +162,7 @@ class Record_model extends CI_Model{
 			foreach ($detail_query as $key => $detail_query_value)
 			{
 				$detail_query[$key]['account_type']=$this->account_type_chinese($detail_query_value['account_type']);
-				$detail_query[$key]['class_rate']=$this->calculation_class_rate($detail_query_value['real_number'],$course_query[0]['choices_number'],$detail_query_value['Numberofleave'];
+				$detail_query[$key]['class_rate']=$this->calculation_class_rate($detail_query_value['real_number'],$course_query[0]['choices_number'],$detail_query_value['Numberofleave']);
 			}
 
 			$result[$rownum]['detail']=$detail_query;
