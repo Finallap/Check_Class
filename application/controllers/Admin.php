@@ -722,7 +722,7 @@
 			$this->load->model('Account_information_model');
 			$this->load->library('table');
 
-			$log = $this->Login_information_model->get_login_information_option('student', null, 50);
+			$log = $this->Login_information_model->get_login_information_all('student', 50);
 
 			print_r($log);
 
