@@ -734,7 +734,7 @@
 					'time' => $l['login_time']
 				];
 			}
-
+			print_r($info);
 
 			$template = array('table_open'  => ' <table class="table">');
 			$this->table->set_template($template);
