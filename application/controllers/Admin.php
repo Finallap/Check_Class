@@ -744,7 +744,7 @@
 			$situation_data['table']=$table;
 
 			$this->load->view($this->type.'/header');
-			$this->load->view('template/account-situation',$situation_data);
+			$this->load->view('admin/account-situation',$situation_data);
 			$this->load->view('template/footer');
 		}
 	}
