@@ -724,14 +724,16 @@
 
 			$log = $this->Login_information_model->get_login_information_option('student', null, 50);
 
-			$info = [];
+			print_r($log);
+
+			$info = []; $i = 0;
 			foreach($log as $l)
 			{
 				$stu_id = $l['student_id'];
-				$info += [
-					'id' => $stu_id,
-					'username' =>  $this->Account_information_model-> get_user_name('student', $stu_id),
-					'time' => $l['login_time']
+				$info[$i++] = [
+					$stu_id,
+					$this->Account_information_model-> get_user_name('student', $stu_id),
+					$l['login_time']
 				];
 			}
 			print_r($info);
