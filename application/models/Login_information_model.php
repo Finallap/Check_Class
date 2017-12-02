@@ -16,7 +16,8 @@ class Login_information_model extends CI_Model{
 		$this->db->select("$table_name.login_time");
 		$this->db->from("(SELECT @rownum:=0) r", FALSE);
 		$this->db->from($table_name);
-		$this->db->where("$table_name.".$type.'_id',$id);
+		if($id !== null)
+			$this->db->where("$table_name.".$type.'_id',$id);
 		$this->db->limit($count,$offset);
 		$this->db->order_by("$table_name.login_time",'DESC');
 		$query=$this->db->get();

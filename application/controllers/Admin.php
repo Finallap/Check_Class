@@ -712,4 +712,39 @@
 
 			$this->load->view('template/alert_and_location_href',$data);
 		}
+
+
+		public function login_situation()
+		{
+			$this->login_status_detection();
+
+			$this->load->model('Login_information_model');
+			$this->load->model('Account_information_model');
+			$this->load->library('table');
+
+			$log = $this->Login_information_model->get_login_information_option('student', null, 50);
+
+			$info = [];
+			foreach($log as $l)
+			{
+				$stu_id = $l['student_id'];
+				$info += [
+					'id' => $stu_id,
+					'username' =>  $this->Account_information_model-> get_user_name('student', $stu_id),
+					'time' => $l['login_time']
+				];
+			}
+
+
+			$template = array('table_open'  => ' <table class="table">');
+			$this->table->set_template($template);
+			$this->table->set_heading('登陆账号', '用户姓名', '登陆时间');
+			$table=$this->table->generate($info);
+
+			$situation_data['table']=$table;
+
+			$this->load->view($this->type.'/header');
+			$this->load->view('template/account-situation',$situation_data);
+			$this->load->view('template/footer');
+		}
 	}
